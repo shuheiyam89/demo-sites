@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mabataki ─ ハンドメイドの服・雑貨・植物｜大阪 森ノ宮・玉造</title>
+<meta name="description" content="森ノ宮・玉造エリアの雑貨店 mabataki。ハンドメイドの服、雑貨、植物。実店舗のほか Creema・minne・オンラインショップでも販売しています。営業時間 10:00〜19:00、日曜定休。">
+<meta name="theme-color" content="#efe8dc">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --oat:#efe8dc;--oat2:#e5dccb;--linen:#f8f4ec;
+  --olive:#66704a;--olive2:#4e5838;--clay:#b5835a;--clay2:#9a6a44;--sky:#9fb3b1;
+  --ink:#33302a;--sub:#7a7266;--line:#d9cfbd;
+  --sans:"Hiragino Sans","Yu Gothic UI","Noto Sans JP",sans-serif;
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  --en:"Futura","Avenir Next","Century Gothic","Helvetica Neue",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--oat);color:var(--ink);font-family:var(--sans);line-height:2;letter-spacing:.06em;-webkit-font-smoothing:antialiased;
+  background-image:
+   repeating-linear-gradient(0deg,rgba(120,100,70,.035) 0 1px,transparent 1px 4px),
+   repeating-linear-gradient(90deg,rgba(120,100,70,.03) 0 1px,transparent 1px 5px)}
+svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1040px,100% - 40px);margin-inline:auto}
+.en{font-family:var(--en);font-size:11px;letter-spacing:.38em;text-transform:lowercase;color:var(--clay2)}
+
+.hd{padding:20px 0}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--en);font-size:22px;letter-spacing:.2em;color:var(--olive2)}
+.logo svg{width:34px;height:20px}
+.hd nav{display:flex;gap:22px;font-size:13px}
+.hd nav a{border-bottom:1px solid transparent;transition:.3s}
+.hd nav a:hover{border-color:var(--olive)}
+
+/* hero */
+.hero{padding:clamp(20px,4vw,40px) 0 clamp(60px,9vw,110px)}
+.hero-box{position:relative;border-radius:200px 200px 24px 24px;overflow:hidden;background:linear-gradient(180deg,#d9e1d6 0%,#e9e2d2 60%,#e2d6c0 100%);min-height:min(78svh,620px);display:flex;align-items:flex-end}
+.hero-box>svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-copy{position:relative;z-index:2;padding:clamp(24px,5vw,54px);width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(24px,4.2vw,40px);letter-spacing:.16em;line-height:1.8;margin:0;background:rgba(248,244,236,.82);padding:16px 22px;border-radius:4px}
+.hero .meta{background:var(--olive2);color:var(--linen);padding:14px 20px;border-radius:4px;font-size:13px;line-height:1.8}
+.hero .meta b{font-family:var(--en);font-size:18px;letter-spacing:.1em;font-weight:400}
+.blink{transform-box:fill-box;transform-origin:center;animation:blink 6s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.sway{transform-box:fill-box;transform-origin:bottom center;animation:sway 5s ease-in-out infinite alternate}
+@keyframes sway{to{transform:rotate(3deg)}}
+
+section{padding:clamp(70px,10vw,120px) 0}
+.head{margin-bottom:clamp(30px,5vw,50px)}
+.head h2{font-family:var(--serif);font-weight:500;font-size:clamp(22px,3.2vw,30px);letter-spacing:.16em;margin:6px 0 0;line-height:1.6}
+.center{text-align:center}
+
+/* intro */
+.intro-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,6vw,80px);align-items:center}
+.intro p{margin:0 0 1em;color:var(--sub);font-size:15px}
+.intro .q{font-family:var(--serif);font-size:clamp(19px,2.6vw,24px);line-height:2;letter-spacing:.14em;color:var(--ink);margin:0 0 20px}
+.shelf{background:var(--linen);border-radius:20px;padding:20px;box-shadow:0 30px 50px -40px rgba(51,48,42,.6)}
+
+/* items */
+.items{background:var(--linen)}
+.i-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.it{background:var(--oat);border-radius:18px;overflow:hidden;transition:transform .4s}
+.it:hover{transform:translateY(-4px)}
+.it .pic{aspect-ratio:1/0.8;display:grid;place-items:center}
+.it .pic svg{width:58%;height:auto}
+.it:nth-child(1) .pic{background:linear-gradient(160deg,#e6d8c3,#d8c4a6)}
+.it:nth-child(2) .pic{background:linear-gradient(160deg,#dfe3d6,#c7cfb8)}
+.it:nth-child(3) .pic{background:linear-gradient(160deg,#d4e0db,#b8cbc5)}
+.it .tx{padding:20px 22px 24px}
+.it h3{margin:0;font-family:var(--serif);font-weight:500;font-size:19px;letter-spacing:.14em}
+.it p{margin:6px 0 0;font-size:13px;color:var(--sub)}
+
+/* channels */
+.ch-lead{color:var(--sub);font-size:15px;margin:0 auto 34px;max-width:34em}
+.ch{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:760px;margin:0 auto}
+.ch a{display:flex;align-items:center;gap:16px;padding:20px 22px;border-radius:16px;background:var(--linen);border:1.5px solid var(--line);transition:border-color .3s,transform .3s,background .3s}
+.ch a:hover{border-color:var(--olive);transform:translateY(-2px);background:#fff}
+.ch .ic{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;flex:none;color:#fff;font-family:var(--en);font-size:15px;letter-spacing:.04em}
+.ch b{display:block;font-size:16px;letter-spacing:.08em}
+.ch small{display:block;font-size:12px;color:var(--sub);line-height:1.6}
+.ch .arw{margin-left:auto;width:18px;height:18px;flex:none;color:var(--olive)}
+.ch .store{grid-column:1/-1;background:var(--olive2);color:var(--linen);border-color:var(--olive2)}
+.ch .store small{color:#d9dcc8}
+.ch .store .arw{color:var(--linen)}
+.ch .store:hover{background:var(--olive)}
+
+/* info */
+.info{background:var(--oat2)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,60px);align-items:start}
+.hours{background:var(--linen);border-radius:20px;padding:28px}
+.hours .t{font-family:var(--en);font-size:clamp(30px,5vw,42px);letter-spacing:.04em;color:var(--olive2);line-height:1.2;margin:4px 0 14px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:0 0 12px}
+.week span{text-align:center;font-size:12px;padding:8px 0;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.week span.off{background:var(--clay);border-color:var(--clay);color:#fff}
+.hours p{margin:0;font-size:13px;color:var(--sub)}
+.info dl{margin:0}
+.info dl div{display:grid;grid-template-columns:6.5em 1fr;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
+.info dt{color:var(--clay2);font-size:12px;letter-spacing:.2em;padding-top:2px}
+.info dd{margin:0}
+
+.contact{text-align:center}
+.contact p{color:var(--sub);font-size:15px;margin:0 0 26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;font-size:15px;letter-spacing:.14em;padding:16px 30px;border-radius:999px;background:var(--clay);color:#fff;transition:background .3s,transform .3s}
+.btn:hover{background:var(--clay2);transform:translateY(-2px)}
+.btn svg{width:18px;height:18px}
+.mail{display:block;margin-top:12px;font-size:13px;color:var(--sub);word-break:break-all}
+footer{text-align:center;padding:26px 0 96px;font-family:var(--en);font-size:12px;letter-spacing:.3em;color:var(--sub);border-top:1px solid var(--line)}
+
+.fab{position:fixed;left:12px;right:12px;bottom:12px;z-index:45;display:none;gap:8px}
+.fab a{flex:1;text-align:center;padding:14px 8px;border-radius:999px;font-size:14px;letter-spacing:.08em;box-shadow:0 10px 24px -12px rgba(51,48,42,.6)}
+.fab .a1{background:var(--olive2);color:var(--linen)}
+.fab .a2{background:var(--linen);color:var(--olive2);border:1.5px solid var(--olive2)}
+
+.js .rv{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease}
+.js .rv.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .hd nav{display:none}
+  .hero-box{border-radius:140px 140px 20px 20px;min-height:72svh}
+  .intro-grid,.info-grid{grid-template-columns:1fr}
+  .i-grid{grid-template-columns:1fr}
+  .it{display:grid;grid-template-columns:120px 1fr;align-items:center}
+  .it .pic{aspect-ratio:1/1;height:100%}
+  .ch{grid-template-columns:1fr}
+  .fab{display:flex}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="logo" href="#top"><svg viewBox="0 0 34 20" fill="none" stroke="#4e5838" stroke-width="1.6" stroke-linecap="round"><path d="M3 8q14 12 28 0"/><path d="M8 13l-2 4M17 15v4M26 13l2 4"/></svg>mabataki</a>
+    <nav><a href="#items">items</a><a href="#shop">online</a><a href="#info">shop info</a><a href="#contact">contact</a></nav>
+  </div>
+</header>
+
+<section class="hero" id="top" style="padding-top:0">
+  <div class="wrap">
+    <div class="hero-box rv">
+      <svg viewBox="0 0 1000 620" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <!-- window light -->
+        <path d="M640 40h240v300H640Z" fill="#f8f4ec" opacity=".7"/>
+        <path d="M760 40v300M640 190h240" stroke="#d9cfbd" stroke-width="6"/>
+        <!-- hanging clothes rack -->
+        <path d="M90 130h360" stroke="#9a6a44" stroke-width="6" stroke-linecap="round"/>
+        <g stroke="#9a6a44" stroke-width="2" fill="none"><path d="M150 130v-12a8 8 0 1 1 8 8M250 130v-12a8 8 0 1 1 8 8M350 130v-12a8 8 0 1 1 8 8"/></g>
+        <path d="M150 132 110 160v190h80V160Z" fill="#c9b08e"/>
+        <path d="M250 132 205 165l-10 210h110l-10-210Z" fill="#8c9670"/>
+        <path d="M350 132 318 158v170h64V158Z" fill="#f8f4ec" stroke="#d9cfbd"/>
+        <path d="M110 160h80M205 165h90" stroke="rgba(255,255,255,.4)" stroke-width="3"/>
+        <!-- shelf -->
+        <path d="M560 420h360" stroke="#9a6a44" stroke-width="10"/>
+        <g><rect x="590" y="370" width="50" height="50" rx="6" fill="#b5835a"/><path d="M590 384h50" stroke="#f8f4ec" stroke-width="3"/></g>
+        <g><ellipse cx="700" cy="404" rx="34" ry="16" fill="#e5dccb"/><path d="M670 404q30-30 60 0" fill="#9fb3b1"/></g>
+        <g><rect x="770" y="350" width="34" height="70" rx="14" fill="#f8f4ec" stroke="#d9cfbd"/><path d="M780 350v-16h14v16" fill="#d9cfbd"/></g>
+        <!-- plants -->
+        <g class="sway"><path d="M860 420c-10-60 0-110 30-150-6 50-10 100-12 150Z" fill="#66704a"/><path d="M870 420c20-50 50-80 80-90-16 30-34 60-56 90Z" fill="#8c9670"/><path d="M864 420c-30-40-60-56-90-58 22 20 44 38 72 58Z" fill="#4e5838"/></g>
+        <path d="M842 420h60l-8 46h-44Z" fill="#b5835a"/>
+        <g class="sway" style="animation-delay:-2s"><path d="M470 620c-6-120 10-200 50-250-20 90-26 170-30 250Z" fill="#4e5838"/><path d="M490 620c30-90 70-140 120-160-30 50-58 110-90 160Z" fill="#66704a"/></g>
+        <!-- eye (mabataki) -->
+        <g transform="translate(520 120)"><g class="blink"><path d="M0 30q50-46 100 0q-50 46-100 0Z" fill="#f8f4ec" stroke="#4e5838" stroke-width="3"/><circle cx="50" cy="30" r="14" fill="#4e5838"/><circle cx="55" cy="25" r="4" fill="#f8f4ec"/></g></g>
+        <path d="M0 560q250-40 500 0t500 0V620H0Z" fill="#d9cfbd" opacity=".7"/>
+      </svg>
+      <div class="hero-copy">
+        <h1>手でつくられた<br>服と、雑貨と、植物と。</h1>
+        <div class="meta"><b>10:00 – 19:00</b><br>日曜定休（ほか臨時休業あり）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap intro-grid">
+    <div class="rv">
+      <span class="en">about</span>
+      <p class="q">森ノ宮・玉造エリアの<br>雑貨店です。</p>
+      <p>mabataki では、ハンドメイドの服や雑貨、植物を扱っています。実店舗のほか、Creema・minne・オンラインショップでもお買い物いただけます。</p>
+      <p>お店に足を運んでも、おうちからでも。お好きな方法で、お気に入りを見つけてください。</p>
+    </div>
+    <div class="shelf rv" aria-hidden="true">
+      <svg viewBox="0 0 400 260">
+        <rect width="400" height="260" rx="12" fill="#efe8dc"/>
+        <path d="M20 120h360M20 230h360" stroke="#b5835a" stroke-width="6"/>
+        <rect x="40" y="70" width="44" height="50" rx="4" fill="#9fb3b1"/><rect x="92" y="54" width="36" height="66" rx="4" fill="#c9b08e"/>
+        <ellipse cx="180" cy="110" rx="30" ry="10" fill="#d9cfbd"/><path d="M152 110q28-36 56 0" fill="#b5835a"/>
+        <path d="M250 120l-4-36h40l-4 36Z" fill="#b5835a"/><path d="M266 84c-14-20-10-40 0-50 10 10 14 30 0 50Z" fill="#66704a"/><path d="M266 84c8-18 24-26 34-24-4 12-18 22-34 24Z" fill="#8c9670"/>
+        <circle cx="340" cy="100" r="20" fill="#f8f4ec" stroke="#d9cfbd"/><path d="M330 100h20M340 90v20" stroke="#b5835a"/>
+        <path d="M50 230v-60h80v60" fill="#8c9670"/><path d="M50 182h80" stroke="#f8f4ec" stroke-width="3"/>
+        <path d="M160 230l10-70h60l10 70Z" fill="#f8f4ec" stroke="#d9cfbd"/>
+        <path d="M290 230l-6-30h52l-6 30Z" fill="#b5835a"/><path d="M310 200c-20-24-14-50 0-60 14 10 20 36 0 60Z" fill="#4e5838"/><path d="M310 200c10-22 30-30 44-28-6 16-22 26-44 28Z" fill="#66704a"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="items" id="items">
+  <div class="wrap">
+    <div class="head center rv"><span class="en">items</span><h2>取り扱いのもの</h2></div>
+    <div class="i-grid">
+      <div class="it rv"><div class="pic"><svg viewBox="0 0 100 100"><path d="M34 14 18 26l8 14 8-6v52h32V34l8 6 8-14-16-12c-2 8-8 12-16 12s-14-4-16-12Z" fill="#f8f4ec" stroke="#9a6a44" stroke-width="2" stroke-linejoin="round"/><path d="M42 50h16" stroke="#9a6a44" stroke-dasharray="3 3"/></svg></div><div class="tx"><span class="en">clothes</span><h3>ハンドメイドの服</h3><p>手しごとのぬくもりを感じる服。</p></div></div>
+      <div class="it rv"><div class="pic"><svg viewBox="0 0 100 100"><path d="M24 40h52l-6 44H30Z" fill="#f8f4ec" stroke="#4e5838" stroke-width="2"/><path d="M36 40c0-14 6-22 14-22s14 8 14 22" fill="none" stroke="#4e5838" stroke-width="2"/><circle cx="50" cy="60" r="7" fill="#b5835a"/></svg></div><div class="tx"><span class="en">goods</span><h3>雑貨</h3><p>暮らしにそっと寄り添う、手づくりの雑貨。</p></div></div>
+      <div class="it rv"><div class="pic"><svg viewBox="0 0 100 100"><path d="M34 62h32l-4 26H38Z" fill="#b5835a"/><path d="M50 62c-14-14-12-34 0-44 12 10 14 30 0 44Z" fill="#4e5838"/><path d="M50 62c8-16 22-22 32-20-4 12-16 20-32 20Z" fill="#66704a"/><path d="M50 62c-10-12-24-16-32-12 6 10 18 14 32 12Z" fill="#8c9670"/></svg></div><div class="tx"><span class="en">plants</span><h3>植物</h3><p>部屋に緑をひとつ。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="wrap center">
+    <div class="head rv"><span class="en">where to buy</span><h2>お買い物の入口</h2></div>
+    <p class="ch-lead rv">店舗でも、オンラインでも。mabataki の商品は、いくつかの方法でお求めいただけます。</p>
+    <div class="ch">
+      <!-- ※各オンラインショップのURLは未確認のため仮リンク（href="#shop"）。正式URLに差し替えてください。 -->
+      <a class="store rv" href="#info"><span class="ic" style="background:#b5835a"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 10h18M5 10v10h14V10M3 10l2-6h14l2 6"/><path d="M10 20v-5h4v5"/></svg></span><span><b>実店舗</b><small>森ノ宮・玉造エリア／10:00〜19:00・日曜定休</small></span><svg class="arw" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7 4 6 6-6 6"/></svg></a>
+      <a class="rv" href="#shop"><span class="ic" style="background:#66704a">Cr</span><span><b>Creema</b><small>ハンドメイドマーケット</small></span><svg class="arw" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7 4 6 6-6 6"/></svg></a>
+      <a class="rv" href="#shop"><span class="ic" style="background:#9a6a44">mi</span><span><b>minne</b><small>ハンドメイドマーケット</small></span><svg class="arw" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7 4 6 6-6 6"/></svg></a>
+      <a class="rv" href="#shop" style="grid-column:1/-1"><span class="ic" style="background:#7e9593"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l3 13h11l2-9H6"/></svg></span><span><b>オンラインショップ</b><small>mabataki 自社EC</small></span><svg class="arw" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7 4 6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="info" id="info">
+  <div class="wrap">
+    <div class="head rv"><span class="en">shop info</span><h2>店舗のご案内</h2></div>
+    <div class="info-grid">
+      <div class="hours rv">
+        <span class="en">open</span>
+        <p class="t">10:00 – 19:00</p>
+        <div class="week"><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span><span class="off">日</span></div>
+        <p>定休日：日曜日（ほか臨時休業あり）</p>
+      </div>
+      <dl class="rv">
+        <div><dt>店名</dt><dd>mabataki</dd></div>
+        <div><dt>所在地</dt><dd>大阪府大阪市東成区（森ノ宮・玉造エリア）</dd></div>
+        <div><dt>取り扱い</dt><dd>ハンドメイドの服・雑貨・植物</dd></div>
+        <div><dt>オンライン</dt><dd>Creema／minne／自社オンラインショップ</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap rv">
+    <div class="head"><span class="en">contact</span><h2>お問い合わせ</h2></div>
+    <p>商品やお店のことなど、<br>お気軽にお問い合わせください。</p>
+    <a class="btn" href="mailto:mabataki@live.jp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="m2 5 8 6 8-6"/></svg>メールで問い合わせる</a>
+    <span class="mail">mabataki@live.jp</span>
+  </div>
+</section>
+
+<footer>mabataki · osaka higashinari</footer>
+
+<div class="fab"><a class="a1" href="#shop">オンラインで見る</a><a class="a2" href="#contact">お問い合わせ</a></div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

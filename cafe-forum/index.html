@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cafeふぉーらむ ─ 広島市安佐北区のコミュニティカフェ</title>
+<meta name="description" content="ドリンク付きランチ500円。週替わりのワンプレートランチやホットサンド。コミュニティスペース併設の地域のカフェ「Cafeふぉーらむ」。営業時間 11:00〜15:00。">
+<meta name="theme-color" content="#d4693f">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --cream:#fff6e8;--cream2:#fbe9cf;--paper:#fffdf8;
+  --terra:#d4693f;--terra2:#b4522b;--mustard:#e9b03f;--olive:#7d8a3f;--brown:#5a3d2b;
+  --ink:#3b2a20;--sub:#80695a;--line:#ecd8bb;
+  --hand:"Klee One","Hiragino Maru Gothic ProN","Zen Maru Gothic","Yu Gothic UI",sans-serif;
+  --sans:"Hiragino Sans","Yu Gothic UI","Noto Sans JP",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.9;letter-spacing:.04em;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(rgba(180,82,43,.07) 1.2px,transparent 1.3px);background-size:18px 18px}
+svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1040px,100% - 40px);margin-inline:auto}
+.lbl{font-family:var(--hand);font-size:14px;color:var(--terra);letter-spacing:.12em;display:inline-flex;align-items:center;gap:8px}
+.lbl::before,.lbl::after{content:"";width:18px;height:2px;background:currentColor;border-radius:2px}
+
+/* header */
+.hd{position:sticky;top:0;z-index:40;background:rgba(255,246,232,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--hand);font-weight:700;font-size:19px;letter-spacing:.08em;color:var(--brown)}
+.logo svg{width:32px;height:32px}
+.hd .open{font-size:12px;font-weight:700;background:var(--brown);color:var(--cream);padding:5px 12px;border-radius:999px;letter-spacing:.1em}
+
+/* hero */
+.hero{padding:clamp(28px,6vw,70px) 0 clamp(50px,8vw,90px);position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,5vw,56px);align-items:center}
+.hero h1{font-family:var(--hand);font-weight:700;font-size:clamp(26px,4.6vw,42px);line-height:1.55;letter-spacing:.06em;margin:12px 0 18px;color:var(--brown)}
+.hero p{margin:0 0 24px;color:var(--sub);font-size:15px}
+.price-tag{position:relative;display:inline-block;margin:0 0 20px}
+.price-tag .big{display:flex;align-items:baseline;gap:6px;background:var(--terra);color:#fff;border-radius:22px;padding:14px 26px 12px;box-shadow:6px 6px 0 var(--brown);transform:rotate(-2deg)}
+.price-tag .big span{font-family:var(--hand);font-size:18px;font-weight:700}
+.price-tag .big b{font-family:Georgia,"Times New Roman",serif;font-size:clamp(56px,10vw,84px);line-height:1;letter-spacing:-.02em}
+.price-tag .big small{font-size:20px;font-weight:700}
+.price-tag .with{position:absolute;right:-18px;top:-18px;width:78px;height:78px;border-radius:50%;background:var(--mustard);color:var(--brown);display:grid;place-items:center;text-align:center;font-weight:700;font-size:12px;line-height:1.3;transform:rotate(10deg);box-shadow:0 6px 14px -6px rgba(90,61,43,.5)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:15px;padding:14px 24px;border-radius:14px;background:var(--brown);color:var(--cream);border:2px solid var(--brown);transition:transform .2s,box-shadow .2s;box-shadow:4px 4px 0 var(--terra)}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--terra)}
+.btn.light{background:var(--paper);color:var(--brown)}
+.btn svg{width:20px;height:20px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.plate svg{width:100%;height:auto}
+.steam{animation:st 3.5s ease-in-out infinite}
+.steam:nth-child(2){animation-delay:-1.2s}.steam:nth-child(3){animation-delay:-2.3s}
+@keyframes st{0%{opacity:0;transform:translateY(8px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-14px)}}
+
+section{padding:clamp(64px,9vw,110px) 0}
+.head{text-align:center;margin-bottom:clamp(30px,5vw,48px)}
+.head h2{font-family:var(--hand);font-weight:700;font-size:clamp(24px,3.6vw,32px);letter-spacing:.08em;margin:6px 0 0;color:var(--brown);line-height:1.5}
+.head p{margin:10px 0 0;color:var(--sub);font-size:14px}
+
+/* weekly board */
+.weekly{background:var(--paper);border-block:2px dashed var(--line)}
+.board{max-width:760px;margin:0 auto;background:linear-gradient(160deg,#3d4a3a,#2e3a2c);border:12px solid #9a6b45;border-radius:14px;padding:clamp(24px,4vw,40px);color:#f3efe2;position:relative;box-shadow:0 26px 40px -28px rgba(59,42,32,.8), inset 0 0 40px rgba(0,0,0,.35)}
+.board::after{content:"";position:absolute;left:50%;top:-34px;width:60px;height:20px;transform:translateX(-50%);border:3px solid #9a6b45;border-bottom:0;border-radius:30px 30px 0 0}
+.board h3{font-family:var(--hand);font-weight:700;font-size:clamp(22px,3.4vw,28px);margin:0 0 4px;letter-spacing:.1em;text-align:center}
+.board .sub{text-align:center;margin:0 0 22px;font-size:13px;color:#cfd6c2;font-family:var(--hand)}
+.board ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.board li{display:flex;gap:14px;align-items:flex-start;font-family:var(--hand);font-size:16px;border-bottom:1px dashed rgba(243,239,226,.25);padding-bottom:12px}
+.board li:last-child{border-bottom:0}
+.board li i{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--mustard);display:grid;place-items:center;font-style:normal;font-size:13px;color:var(--mustard)}
+.board li small{display:block;font-size:13px;color:#cfd6c2}
+.chalk{color:var(--mustard)}
+.ig{margin-top:26px;text-align:center}
+.ig .btn{background:linear-gradient(135deg,#f3a04a,#d4693f 50%,#a8467a);border-color:transparent;color:#fff;box-shadow:4px 4px 0 var(--brown)}
+.ig small{display:block;margin-top:10px;font-size:13px;color:var(--sub)}
+
+/* menu */
+.m-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.m{background:var(--paper);border-radius:22px;padding:26px 22px 22px;text-align:center;border:2px solid var(--line);position:relative}
+.m.main{border-color:var(--terra);background:#fff}
+.m .rib{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--terra);color:#fff;font-size:11px;font-weight:700;padding:3px 14px;border-radius:999px;letter-spacing:.1em;white-space:nowrap}
+.m svg{width:84px;height:84px;margin:4px auto 10px}
+.m h3{margin:0 0 4px;font-family:var(--hand);font-size:19px;color:var(--brown)}
+.m p{margin:0 0 14px;font-size:13px;color:var(--sub);line-height:1.8}
+.m .yen{font-family:Georgia,serif;font-size:34px;font-weight:700;color:var(--terra2);line-height:1}
+.m .yen small{font-family:var(--sans);font-size:14px;margin-left:2px}
+.m .or{font-size:13px;color:var(--sub);margin:0 6px;font-family:var(--sans)}
+.drinks{margin-top:22px;text-align:center;font-size:13px;color:var(--sub)}
+.drinks span{display:inline-block;background:var(--cream2);border-radius:999px;padding:4px 14px;margin:3px;color:var(--brown);font-weight:700}
+
+/* community */
+.comm{background:var(--cream2);position:relative;overflow:hidden}
+.comm::before{content:"";position:absolute;inset:auto 0 0;height:60px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='60'%3E%3Cpath d='M0 60V30q20-24 40 0t40 0v30Z' fill='%23f5dcb8'/%3E%3C/svg%3E") repeat-x bottom/80px 60px}
+.c-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,5vw,56px);align-items:center;position:relative}
+.c-grid h3{font-family:var(--hand);font-size:clamp(20px,3vw,26px);color:var(--brown);margin:8px 0 14px;line-height:1.6}
+.c-grid p{margin:0 0 1em;color:var(--sub);font-size:15px}
+.c-list{display:grid;gap:12px}
+.c-item{display:flex;gap:16px;align-items:center;background:var(--paper);border-radius:18px;padding:18px 20px}
+.c-item svg{width:46px;height:46px;flex:none}
+.c-item b{display:block;color:var(--brown);font-size:16px}
+.c-item small{color:var(--sub);font-size:13px}
+
+/* info */
+.info{max-width:680px;margin:0 auto;background:var(--paper);border-radius:24px;padding:clamp(22px,4vw,36px);border:2px solid var(--line)}
+.info div{display:grid;grid-template-columns:7em 1fr;padding:14px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.info div:last-child{border-bottom:0}
+.info dt{font-weight:700;color:var(--terra2)}
+.info dd{margin:0}
+.info .time{font-family:Georgia,serif;font-size:24px;font-weight:700;color:var(--brown);letter-spacing:.04em}
+
+.contact{text-align:center;background:var(--brown);color:var(--cream)}
+.contact .lbl{color:var(--mustard)}
+.contact h2{color:var(--cream)}
+.contact p{margin:0 0 24px;font-size:15px;color:#ecd8bb}
+.contact .btn{background:var(--mustard);border-color:var(--mustard);color:var(--brown);box-shadow:4px 4px 0 #2d1d13}
+.mail{display:block;margin-top:14px;font-size:13px;color:#ecd8bb;word-break:break-all}
+footer{background:#46301f;color:#c9b39a;text-align:center;font-size:12px;padding:20px 0 96px}
+
+.fab{position:fixed;left:12px;right:12px;bottom:12px;z-index:45;display:none}
+.fab .btn{width:100%;background:var(--terra);border-color:var(--terra);color:#fff;box-shadow:0 8px 20px -8px rgba(59,42,32,.6)}
+
+.js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .hero-grid,.c-grid{grid-template-columns:1fr}
+  .plate{max-width:330px;margin:0 auto}
+  .m-grid{grid-template-columns:1fr}
+  .fab{display:block}
+  .info div{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="logo" href="#top"><svg viewBox="0 0 32 32" fill="none" stroke="#5a3d2b" stroke-width="2"><path d="M5 12h18v7a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8Z" fill="#e9b03f"/><path d="M23 14h2a3 3 0 0 1 0 6h-2"/><path d="M11 4c-2 2 2 4 0 6M17 4c-2 2 2 4 0 6"/></svg>Cafeふぉーらむ</a>
+    <span class="open">11:00〜15:00</span>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <span class="lbl">地域のコミュニティカフェ</span>
+      <h1>ほっとひと息、<br>みんなの食卓。</h1>
+      <div class="price-tag">
+        <div class="big"><span>ランチ</span><b>500</b><small>円</small></div>
+        <span class="with">ドリンク<br>付き</span>
+      </div>
+      <p>メニューは週替わり。ワンプレートランチやホットサンドなどを、数量限定でご用意しています。</p>
+      <div class="btns">
+        <a class="btn" href="#weekly">今週のメニュー</a>
+        <a class="btn light" href="#menu">料金を見る</a>
+      </div>
+    </div>
+    <div class="plate rv" aria-hidden="true">
+      <svg viewBox="0 0 400 380">
+        <circle cx="200" cy="200" r="170" fill="#fbe9cf"/>
+        <g stroke="#b4522b" stroke-width="3" fill="none" stroke-linecap="round"><path class="steam" d="M150 70c-10 12 10 20 0 32"/><path class="steam" d="M200 60c-10 12 10 20 0 32"/><path class="steam" d="M250 70c-10 12 10 20 0 32"/></g>
+        <ellipse cx="200" cy="230" rx="160" ry="120" fill="#fff" stroke="#ecd8bb" stroke-width="4"/>
+        <ellipse cx="200" cy="230" rx="132" ry="96" fill="none" stroke="#f3e3cb" stroke-width="2"/>
+        <!-- rice -->
+        <ellipse cx="140" cy="200" rx="52" ry="40" fill="#fffaf0" stroke="#e8dcc6" stroke-width="2"/>
+        <circle cx="140" cy="188" r="6" fill="#c9405c"/>
+        <!-- hot sandwich -->
+        <g transform="translate(236 168) rotate(12)"><path d="M0 0 L70 0 L35 56Z" fill="#e9b03f" stroke="#b4522b" stroke-width="3" stroke-linejoin="round"/><path d="M10 6h50" stroke="#d4693f" stroke-width="5"/><path d="M14 14h42" stroke="#7d8a3f" stroke-width="4"/><path d="M18 22h34" stroke="#fff3c4" stroke-width="5"/></g>
+        <!-- salad -->
+        <g><circle cx="200" cy="282" r="40" fill="#e5efcf"/><circle cx="186" cy="272" r="14" fill="#7d8a3f"/><circle cx="212" cy="270" r="12" fill="#9aab54"/><circle cx="202" cy="294" r="12" fill="#7d8a3f"/><circle cx="222" cy="292" r="7" fill="#d4693f"/><circle cx="180" cy="294" r="6" fill="#d4693f"/></g>
+        <!-- cup -->
+        <g transform="translate(300 270)"><ellipse cx="30" cy="54" rx="40" ry="10" fill="#ecd8bb"/><path d="M0 10h60v26a22 22 0 0 1-22 22h-16A22 22 0 0 1 0 36Z" fill="#d4693f"/><ellipse cx="30" cy="10" rx="30" ry="7" fill="#7a4a2e"/><path d="M60 18h6a8 8 0 0 1 0 16h-6" fill="none" stroke="#d4693f" stroke-width="5"/></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="weekly" id="weekly">
+  <div class="wrap">
+    <div class="head rv"><span class="lbl">Weekly Menu</span><h2>今週のメニュー</h2><p>メニューは毎週変わります。どれも数量限定です。</p></div>
+    <div class="board rv">
+      <h3>本日のランチ</h3>
+      <p class="sub">ドリンク付き <span class="chalk">500円</span></p>
+      <ul>
+        <li><i>1</i><div>週替わりワンプレートランチ<small>その週の内容はInstagramでお知らせします</small></div></li>
+        <li><i>2</i><div>ホットサンド　など<small>数量限定・なくなり次第終了</small></div></li>
+        <li><i>+</i><div>デザートプレート <span class="chalk">100円／200円</span><small>ランチと一緒にどうぞ</small></div></li>
+      </ul>
+    </div>
+    <div class="ig rv">
+      <a class="btn" href="https://www.instagram.com/cafe_forum_hiroshima/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>今週の内容をInstagramで見る</a>
+      <small>@cafe_forum_hiroshima</small>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="head rv"><span class="lbl">Menu &amp; Price</span><h2>メニューと料金</h2></div>
+    <div class="m-grid">
+      <div class="m main rv"><span class="rib">ドリンク付き</span>
+        <svg viewBox="0 0 84 84"><circle cx="42" cy="44" r="34" fill="#fff" stroke="#ecd8bb" stroke-width="3"/><ellipse cx="32" cy="40" rx="12" ry="9" fill="#fffaf0" stroke="#e8dcc6"/><path d="M46 30l16 4-8 14Z" fill="#e9b03f"/><circle cx="44" cy="56" r="9" fill="#9aab54"/></svg>
+        <h3>ランチ（ドリンク付き）</h3><p>週替わりのワンプレートランチ・ホットサンドなど。数量限定。</p><span class="yen">500<small>円</small></span></div>
+      <div class="m rv">
+        <svg viewBox="0 0 84 84"><ellipse cx="42" cy="56" rx="32" ry="10" fill="#fbe9cf"/><path d="M24 54c0-14 8-24 18-24s18 10 18 24Z" fill="#f7d38a"/><path d="M24 40c6-6 30-6 36 0" fill="none" stroke="#b4522b" stroke-width="3"/><circle cx="42" cy="28" r="5" fill="#c9405c"/></svg>
+        <h3>デザートプレート</h3><p>ちょっと甘いものがほしいときに。</p><span class="yen">100<small>円</small></span><span class="or">または</span><span class="yen">200<small>円</small></span></div>
+      <div class="m rv">
+        <svg viewBox="0 0 84 84"><path d="M22 24h36l-4 44a6 6 0 0 1-6 5H32a6 6 0 0 1-6-5Z" fill="#d4693f"/><path d="M24 36h32" stroke="#fff6e8" stroke-width="3"/><path d="M58 32h6a7 7 0 0 1 0 14h-7" fill="none" stroke="#d4693f" stroke-width="4"/><path d="M34 10c-3 4 3 6 0 10M46 10c-3 4 3 6 0 10" stroke="#80695a" stroke-width="2" fill="none"/></svg>
+        <h3>ドリンクバーのみ</h3><p>ドリンクバー形式。お好きなものをどうぞ。</p><span class="yen">200<small>円</small></span></div>
+    </div>
+    <p class="drinks rv">ドリンクバー：<span>コーヒー</span><span>カフェラテ</span><span>紅茶</span>など</p>
+  </div>
+</section>
+
+<section class="comm">
+  <div class="wrap c-grid">
+    <div class="rv">
+      <span class="lbl">Community Space</span>
+      <h3>食べて、話して、つながる。<br>地域のみんなの居場所です。</h3>
+      <p>Cafeふぉーらむは、地域のコミュニティカフェです。カフェにはコミュニティスペースを併設。サークル活動などにご利用いただけるほか、地域交流のイベントも開催しています。</p>
+    </div>
+    <div class="c-list">
+      <div class="c-item rv"><svg viewBox="0 0 46 46" fill="none" stroke="#d4693f" stroke-width="2.4"><circle cx="15" cy="16" r="6"/><circle cx="31" cy="16" r="6"/><path d="M4 38c0-7 5-12 11-12s11 5 11 12M20 38c0-7 5-12 11-12s11 5 11 12"/></svg><span><b>コミュニティスペース併設</b><small>サークル活動などにご利用いただけます</small></span></div>
+      <div class="c-item rv"><svg viewBox="0 0 46 46" fill="none" stroke="#7d8a3f" stroke-width="2.4"><rect x="6" y="9" width="34" height="30" rx="4"/><path d="M6 18h34M15 5v8M31 5v8"/><circle cx="23" cy="29" r="4" fill="#e9b03f" stroke="none"/></svg><span><b>地域交流イベント</b><small>地域の方が集まるイベントを開催しています</small></span></div>
+      <div class="c-item rv"><svg viewBox="0 0 46 46" fill="none" stroke="#a8467a" stroke-width="2.4"><rect x="8" y="8" width="30" height="30" rx="9"/><circle cx="23" cy="23" r="7"/><circle cx="32" cy="14" r="1.6" fill="#a8467a"/></svg><span><b>Instagramで発信中</b><small>週替わりメニューをお知らせしています</small></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="info">
+  <div class="wrap">
+    <div class="head rv"><span class="lbl">Information</span><h2>店舗情報</h2></div>
+    <dl class="info rv">
+      <div><dt>店名</dt><dd>Cafeふぉーらむ</dd></div>
+      <div><dt>営業時間</dt><dd><span class="time">11:00〜15:00</span></dd></div>
+      <div><dt>所在地</dt><dd>広島県広島市安佐北区</dd></div>
+      <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/cafe_forum_hiroshima/" target="_blank" rel="noopener" style="color:#b4522b;font-weight:700">@cafe_forum_hiroshima</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap rv">
+    <div class="head"><span class="lbl">Contact</span><h2>お問い合わせ</h2></div>
+    <p>コミュニティスペースのご利用やイベントのことなど、<br>お気軽にお問い合わせください。</p>
+    <a class="btn" href="mailto:support@marukoshi.jp?subject=Cafe%E3%81%B5%E3%81%89%E3%83%BC%E3%82%89%E3%82%80%E3%81%B8%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="m2 5 8 6 8-6"/></svg>メールで問い合わせる</a>
+    <span class="mail">support@marukoshi.jp</span>
+  </div>
+</section>
+<footer>&copy; Cafeふぉーらむ</footer>
+
+<div class="fab"><a class="btn" href="#weekly">今週のメニューを見る</a></div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

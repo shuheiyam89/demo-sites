@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>花儀生花店 〜Hanayoshi〜 ─ 愛川町の花屋</title>
+<meta name="description" content="神奈川県愛川町の老舗、花儀生花店。スタンド花・胡蝶蘭・葬儀用生花・花束・観葉植物。愛川町内配送無料（3,000円以上）、花キューピットで全国発送にも対応。">
+<meta name="theme-color" content="#e45c76">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --cream:#fffaf4;--blush:#fde9ea;--peach:#ffe3cf;--leaf:#e7f2e6;
+  --rose:#e45c76;--rose2:#c9405c;--sun:#f5b93d;--green:#3f8a5f;--lilac:#8a76c4;
+  --ink:#3a2c2f;--sub:#7b6a6d;--line:#f0d9dc;
+  --round:"Hiragino Maru Gothic ProN","Zen Maru Gothic","M PLUS Rounded 1c","Hiragino Sans","Yu Gothic UI",sans-serif;
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--round);line-height:1.9;letter-spacing:.04em;-webkit-font-smoothing:antialiased}
+svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1080px,100% - 40px);margin-inline:auto}
+.en{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--rose)}
+
+/* header */
+.hd{position:sticky;top:0;z-index:40;background:rgba(255,250,244,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:34px;height:34px}
+.logo b{font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.12em;display:block;line-height:1.2}
+.logo small{font-family:Georgia,serif;font-style:italic;font-size:11px;color:var(--rose);display:block}
+.hd nav{display:flex;gap:22px;font-size:13px;font-weight:600}
+.hd nav a:hover{color:var(--rose)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:
+  radial-gradient(circle at 12% 20%,#ffd6dd 0,transparent 32%),
+  radial-gradient(circle at 88% 12%,#ffe7b3 0,transparent 30%),
+  radial-gradient(circle at 80% 90%,#dbeedd 0,transparent 34%),
+  var(--cream);padding:clamp(48px,8vw,96px) 0 clamp(60px,9vw,110px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,5vw,60px);align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--rose);color:var(--rose2);font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px}
+.badge i{width:7px;height:7px;border-radius:50%;background:var(--rose)}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5.6vw,54px);line-height:1.45;letter-spacing:.06em;margin:18px 0 18px}
+.hero h1 em{font-style:normal;color:var(--rose);background:linear-gradient(transparent 70%,#ffe08a 70%)}
+.hero p{margin:0 0 26px;color:var(--sub);font-size:15px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:15px;padding:15px 26px;border-radius:999px;background:var(--rose);color:#fff;box-shadow:0 10px 0 -4px var(--rose2);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(2px);box-shadow:0 6px 0 -4px var(--rose2)}
+.btn.ghost{background:#fff;color:var(--rose2);border:2px solid var(--rose);box-shadow:none}
+.btn svg{width:18px;height:18px}
+.bouquet{position:relative}
+.bouquet svg{width:100%;height:auto}
+.sway{transform-origin:200px 380px;animation:sway 6s ease-in-out infinite alternate}
+@keyframes sway{to{transform:rotate(2.5deg)}}
+
+/* perks strip */
+.perks{background:var(--rose);color:#fff;padding:0}
+.perks .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+.perk{display:flex;align-items:center;gap:14px;padding:22px 18px}
+.perk+.perk{border-left:1px dashed rgba(255,255,255,.5)}
+.perk svg{width:40px;height:40px;flex:none}
+.perk b{display:block;font-size:15px;line-height:1.4}
+.perk small{font-size:12px;opacity:.92;line-height:1.5;display:block}
+
+section{padding:clamp(70px,10vw,120px) 0}
+.head{text-align:center;margin-bottom:clamp(30px,5vw,50px)}
+.head h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.6vw,34px);letter-spacing:.1em;margin:4px 0 0;line-height:1.5}
+.head p{margin:12px 0 0;color:var(--sub);font-size:14px}
+
+/* purpose chips */
+.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:0 0 clamp(36px,5vw,56px)}
+.chip{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:999px;font-weight:700;font-size:14px;background:#fff;border:2px solid var(--c);color:var(--c);transition:.2s}
+.chip:hover{background:var(--c);color:#fff}
+.chip i{width:9px;height:9px;border-radius:50%;background:currentColor}
+
+/* purpose blocks */
+.use{border-radius:28px;padding:clamp(26px,4vw,44px);margin-bottom:28px;position:relative;overflow:hidden;scroll-margin-top:80px}
+.use.celebrate{background:var(--blush)}
+.use.opening{background:var(--peach)}
+.use.offer{background:#efedf6}
+.use::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.55)}
+.use-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;position:relative;z-index:1}
+.use-head .ic{width:54px;height:54px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.use-head .ic svg{width:32px;height:32px}
+.use-head h3{margin:0;font-family:var(--serif);font-size:22px;letter-spacing:.1em;font-weight:600;line-height:1.4}
+.use-head small{display:block;font-family:var(--round);font-size:12px;color:var(--sub);letter-spacing:.06em;font-weight:400}
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;position:relative;z-index:1}
+.item{background:#fff;border-radius:18px;padding:20px 20px 18px;display:flex;flex-direction:column;box-shadow:0 8px 24px -18px rgba(120,40,60,.5)}
+.item h4{margin:0 0 4px;font-size:17px;letter-spacing:.06em}
+.item p{margin:0 0 14px;font-size:13px;color:var(--sub);line-height:1.8}
+.pr{margin-top:auto;border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+.pr span{font-size:12px;color:var(--sub)}
+.pr b{font-size:22px;color:var(--rose2);letter-spacing:.02em;font-family:Georgia,"Times New Roman",serif}
+.pr b small{font-size:12px;font-family:var(--round);margin-left:2px}
+.pr .ask{font-size:14px;font-weight:700;color:var(--green)}
+
+/* price table */
+.table{background:#fff;border-radius:24px;padding:clamp(20px,4vw,36px);box-shadow:0 20px 40px -32px rgba(120,40,60,.5);max-width:760px;margin:0 auto}
+.table table{width:100%;border-collapse:collapse;font-size:15px}
+.table th,.table td{padding:14px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.table td{text-align:right;font-weight:700;color:var(--rose2);white-space:nowrap}
+.table tr:last-child th,.table tr:last-child td{border-bottom:0}
+.table caption{caption-side:bottom;text-align:right;font-size:12px;color:var(--sub);padding-top:10px}
+
+/* coupon */
+.coupon{padding:0 0 clamp(70px,10vw,120px)}
+.cp{max-width:760px;margin:0 auto;position:relative;background:linear-gradient(120deg,#ffcf5c,#ffb36b);border-radius:24px;padding:30px 32px;display:flex;align-items:center;gap:26px;color:#5a2d12}
+.cp::before,.cp::after{content:"";position:absolute;top:50%;width:28px;height:28px;border-radius:50%;background:var(--cream);transform:translateY(-50%)}
+.cp::before{left:-14px}.cp::after{right:-14px}
+.cp .off{font-family:Georgia,serif;font-size:58px;font-weight:700;line-height:1;flex:none;border-right:2px dashed rgba(90,45,18,.35);padding-right:26px}
+.cp .off small{font-size:20px}
+.cp b{font-size:18px;display:block;margin-bottom:4px}
+.cp p{margin:0;font-size:13px}
+
+/* delivery */
+.deliv{background:var(--leaf)}
+.d-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.d{background:#fff;border-radius:22px;padding:28px 24px;text-align:center}
+.d svg{width:64px;height:64px;margin:0 auto 12px}
+.d h3{margin:0 0 6px;font-size:17px;color:var(--green)}
+.d p{margin:0;font-size:13px;color:var(--sub)}
+
+/* about / access */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,60px);align-items:center}
+.about h3{font-family:var(--serif);font-size:clamp(20px,2.8vw,26px);letter-spacing:.08em;font-weight:600;line-height:1.7;margin:6px 0 16px}
+.about p{color:var(--sub);font-size:15px;margin:0 0 1em}
+.access{background:#fff;border-radius:24px;padding:28px;border:2px solid var(--line)}
+.access dl{margin:0}
+.access div{display:grid;grid-template-columns:6em 1fr;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.access div:last-child{border-bottom:0}
+.access dt{color:var(--rose2);font-weight:700}
+.access dd{margin:0}
+
+/* contact */
+.contact{background:linear-gradient(160deg,#e45c76,#f08a6a);color:#fff;text-align:center;border-radius:40px 40px 0 0}
+.contact .en{color:#ffe7b3}
+.contact h2{color:#fff}
+.contact p{margin:0 0 26px;font-size:15px}
+.contact .btn{background:#fff;color:var(--rose2);box-shadow:0 10px 0 -4px rgba(0,0,0,.15)}
+.mail{display:block;margin-top:14px;font-size:13px;opacity:.9;word-break:break-all}
+footer{background:#c9405c;color:#ffe3e8;text-align:center;font-size:12px;padding:22px 0 96px}
+
+.fab{position:fixed;left:12px;right:12px;bottom:12px;z-index:45;display:none}
+.fab .btn{width:100%}
+
+.js .rv{opacity:0;transform:translateY(22px) scale(.98);transition:opacity .7s ease,transform .7s cubic-bezier(.3,1.4,.5,1)}
+.js .rv.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .hero-grid,.about-grid{grid-template-columns:1fr}
+  .bouquet{max-width:320px;margin:0 auto;order:-1}
+  .hd nav{display:none}
+  .perks .wrap{grid-template-columns:1fr}
+  .perk+.perk{border-left:0;border-top:1px dashed rgba(255,255,255,.5)}
+  .d-grid{grid-template-columns:1fr}
+  .cp{flex-direction:column;text-align:center;gap:14px}
+  .cp .off{border-right:0;border-bottom:2px dashed rgba(90,45,18,.35);padding:0 0 14px}
+  .fab{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <svg viewBox="0 0 40 40"><g fill="#e45c76"><circle cx="20" cy="11" r="7"/><circle cx="29" cy="18" r="7"/><circle cx="26" cy="28" r="7"/><circle cx="14" cy="28" r="7"/><circle cx="11" cy="18" r="7"/></g><circle cx="20" cy="20" r="5.5" fill="#f5b93d"/></svg>
+      <span><b>花儀生花店</b><small>Hanayoshi</small></span>
+    </a>
+    <nav><a href="#items">商品と料金</a><a href="#delivery">配送</a><a href="#access">店舗</a><a href="#contact">お問い合わせ</a></nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <span class="badge"><i></i>愛川町の老舗のお花屋さん</span>
+      <h1>大切な日に、<br><em>ぴったりの花</em>を。</h1>
+      <p>お祝い・開店祝い・お供えまで。スタンド花、胡蝶蘭、葬儀用生花、花束やアレンジメントをご用意しています。愛川町内は配送無料、全国発送にも対応。</p>
+      <div class="btns">
+        <a class="btn" href="#items">商品と料金を見る</a>
+        <a class="btn ghost" href="#contact">ご注文・ご相談</a>
+      </div>
+    </div>
+    <div class="bouquet rv" aria-hidden="true">
+      <svg viewBox="0 0 400 420">
+        <circle cx="200" cy="200" r="180" fill="#fff" opacity=".7"/>
+        <g class="sway">
+          <g stroke="#3f8a5f" stroke-width="5" stroke-linecap="round"><path d="M200 380 170 230M200 380 200 210M200 380 232 228M200 380 140 260M200 380 262 262"/></g>
+          <g fill="#6fb38a"><path d="M150 250c-40-10-60-40-60-40 30-6 56 10 60 40Z"/><path d="M250 255c40-12 62-42 62-42-32-4-58 12-62 42Z"/><path d="M190 300c-30 0-50-20-50-20 22-10 44-2 50 20Z"/></g>
+          <g><circle cx="168" cy="200" r="38" fill="#e45c76"/><circle cx="168" cy="200" r="24" fill="#f07d93"/><circle cx="168" cy="200" r="11" fill="#c9405c"/></g>
+          <g><circle cx="238" cy="190" r="42" fill="#ffb3c1"/><circle cx="238" cy="190" r="27" fill="#ffd0d9"/><circle cx="238" cy="190" r="12" fill="#ff8fa6"/></g>
+          <g fill="#f5b93d"><circle cx="200" cy="140" r="16"/><circle cx="222" cy="128" r="16"/><circle cx="226" cy="152" r="16"/><circle cx="178" cy="128" r="16"/><circle cx="182" cy="152" r="16"/></g><circle cx="202" cy="140" r="10" fill="#e08a1e"/>
+          <g fill="#8a76c4"><circle cx="128" cy="250" r="14"/><circle cx="118" cy="232" r="11"/><circle cx="132" cy="226" r="9"/></g>
+          <g fill="#fff" stroke="#f0d9dc"><circle cx="280" cy="250" r="16"/><circle cx="292" cy="232" r="12"/></g>
+        </g>
+        <path d="M150 300 L200 400 L250 300 Q200 330 150 300Z" fill="#f5b93d"/>
+        <path d="M168 320 L200 392 L232 320" fill="none" stroke="#e08a1e" stroke-width="2"/>
+        <path d="M200 330c-24-14-40-6-36 6 4 12 24 6 36-6Zm0 0c24-14 40-6 36 6-4 12-24 6-36-6Z" fill="#e45c76"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="perks">
+  <div class="wrap">
+    <div class="perk"><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="12" width="22" height="16" rx="2"/><path d="M25 17h7l5 6v5H25"/><circle cx="11" cy="30" r="3.5" fill="#e45c76"/><circle cx="31" cy="30" r="3.5" fill="#e45c76"/></svg><span><b>愛川町内 配送無料</b><small>3,000円以上のご注文。厚木市・相模原市も一部無料</small></span></div>
+    <div class="perk"><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2"><circle cx="20" cy="20" r="15"/><path d="M5 20h30M20 5c-6 8-6 22 0 30M20 5c6 8 6 22 0 30"/></svg><span><b>全国発送に対応</b><small>花キューピットで全国へお届け</small></span></div>
+    <div class="perk"><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12h32v6a3 3 0 0 0 0 6v6H4v-6a3 3 0 0 0 0-6Z"/><path d="M16 14v14" stroke-dasharray="2 3"/></svg><span><b>HP限定 10%OFF</b><small>ホームページ限定クーポンあり</small></span></div>
+  </div>
+</div>
+
+<section id="items">
+  <div class="wrap">
+    <div class="head rv"><span class="en">Flowers &amp; Prices</span><h2>用途から選ぶ</h2><p>価格はすべて税込です。</p></div>
+    <div class="chips rv">
+      <a class="chip" style="--c:#e45c76" href="#celebrate"><i></i>お祝い・贈り物</a>
+      <a class="chip" style="--c:#e0861e" href="#opening"><i></i>開店・開業祝い</a>
+      <a class="chip" style="--c:#8a76c4" href="#offer"><i></i>お供え・葬儀</a>
+    </div>
+
+    <div class="use celebrate rv" id="celebrate">
+      <div class="use-head"><span class="ic"><svg viewBox="0 0 32 32"><g fill="#e45c76"><circle cx="16" cy="9" r="5"/><circle cx="22" cy="14" r="5"/><circle cx="19" cy="21" r="5"/><circle cx="12" cy="21" r="5"/><circle cx="10" cy="14" r="5"/></g><circle cx="16" cy="16" r="3.5" fill="#f5b93d"/></svg></span><h3>お祝い・贈り物<small>誕生日、記念日、お礼の気持ちに</small></h3></div>
+      <div class="items">
+        <div class="item"><h4>花束・アレンジメント</h4><p>贈る方やシーンのイメージに合わせてお作りします。色や雰囲気をお気軽にご相談ください。</p><div class="pr"><span class="ask">イメージに合わせて制作</span></div></div>
+        <div class="item"><h4>胡蝶蘭</h4><p>華やかで格式のある贈り物に。</p><div class="pr"><b>10,800<small>円〜</small></b></div></div>
+        <div class="item"><h4>観葉植物</h4><p>長く楽しめるグリーンのギフト。</p><div class="pr"><b>3,000<small>円〜</small></b></div></div>
+      </div>
+    </div>
+
+    <div class="use opening rv" id="opening">
+      <div class="use-head"><span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="#e0861e" stroke-width="2"><circle cx="16" cy="11" r="7"/><path d="M16 18v12M10 30h12M11 24l5-3 5 3"/></svg></span><h3>開店・開業祝い<small>お店の門出を華やかに</small></h3></div>
+      <div class="items">
+        <div class="item"><h4>スタンド花</h4><p>店頭を明るく彩る、お祝いの定番。</p><div class="pr"><span>1段</span><b>10,800<small>円</small></b><span>2段</span><b>16,200<small>円〜</small></b></div></div>
+        <div class="item"><h4>胡蝶蘭</h4><p>開店・開業のお祝いに。</p><div class="pr"><b>10,800<small>円〜</small></b></div></div>
+        <div class="item"><h4>観葉植物</h4><p>オフィスや店内のグリーンに。</p><div class="pr"><b>3,000<small>円〜</small></b></div></div>
+      </div>
+    </div>
+
+    <div class="use offer rv" id="offer">
+      <div class="use-head"><span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="#8a76c4" stroke-width="2"><path d="M16 4c4 5 4 10 0 14-4-4-4-9 0-14Z"/><path d="M16 18c-5-2-9 0-11 4 5 2 9 0 11-4Zm0 0c5-2 9 0 11 4-5 2-9 0-11-4Z"/><path d="M16 18v10"/></svg></span><h3>お供え・葬儀<small>心を込めて、お悔やみの気持ちを</small></h3></div>
+      <div class="items">
+        <div class="item"><h4>葬儀用生花</h4><p>2種類からお選びいただけます。</p><div class="pr"><b>12,600<small>円</small></b><b>14,500<small>円</small></b></div></div>
+        <div class="item"><h4>お供えの花束・アレンジメント</h4><p>ご予算やご要望に合わせてお作りします。</p><div class="pr"><span class="ask">イメージに合わせて制作</span></div></div>
+      </div>
+    </div>
+
+    <div class="table rv">
+      <table>
+        <caption>※価格は税込</caption>
+        <tr><th>スタンド花 1段</th><td>10,800円</td></tr>
+        <tr><th>スタンド花 2段</th><td>16,200円〜</td></tr>
+        <tr><th>葬儀用生花</th><td>12,600円／14,500円</td></tr>
+        <tr><th>胡蝶蘭</th><td>10,800円〜</td></tr>
+        <tr><th>観葉植物</th><td>3,000円〜</td></tr>
+        <tr><th>花束・アレンジメント</th><td style="color:#3f8a5f">ご相談ください</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="coupon">
+  <div class="wrap">
+    <div class="cp rv">
+      <div class="off">10<small>%OFF</small></div>
+      <div><b>ホームページ限定クーポン</b><p>ホームページをご覧の方だけの10％offクーポンをご用意しています。ご利用方法はお問い合わせください。</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="deliv" id="delivery">
+  <div class="wrap">
+    <div class="head rv"><span class="en">Delivery</span><h2>配送のご案内</h2></div>
+    <div class="d-grid">
+      <div class="d rv"><svg viewBox="0 0 64 64" fill="none" stroke="#3f8a5f" stroke-width="2.2"><path d="M32 58s-18-17-18-31a18 18 0 0 1 36 0c0 14-18 31-18 31Z"/><circle cx="32" cy="27" r="7"/></svg><h3>愛川町内は配送無料</h3><p>3,000円以上のご注文で、愛川町内へ無料でお届けします。</p></div>
+      <div class="d rv"><svg viewBox="0 0 64 64" fill="none" stroke="#3f8a5f" stroke-width="2.2"><rect x="6" y="20" width="34" height="24" rx="3"/><path d="M40 28h10l8 9v7H40"/><circle cx="18" cy="48" r="5" fill="#fff"/><circle cx="48" cy="48" r="5" fill="#fff"/></svg><h3>厚木市・相模原市も一部無料</h3><p>近隣エリアの一部も無料でお届けします。詳しくはお問い合わせください。</p></div>
+      <div class="d rv"><svg viewBox="0 0 64 64" fill="none" stroke="#3f8a5f" stroke-width="2.2"><circle cx="32" cy="32" r="24"/><path d="M8 32h48M32 8c-10 12-10 36 0 48M32 8c10 12 10 36 0 48"/></svg><h3>全国発送</h3><p>花キューピットで、全国へお花をお届けできます。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="access">
+  <div class="wrap about-grid">
+    <div class="rv">
+      <span class="en">About us</span>
+      <h3>愛川町で長く愛されてきた、<br>街のお花屋さんです。</h3>
+      <p>お祝いの席を彩るスタンド花から、大切な方を偲ぶお供えのお花まで。用途やご予算に合わせて、ひとつひとつ心を込めてお作りします。</p>
+    </div>
+    <div class="access rv">
+      <dl>
+        <div><dt>店名</dt><dd>花儀生花店 〜Hanayoshi〜</dd></div>
+        <div><dt>所在地</dt><dd>神奈川県愛甲郡愛川町</dd></div>
+        <div><dt>配送</dt><dd>愛川町内無料（3,000円以上）<br>厚木市・相模原市も一部無料</dd></div>
+        <div><dt>全国発送</dt><dd>花キューピット対応</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap rv">
+    <div class="head"><span class="en">Contact</span><h2>ご注文・ご相談</h2></div>
+    <p>お花の用途・ご予算・お届け日をお知らせください。<br>イメージに合わせてご提案します。</p>
+    <a class="btn" href="mailto:hanayoshi@8744.co.jp?subject=%E3%81%8A%E8%8A%B1%E3%81%AE%E3%81%94%E6%B3%A8%E6%96%87%E3%83%BB%E3%81%94%E7%9B%B8%E8%AB%87&body=%E3%81%94%E7%94%A8%E9%80%94%EF%BC%9A%0A%E3%81%94%E4%BA%88%E7%AE%97%EF%BC%9A%0A%E3%81%8A%E5%B1%8A%E3%81%91%E6%97%A5%EF%BC%9A%0A%E3%81%8A%E5%B1%8A%E3%81%91%E5%85%88%EF%BC%9A%0A"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="m2 5 8 6 8-6"/></svg>メールで注文・相談する</a>
+    <span class="mail">hanayoshi@8744.co.jp</span>
+  </div>
+</section>
+<footer>&copy; 花儀生花店 〜Hanayoshi〜</footer>
+
+<div class="fab"><a class="btn" href="#contact">ご注文・ご相談はこちら</a></div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

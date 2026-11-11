@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>つり橋の宿 山水観 湯川荘 ─ 安曇白骨温泉</title>
+<meta name="description" content="白骨温泉の乳白色の湯と、無料で使える貸切露天風呂。つり橋が目印の宿「山水観 湯川荘」。ご予約は直接予約のみ承っております。">
+<meta name="theme-color" content="#1f2a2c">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --milk:#f4f1ea;--milk2:#e9e4d8;--line:#d6cfbf;
+  --sumi:#1f2a2c;--sumi2:#33403f;--ai:#3f5a63;--koke:#5f6f52;
+  --ink:#262a29;--sub:#6b6a62;--shu:#9c3f2b;--kin:#a88b5a;
+  --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  --sans:"Hiragino Sans","Yu Gothic UI","Noto Sans JP",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--milk);color:var(--ink);font-family:var(--serif);line-height:2;letter-spacing:.06em;-webkit-font-smoothing:antialiased}
+svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1080px,100% - 44px);margin-inline:auto}
+.en{font-family:var(--sans);font-size:10px;letter-spacing:.45em;text-transform:uppercase;color:var(--kin)}
+
+/* header */
+.hd{position:fixed;inset:0 0 auto;z-index:40;padding:18px 0;transition:background .5s,padding .5s}
+.hd.on{background:rgba(31,42,44,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 0}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{color:var(--milk);display:flex;align-items:center;gap:12px}
+.logo svg{width:34px;height:34px}
+.logo b{font-weight:500;font-size:16px;letter-spacing:.2em;display:block;line-height:1.3}
+.logo small{font-family:var(--sans);font-size:9px;letter-spacing:.3em;opacity:.7;display:block}
+.hd-btn{font-family:var(--sans);font-size:12px;letter-spacing:.18em;color:var(--milk);border:1px solid rgba(244,241,234,.6);padding:9px 18px;border-radius:2px;transition:.3s}
+.hd-btn:hover{background:var(--milk);color:var(--sumi)}
+
+/* hero */
+.hero{position:relative;min-height:100svh;overflow:hidden;background:linear-gradient(180deg,#18232a 0%,#2c3b40 45%,#5b6a69 72%,#cfc9bb 100%);color:var(--milk)}
+.hero>svg{position:absolute;inset:0;width:100%;height:100%}
+.steam{animation:rise 9s ease-in-out infinite alternate;transform-origin:center bottom}
+.steam.s2{animation-duration:12s;animation-delay:-4s}
+@keyframes rise{0%{transform:translateY(10px) scaleX(1);opacity:.55}100%{transform:translateY(-26px) scaleX(1.12);opacity:.9}}
+.hero-in{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:110px 0 90px}
+.hero h1{margin:0;writing-mode:vertical-rl;font-weight:500;font-size:clamp(30px,5.4vw,54px);letter-spacing:.3em;line-height:1.9;height:9.5em;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero h1 small{font-size:.42em;letter-spacing:.4em;opacity:.85}
+.hero-row{display:flex;gap:clamp(28px,6vw,80px);align-items:flex-end}
+.hero-lead{max-width:21em}
+.hero-lead p{margin:0 0 26px;font-size:15px;color:#e9e5da}
+.hero-lead .en{color:#d9c8a3}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:14px;letter-spacing:.16em;padding:17px 30px;border-radius:2px;background:var(--milk);color:var(--sumi);transition:transform .3s,box-shadow .3s;box-shadow:0 16px 30px -18px rgba(0,0,0,.6)}
+.btn:hover{transform:translateY(-2px)}
+.btn.dark{background:var(--sumi);color:var(--milk)}
+.btn svg{width:18px;height:18px}
+
+/* sections */
+section{padding:clamp(84px,12vw,150px) 0;position:relative}
+.head{margin-bottom:clamp(40px,6vw,70px)}
+.head h2{margin:12px 0 0;font-weight:500;font-size:clamp(24px,3.4vw,36px);letter-spacing:.18em;line-height:1.6}
+.center{text-align:center}
+
+/* yu */
+.yu-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,90px);align-items:center}
+.pool{aspect-ratio:4/3.2;border-radius:3px;overflow:hidden;position:relative;box-shadow:0 40px 70px -40px rgba(31,42,44,.6)}
+.pool::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.45)}
+.yu h3{margin:0 0 24px;font-weight:500;font-size:clamp(20px,2.6vw,28px);letter-spacing:.14em;line-height:1.9}
+.yu p{margin:0 0 1.1em;color:var(--sub);font-size:15px}
+
+/* features */
+.feat{background:var(--milk2)}
+.feat::before{content:"";position:absolute;inset:0;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cpath d='M0 30a30 30 0 0 1 60 0M10 30a20 20 0 0 1 40 0M20 30a10 10 0 0 1 20 0' fill='none' stroke='%23c9c1ae' stroke-width='1'/%3E%3C/svg%3E")}
+.f-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.f{background:var(--milk);padding:40px 30px 36px;border-top:3px solid var(--ai)}
+.f:nth-child(2){border-color:var(--koke)}.f:nth-child(3){border-color:var(--shu)}
+.f .no{font-family:var(--sans);font-size:11px;letter-spacing:.3em;color:var(--kin)}
+.f svg{width:64px;height:64px;margin:18px 0 20px}
+.f h3{margin:0 0 12px;font-weight:500;font-size:19px;letter-spacing:.12em;line-height:1.7}
+.f p{margin:0;font-size:14px;color:var(--sub)}
+.free{display:inline-block;font-family:var(--sans);font-size:11px;letter-spacing:.2em;background:var(--shu);color:#fff;padding:2px 10px;margin-left:6px;vertical-align:middle;border-radius:2px}
+
+/* reserve */
+.rsv{background:var(--sumi);color:var(--milk)}
+.rsv .en{color:#cbb689}
+.notice{max-width:640px;margin:0 auto clamp(40px,6vw,64px);border:1px solid rgba(244,241,234,.3);padding:22px 26px;text-align:center;font-size:15px}
+.notice b{color:#e8d6ad;font-weight:500}
+.steps{list-style:none;margin:0 auto;padding:0;max-width:760px;display:grid;gap:18px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:76px 1fr;gap:20px;align-items:start;background:var(--sumi2);padding:26px 26px 26px 22px;border-radius:2px;position:relative}
+.steps li+li::before{content:"";position:absolute;left:58px;top:-18px;width:1px;height:18px;background:rgba(244,241,234,.35)}
+.steps .n{font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:#cbb689;text-align:center;border-right:1px solid rgba(244,241,234,.18);padding-right:14px}
+.steps .n b{display:block;font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:0;color:var(--milk);line-height:1.3}
+.steps h3{margin:0 0 6px;font-weight:500;font-size:18px;letter-spacing:.12em}
+.steps p{margin:0;font-size:14px;color:#c9c8bf}
+.rsv-cta{margin-top:clamp(40px,6vw,60px);text-align:center}
+.rsv-cta small{display:block;margin-top:16px;font-family:var(--sans);font-size:12px;color:#a9aba3;letter-spacing:.1em}
+
+/* info */
+.info dl{margin:0 auto;max-width:720px}
+.info dl div{display:grid;grid-template-columns:8em 1fr;padding:20px 4px;border-bottom:1px solid var(--line)}
+.info dt{font-family:var(--sans);font-size:12px;letter-spacing:.2em;color:var(--ai);padding-top:3px}
+.info dd{margin:0;font-size:15px}
+.cards{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cards span{font-family:var(--sans);font-size:11px;letter-spacing:.1em;border:1px solid var(--line);padding:2px 10px;border-radius:2px;background:#fff}
+
+/* contact */
+.contact{background:linear-gradient(180deg,var(--milk) 0%,#dfe3df 100%);text-align:center}
+.contact p{color:var(--sub);font-size:15px;margin:0 0 30px}
+.mail{display:block;margin-top:14px;font-family:var(--sans);font-size:13px;color:var(--sub);letter-spacing:.06em;word-break:break-all}
+
+footer{background:var(--sumi);color:#a9aba3;text-align:center;padding:40px 0 100px;font-family:var(--sans);font-size:11px;letter-spacing:.2em}
+footer b{display:block;font-family:var(--serif);color:var(--milk);font-size:15px;font-weight:500;letter-spacing:.24em;margin-bottom:6px}
+
+.fab{position:fixed;left:12px;right:12px;bottom:12px;z-index:45;display:none}
+.fab .btn{width:100%;background:var(--shu);color:#fff}
+
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .yu-grid,.f-grid{grid-template-columns:1fr}
+  .hero-row{flex-direction:column;align-items:flex-start}
+  .hero h1{height:auto;writing-mode:horizontal-tb;letter-spacing:.16em;font-size:clamp(28px,8.4vw,40px);line-height:1.6}
+  .hero h1 small{display:block;margin-bottom:6px}
+  .hd-btn{display:none}
+  .fab{display:block}
+  .info dl div{grid-template-columns:1fr;gap:4px}
+  .steps li{grid-template-columns:60px 1fr;gap:14px;padding:22px 18px 22px 14px}
+  .steps li+li::before{left:44px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hd" id="hd">
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 15 Q20 26 37 15"/><path d="M3 15v14M37 15v14M9 19.5v9.5M15 21.8v7.2M20 22.4v6.6M25 21.8v7.2M31 19.5v9.5"/><path d="M1 29h38"/></svg>
+      <span><b>山水観 湯川荘</b><small>SHIRAHONE ONSEN</small></span>
+    </a>
+    <a class="hd-btn" href="#reserve">ご予約</a>
+  </div>
+</header>
+
+<section class="hero" id="top" style="padding:0">
+  <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="moon" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f5efe0" stop-opacity=".95"/><stop offset=".6" stop-color="#f5efe0" stop-opacity=".15"/><stop offset="1" stop-color="#f5efe0" stop-opacity="0"/></radialGradient>
+      <linearGradient id="yu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9e6dc"/><stop offset="1" stop-color="#bdc4bf"/></linearGradient>
+      <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+    </defs>
+    <circle cx="930" cy="170" r="150" fill="url(#moon)"/>
+    <circle cx="930" cy="170" r="34" fill="#f2ecdc" opacity=".9"/>
+    <path d="M0 470 L120 360 220 420 360 280 480 380 600 300 760 420 880 330 1010 410 1200 300V900H0Z" fill="#26353a"/>
+    <path d="M0 540 L160 450 300 520 430 430 590 520 720 450 880 540 1040 460 1200 530V900H0Z" fill="#1b282c"/>
+    <!-- suspension bridge -->
+    <g stroke="#cfc6b0" stroke-width="2" fill="none" opacity=".85">
+      <path d="M180 520 Q600 640 1020 520"/>
+      <path d="M180 520v-60M1020 520v-60" stroke-width="5"/>
+      <path d="M180 462 Q600 600 1020 462" stroke-width="1.5"/>
+      <g stroke-width="1" opacity=".8">
+        <path d="M260 488v54M340 510v40M420 530v26M500 545v18M600 555v10M700 545v18M780 530v26M860 510v40M940 488v54"/>
+      </g>
+    </g>
+    <!-- milky pool -->
+    <ellipse cx="600" cy="800" rx="720" ry="170" fill="url(#yu)"/>
+    <ellipse cx="600" cy="790" rx="560" ry="110" fill="#f4f1ea" opacity=".55"/>
+    <g fill="#f4f1ea" filter="url(#blur)">
+      <ellipse class="steam" cx="420" cy="660" rx="170" ry="70" opacity=".7"/>
+      <ellipse class="steam s2" cx="760" cy="640" rx="200" ry="80" opacity=".6"/>
+      <ellipse class="steam" cx="600" cy="560" rx="120" ry="60" opacity=".45"/>
+    </g>
+    <g fill="#141d20"><path d="M0 900V620c60-20 120 10 170 60 30 30 60 120 60 220Z"/><path d="M1200 900V600c-80 10-150 60-190 140-20 40-30 100-30 160Z"/></g>
+  </svg>
+  <div class="hero-in">
+    <div class="wrap hero-row">
+      <h1><small>つり橋の宿</small>乳白色の湯に<br>ひとり、ふたり。</h1>
+      <div class="hero-lead">
+        <span class="en">Shirahone Onsen — Sansuikan Yukawaso</span>
+        <p>安曇白骨温泉、つり橋が目印の宿「山水観 湯川荘」。白骨温泉ならではの乳白色の湯と、無料でお使いいただける貸切露天風呂でお待ちしております。</p>
+        <a class="btn" href="#reserve">ご予約の流れを見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="yu">
+  <div class="wrap yu-grid">
+    <div class="pool rv">
+      <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55666a"/><stop offset="1" stop-color="#a7aea7"/></linearGradient>
+          <radialGradient id="milk2" cx="50%" cy="30%" r="80%"><stop offset="0" stop-color="#fbf9f3"/><stop offset="1" stop-color="#cfd3cb"/></radialGradient>
+          <filter id="b2"><feGaussianBlur stdDeviation="9"/></filter>
+        </defs>
+        <rect width="400" height="320" fill="url(#sky2)"/>
+        <path d="M0 150 60 110 120 140 200 90 280 140 340 105 400 135V320H0Z" fill="#3c4b4c"/>
+        <path d="M-10 200 Q200 160 410 200V320H-10Z" fill="#6e665a"/>
+        <path d="M20 215 Q200 182 380 215 Q370 290 200 296 Q30 290 20 215Z" fill="url(#milk2)"/>
+        <g fill="#5c544a"><ellipse cx="40" cy="222" rx="30" ry="14"/><ellipse cx="362" cy="226" rx="34" ry="15"/><ellipse cx="210" cy="296" rx="70" ry="10"/></g>
+        <g fill="#fff" filter="url(#b2)" opacity=".75"><ellipse class="steam" cx="150" cy="190" rx="70" ry="24"/><ellipse class="steam s2" cx="260" cy="180" rx="80" ry="26"/></g>
+      </svg>
+    </div>
+    <div class="rv">
+      <span class="en">Milky Hot Spring</span>
+      <h3>白く、やわらかく。<br>白骨温泉の乳白色の湯</h3>
+      <p>白骨温泉ならではの、やわらかな乳白色のお湯。ゆっくりと身体をあずけて、日常を忘れるひとときを。</p>
+      <p>貸切露天風呂は追加料金なし。ご家族やご夫婦、大切な方と、気兼ねなくお湯を楽しめます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="feat">
+  <div class="wrap">
+    <div class="head center rv"><span class="en">Features</span><h2>湯川荘の三つのこと</h2></div>
+    <div class="f-grid">
+      <div class="f rv">
+        <span class="no">01</span>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#3f5a63" stroke-width="1.4"><ellipse cx="32" cy="44" rx="26" ry="9"/><path d="M22 30c-4-5 4-8 0-14M32 28c-4-5 4-8 0-14M42 30c-4-5 4-8 0-14"/></svg>
+        <h3>乳白色の湯</h3>
+        <p>白骨温泉ならではの、白くやわらかなお湯をお楽しみいただけます。</p>
+      </div>
+      <div class="f rv">
+        <span class="no">02</span>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#5f6f52" stroke-width="1.4"><path d="M8 26 32 10l24 16"/><path d="M14 22v6M50 22v6"/><ellipse cx="32" cy="46" rx="22" ry="8"/><path d="M20 46h24"/></svg>
+        <h3>貸切露天風呂<span class="free">無料</span></h3>
+        <p>貸切の露天風呂を無料でご利用いただけます。人目を気にせず、自分たちだけの時間を。</p>
+      </div>
+      <div class="f rv">
+        <span class="no">03</span>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#9c3f2b" stroke-width="1.4"><path d="M4 26 Q32 44 60 26"/><path d="M4 22v20M60 22v20M4 42h56"/><path d="M14 31v11M24 35v7M32 36v6M40 35v7M50 31v11"/></svg>
+        <h3>つり橋が目印</h3>
+        <p>宿の目印は、つり橋。渡った先に、山水観 湯川荘があります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rsv" id="reserve">
+  <div class="wrap">
+    <div class="head center rv"><span class="en">Reservation</span><h2>ご予約の流れ</h2></div>
+    <p class="notice rv">ご予約は<b>宿への直接予約のみ</b>承っております。<br>インターネットの旅行予約サイトでは受け付けておりません。</p>
+    <ol class="steps">
+      <li class="rv"><span class="n">STEP<b>1</b></span><div><h3>空室を確認する</h3><p>ご希望の日程・人数を、メールまたはお電話でお知らせください。お電話の受付は 10:00〜21:00 です。</p></div></li>
+      <li class="rv"><span class="n">STEP<b>2</b></span><div><h3>お申し込み</h3><p>空室がございましたら、そのままお申し込みください。</p></div></li>
+      <li class="rv"><span class="n">STEP<b>3</b></span><div><h3>白骨温泉へ</h3><p>つり橋を目印にお越しください。お支払いは現金・クレジットカードがご利用いただけます。</p></div></li>
+    </ol>
+    <div class="rsv-cta rv">
+      <a class="btn" href="mailto:mail@sansuikan-yu.com?subject=%E7%A9%BA%E5%AE%A4%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B&body=%E3%81%94%E5%B8%8C%E6%9C%9B%E6%97%A5%EF%BC%9A%0A%E6%B3%8A%E6%95%B0%EF%BC%9A%0A%E4%BA%BA%E6%95%B0%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0A">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="4" width="16" height="12" rx="1"/><path d="m2 5 8 6 8-6"/></svg>メールで空室を問い合わせる</a>
+      <small>お電話受付 10:00〜21:00</small>
+    </div>
+  </div>
+</section>
+
+<section class="info">
+  <div class="wrap">
+    <div class="head center rv"><span class="en">Information</span><h2>ご案内</h2></div>
+    <dl class="rv">
+      <div><dt>宿名</dt><dd>つり橋の宿 山水観 湯川荘</dd></div>
+      <div><dt>所在地</dt><dd>長野県松本市 安曇（白骨温泉）</dd></div>
+      <div><dt>ご予約</dt><dd>直接予約のみ（旅行予約サイトでのお取り扱いはありません）</dd></div>
+      <div><dt>電話受付</dt><dd>10:00〜21:00</dd></div>
+      <div><dt>お支払い</dt><dd>現金・クレジットカード（一回払いのみ）<div class="cards"><span>VISA</span><span>MASTER</span><span>JCB</span><span>AMEX</span></div></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap rv">
+    <div class="head"><span class="en">Contact</span><h2>お問い合わせ</h2></div>
+    <p>空室の確認、ご予約、そのほかのご質問は<br>メールにてお気軽にどうぞ。</p>
+    <a class="btn dark" href="mailto:mail@sansuikan-yu.com">メールでお問い合わせ</a>
+    <span class="mail">mail@sansuikan-yu.com</span>
+  </div>
+</section>
+
+<footer><b>つり橋の宿 山水観 湯川荘</b>NAGANO · MATSUMOTO · SHIRAHONE ONSEN</footer>
+
+<div class="fab"><a class="btn" href="#reserve">空室を問い合わせる</a></div>
+
+<script>
+(function(){
+  var hd=document.getElementById('hd');
+  addEventListener('scroll',function(){hd.classList.toggle('on',scrollY>40)},{passive:true});
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
