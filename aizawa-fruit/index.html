@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>あいざわフルーツ観光農園｜福島市フルーツライン沿いの果物狩り</title>
+<meta name="description" content="福島市のフルーツライン沿い、飯坂温泉エリアの家族経営の観光農園。さくらんぼ・桃・梨・ぶどう・りんごの果物狩りと直売。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.pexels.com">
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffdf6;--sf:#fdf0e4;--card:#fff;--ink:#2f2a24;--mu:#71665a;--ac:#c4303e;--ac2:#3a8449;--line:#f0e2d2;--hdbg:rgba(255,253,246,.93);--btn:#c4303e;--onbtn:#fff;--btnr:14px;--r:18px;--hf:"Kiwi Maru",serif;--bf:"Zen Kaku Gothic New",sans-serif;--ov:linear-gradient(180deg,rgba(20,38,26,.42),rgba(20,38,26,.8))}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:110px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--bf);font-size:16px;line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+ul{list-style:none}
+.hd{position:sticky;top:0;z-index:30;background:var(--hdbg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+.logo{font-family:var(--hf);font-weight:700;font-size:18px;text-decoration:none;line-height:1.3;margin-right:auto}
+.logo small{display:block;font-family:var(--bf);font-size:10px;font-weight:500;color:var(--mu);letter-spacing:.12em}
+.hd-cta{flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--btnr);background:var(--btn);color:var(--onbtn);font-size:13px;font-weight:700;text-decoration:none}
+.nav{display:flex;gap:4px;overflow-x:auto;padding:0 12px 8px;max-width:1120px;margin:0 auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;font-size:13px;text-decoration:none;padding:4px 10px;border-radius:999px;color:var(--mu)}
+.nav a:hover{color:var(--ac)}
+@media(min-width:900px){.hd-in{padding:14px 24px}.nav{position:absolute;top:0;left:50%;transform:translateX(-50%);padding:0;height:100%;align-items:center;max-width:none}.nav a{font-size:14px}}
+.hero{position:relative;min-height:86svh;display:flex;color:#fff;overflow:hidden;background:#222}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:var(--ov)}
+.hero-in{position:relative;z-index:1;width:100%;max-width:1120px;margin:0 auto;padding:48px 20px 56px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero.center .hero-in{justify-content:center;align-items:center;text-align:center}
+.kicker{font-size:12px;letter-spacing:.18em;font-weight:700;opacity:.92;margin-bottom:14px}
+.hero h1{font-family:var(--hf);font-size:clamp(30px,8.4vw,62px);line-height:1.38;font-weight:700;text-shadow:0 2px 18px rgba(0,0,0,.35);letter-spacing:.04em}
+.hero .lead{margin-top:18px;max-width:34em;font-size:15px;line-height:1.95;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero.center .btns{justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:12px 26px;border-radius:var(--btnr);background:var(--btn);color:var(--onbtn);font-weight:700;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.btn.ghost{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.85);color:#fff}
+.sec{padding:76px 20px}
+.sec.alt{background:var(--sf)}
+.wrap{max-width:1080px;margin:0 auto}
+.eb{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--ac)}
+.sec h2{font-family:var(--hf);font-size:clamp(24px,6vw,36px);line-height:1.5;margin:6px 0 22px;font-weight:700}
+.sec-lead{color:var(--mu);margin:-8px 0 28px}
+.ph{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);background:var(--sf)}
+.g2{display:grid;gap:28px}
+@media(min-width:820px){.g2{grid-template-columns:1fr 1fr;gap:48px;align-items:center}.g2.rev>:first-child{order:2}}
+.cards{display:grid;gap:16px}
+@media(min-width:720px){.cards.c2{grid-template-columns:repeat(2,1fr)}.cards.c3{grid-template-columns:repeat(3,1fr)}.cards.c4{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.card h3{font-family:var(--hf);font-size:19px;line-height:1.5;margin-bottom:6px}
+.muted{color:var(--mu)}
+.small{font-size:13px}
+.note{font-size:13px;color:var(--mu);margin-top:14px}
+table.tb{width:100%;border-collapse:collapse;font-size:15px}
+.tb th,.tb td{padding:13px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.tb th{font-weight:500}
+.tb td{text-align:right;font-weight:700;white-space:nowrap;padding-left:12px}
+.info{display:grid;gap:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:6px 22px}
+.info div{display:grid;grid-template-columns:7.5em 1fr;gap:10px;padding:15px 0;border-bottom:1px solid var(--line)}
+.info div:last-child{border-bottom:0}
+.info dt{font-weight:700;color:var(--ac)}
+.contact{text-align:center}
+.contact .addr{margin-top:14px;font-size:14px;color:var(--mu);word-break:break-all}
+.contact .btn{min-width:min(100%,320px)}
+.foot{padding:30px 20px 40px;text-align:center;font-size:12px;color:var(--mu);border-top:1px solid var(--line);line-height:1.9}
+.foot .nm{font-family:var(--hf);font-size:15px;color:var(--ink);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:6px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:14px}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin}
+.strip>*{scroll-snap-align:start}
+@media(min-width:720px){.strip{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);overflow:visible}}
+
+
+.narrow{max-width:720px}
+.hero h1{font-weight:500}
+.sec h2{font-weight:500}
+.eb{color:var(--ac2)}
+.fruits{list-style:none;display:flex;gap:6px;justify-content:space-between;position:relative;padding-top:4px}
+.fruits::before{content:"";position:absolute;left:8%;right:8%;top:32px;height:3px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px)}
+.fruits li{position:relative;flex:1;text-align:center;font-family:var(--hf);font-size:14px}
+.fruits span{display:block;width:56px;height:56px;margin:0 auto 8px;border-radius:50%;background:var(--c);box-shadow:0 0 0 5px #fff,0 6px 14px rgba(0,0,0,.12);position:relative}
+.fruits span::after{content:"";position:absolute;top:-6px;left:50%;width:14px;height:10px;background:var(--ac2);border-radius:0 10px 0 10px}
+@media(min-width:720px){.fruits span{width:76px;height:76px}.fruits::before{top:42px}.fruits li{font-size:17px}}
+.fc{position:relative}
+.fc figcaption{position:absolute;left:14px;bottom:14px;background:#fff;border-radius:999px;padding:4px 16px;font-family:var(--hf);font-size:15px}
+.pr-main{background:#fff;border-radius:var(--r);padding:28px 22px;text-align:center;border:3px solid var(--ac);position:relative}
+.pr-name{font-family:var(--hf);font-size:24px}
+.pr-cond{display:inline-block;background:var(--ac);color:#fff;border-radius:999px;padding:2px 16px;font-size:14px;font-weight:700;margin:6px 0}
+.pr-yen{font-family:var(--hf);font-size:56px;color:var(--ac);line-height:1.2}
+.pr-yen span{font-size:20px}
+.tb td{font-weight:500;color:var(--mu);font-size:14px}
+.fm{padding:0;overflow:hidden}
+.fm .ph{border-radius:0}
+.fm h3,.fm p{padding:0 20px}
+.fm h3{padding-top:16px;color:var(--ac2)}
+.fm p{padding-bottom:20px}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="logo" href="#top">あいざわフルーツ観光農園<small>福島市・フルーツライン沿い</small></a>
+    <a class="hd-cta" href="mailto:aizawa-fruit@nifty.com?subject=%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E8%A6%8B%E3%81%A6%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>お問い合わせ</span></a>
+  </div>
+  <nav class="nav" aria-label="ページ内メニュー"><a href="#season">果物狩り</a><a href="#price">料金</a><a href="#farm">農園と直売所</a><a href="#info">営業時間</a><a href="#contact">お問い合わせ</a></nav>
+</header>
+<section class="hero " id="top">
+  <img class="hero-img" src="https://images.pexels.com/photos/12175146/pexels-photo-12175146.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="青空の下に広がる果樹園" fetchpriority="high" width="1200" height="800">
+  <div class="hero-in">
+<p class="kicker">福島市・フルーツライン沿い ／ 飯坂温泉エリア</p>
+<h1>季節の果物を、<br>樹からそのまま。</h1>
+<p class="lead">家族で営む観光農園です。さくらんぼ・桃・梨・ぶどう・りんごの果物狩りと、季節の果物の直売を行っています。</p>
+<div class="btns"><a class="btn" href="#price">果物狩りの料金</a><a class="btn ghost" href="#info">営業時間</a></div>
+  </div>
+</section>
+<main>
+<section class="sec" id="season"><div class="wrap">
+<p class="eb">SEASON</p><h2>季節ごとの果物狩り</h2><p class="sec-lead">季節の移り変わりとともに、5種類の果物狩りを楽しめます。</p>
+<ol class="fruits"><li style="--c:#c4303e"><span></span>さくらんぼ</li><li style="--c:#f08a77"><span></span>桃</li><li style="--c:#c9b04a"><span></span>梨</li><li style="--c:#6f4a8e"><span></span>ぶどう</li><li style="--c:#b9262f"><span></span>りんご</li></ol>
+<p class="note">※果物狩りの時期と受付状況は季節によって変わります。お出かけ前にお問い合わせください。</p>
+<div class="cards c2" style="margin-top:28px">
+<figure class="fc"><img class="ph" src="https://images.pexels.com/photos/34493385/pexels-photo-34493385.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="枝になる赤いさくらんぼ" loading="lazy" decoding="async" width="1200" height="800"><figcaption>さくらんぼ</figcaption></figure>
+<figure class="fc"><img class="ph" src="https://images.pexels.com/photos/8754412/pexels-photo-8754412.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="樹になる桃の実" loading="lazy" decoding="async" width="1200" height="800"><figcaption>桃</figcaption></figure>
+</div></div></section>
+<section class="sec alt" id="price"><div class="wrap">
+<p class="eb">PRICE</p><h2>料金プラン</h2>
+<div class="pr-main"><p class="pr-name">さくらんぼ狩り</p><p class="pr-cond">30分 食べ放題</p><p class="pr-yen">1,980<span>円</span></p></div>
+<table class="tb" style="margin-top:20px"><tr><th>桃狩り</th><td>お問い合わせください</td></tr><tr><th>梨狩り</th><td>お問い合わせください</td></tr><tr><th>ぶどう狩り</th><td>お問い合わせください</td></tr><tr><th>りんご狩り</th><td>お問い合わせください</td></tr></table>
+</div></section>
+<section class="sec" id="farm"><div class="wrap">
+<p class="eb">FARM</p><h2>農園と直売所</h2>
+<div class="cards c2">
+<article class="card fm"><img class="ph" src="https://images.pexels.com/photos/5529940/pexels-photo-5529940.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="果樹園で果物を摘む人" loading="lazy" decoding="async" width="1200" height="800"><h3>果物狩り</h3><p class="muted">樹になった果物を、自分の手で。家族で営む農園で、季節の果物狩りをお楽しみください。</p></article>
+<article class="card fm"><img class="ph" src="https://images.pexels.com/photos/8791917/pexels-photo-8791917.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="葉と一緒に並ぶ桃" loading="lazy" decoding="async" width="1200" height="800"><h3>直売所</h3><p class="muted">農園の直売所では、季節の果物を販売しています。</p></article>
+</div></div></section>
+<section class="sec alt" id="info"><div class="wrap narrow">
+<p class="eb">INFORMATION</p><h2>営業時間・アクセス</h2>
+<dl class="info"><div><dt>営業時間</dt><dd>9:00〜17:00<br><span class="small muted">果物狩りの受付時間は季節により変わります</span></dd></div><div><dt>場所</dt><dd>福島県福島市<br><span class="small muted">フルーツライン沿い（飯坂温泉エリア）</span></dd></div></dl>
+</div></section>
+<section class="sec contact " id="contact"><div class="wrap">
+<p class="eb">CONTACT</p><h2>お問い合わせ</h2>
+<p class="muted">果物狩りの時期・受付状況や、直売についてのお問い合わせはメールでどうぞ。</p>
+<div class="btns" style="justify-content:center"><a class="btn" href="mailto:aizawa-fruit@nifty.com?subject=%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E8%A6%8B%E3%81%A6%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>メールで問い合わせる</a></div>
+<p class="addr">aizawa-fruit@nifty.com</p>
+</div></section>
+</main>
+<footer class="foot">
+  <p class="nm">あいざわフルーツ観光農園</p>
+  <p>福島県福島市（フルーツライン沿い・飯坂温泉エリア）</p>
+  <p>※掲載している写真はイメージです</p>
+  <p>このページは営業用の制作見本です（公式サイトではありません）</p>
+</footer>
+
+</body>
+</html>
