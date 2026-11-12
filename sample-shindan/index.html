@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>似合うヘアスタイル診断｜診断コンテンツ見本ページ</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; background: #f6f4fb; color: #2b2440; line-height: 1.7; }
+  .sample-note { background: #2b2440; color: #fff; text-align: center; font-size: 12px; padding: 8px 12px; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 20px 16px 48px; }
+  .card { background: #fff; border-radius: 20px; padding: 28px 22px; box-shadow: 0 10px 30px rgba(90,70,180,.12); margin-top: 18px; }
+  .hero { text-align: center; padding: 36px 22px; background: linear-gradient(135deg, #6a5cff, #38b6a5); color: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(90,70,180,.25); }
+  .hero h1 { font-size: 26px; line-height: 1.4; margin-bottom: 10px; }
+  .hero p { font-size: 14px; opacity: .95; }
+  .btn { display: block; width: 100%; border: none; cursor: pointer; border-radius: 999px; padding: 15px 20px; font-size: 16px; font-weight: 700; margin-top: 18px; }
+  .btn-primary { background: linear-gradient(135deg, #6a5cff, #8a7bff); color: #fff; box-shadow: 0 6px 16px rgba(106,92,255,.35); }
+  .btn-teal { background: linear-gradient(135deg, #2ea89a, #38b6a5); color: #fff; }
+  .btn-ghost { background: #fff; color: #6a5cff; border: 2px solid #6a5cff; }
+  .progress-text { font-size: 12px; color: #8a84a3; text-align: center; }
+  .bar { height: 8px; background: #eeeaf8; border-radius: 99px; margin: 8px 0 18px; overflow: hidden; }
+  .bar span { display: block; height: 100%; background: linear-gradient(90deg, #6a5cff, #38b6a5); border-radius: 99px; transition: width .3s; }
+  .q { font-size: 19px; font-weight: 700; text-align: center; margin-bottom: 18px; }
+  .choice { display: block; width: 100%; text-align: left; background: #faf9ff; border: 2px solid #e6e1f5; border-radius: 14px; padding: 14px 16px; font-size: 15px; margin-bottom: 10px; cursor: pointer; }
+  .choice:active { border-color: #6a5cff; background: #f0edff; }
+  .result-head { text-align: center; font-size: 13px; color: #8a84a3; }
+  .result-name { text-align: center; font-size: 27px; font-weight: 800; color: #6a5cff; margin: 6px 0 10px; }
+  .result-desc { font-size: 15px; }
+  .menu { background: #f7fdfb; border: 1px solid #cdeee7; border-radius: 14px; padding: 16px; margin-top: 18px; }
+  .menu h3 { font-size: 14px; color: #2ea89a; margin-bottom: 8px; }
+  .menu li { list-style: none; font-size: 15px; padding: 6px 0; border-bottom: 1px dashed #d8f0ea; display: flex; justify-content: space-between; }
+  .menu li:last-child { border-bottom: none; }
+  .again { display: block; margin: 16px auto 0; background: none; border: none; color: #8a84a3; font-size: 14px; cursor: pointer; text-decoration: underline; }
+  .foot { text-align: center; font-size: 12px; color: #a49dc0; margin-top: 22px; }
+</style>
+</head>
+<body>
+<div class="sample-note">これは「診断コンテンツ制作」サービスの見本ページです（美容サロン向けの例）</div>
+<div class="wrap">
+  <div id="root"></div>
+  <p class="foot">診断コンテンツ制作｜お店の集客に使える10問診断ページを作ります</p>
+</div>
+<script>
+const QUESTIONS = [
+  { q: '休みの日の服装は？', c: [
+    { t: 'ナチュラルな素材感の服が多い', s: { natural: 2 } },
+    { t: 'ふんわりしたワンピースやスカート', s: { feminine: 2 } },
+    { t: 'モノトーンでシンプルに決める', s: { cool: 2 } },
+    { t: 'きちんと感のある上品な服', s: { elegant: 2 } } ] },
+  { q: '周りに言われて嬉しいのは？', c: [
+    { t: '爽やかだね', s: { natural: 2, elegant: 1 } },
+    { t: 'かわいいね', s: { feminine: 2 } },
+    { t: 'かっこいいね', s: { cool: 2 } },
+    { t: '大人っぽいね', s: { elegant: 2, cool: 1 } } ] },
+  { q: '髪に一番求めるのは？', c: [
+    { t: '手入れがラクで自然な仕上がり', s: { natural: 2 } },
+    { t: '柔らかくてツヤのある質感', s: { feminine: 2, elegant: 1 } },
+    { t: 'シャープで垢抜けた印象', s: { cool: 2 } },
+    { t: '上品で落ち着いた雰囲気', s: { elegant: 2 } } ] },
+  { q: '好きな色は？', c: [
+    { t: 'ベージュ・ブラウン系', s: { natural: 2 } },
+    { t: 'ピンク・ラベンダー系', s: { feminine: 2 } },
+    { t: '黒・グレー系', s: { cool: 2 } },
+    { t: 'ネイビー・ボルドー系', s: { elegant: 2 } } ] },
+  { q: 'メイクの雰囲気は？', c: [
+    { t: 'ナチュラルメイク中心', s: { natural: 2 } },
+    { t: '血色感のある可愛いメイク', s: { feminine: 2 } },
+    { t: 'シャープなアイラインが好き', s: { cool: 2 } },
+    { t: 'マットで大人っぽいメイク', s: { elegant: 2 } } ] },
+  { q: '理想の休日は？', c: [
+    { t: 'カフェや公園でゆっくり', s: { natural: 2, feminine: 1 } },
+    { t: '友達と可愛いお店めぐり', s: { feminine: 2 } },
+    { t: '美術館や街歩き', s: { cool: 2, elegant: 1 } },
+    { t: 'ホテルランチやアフタヌーンティー', s: { elegant: 2 } } ] },
+  { q: '髪の長さの好みは？', c: [
+    { t: '肩前後の扱いやすい長さ', s: { natural: 2 } },
+    { t: '巻けるロングが好き', s: { feminine: 2 } },
+    { t: 'ショートやボブで潔く', s: { cool: 2 } },
+    { t: 'セミロングできちんと感', s: { elegant: 2 } } ] },
+  { q: '挑戦してみたい髪色は？', c: [
+    { t: '明るめのベージュブラウン', s: { natural: 2 } },
+    { t: 'ピンクブラウンやラベンダー', s: { feminine: 2 } },
+    { t: 'アッシュグレーやブルー系', s: { cool: 2 } },
+    { t: '深みのあるダークブラウン', s: { elegant: 2 } } ] },
+  { q: 'サロンで大事にしたいのは？', c: [
+    { t: '自宅での再現しやすさ', s: { natural: 2 } },
+    { t: '可愛くしてもらえること', s: { feminine: 2 } },
+    { t: '似合わせの提案力', s: { cool: 2, elegant: 1 } },
+    { t: '落ち着いた接客と空間', s: { elegant: 2 } } ] },
+  { q: '仕上がりのイメージは？', c: [
+    { t: '風になびくような自然さ', s: { natural: 2 } },
+    { t: 'ふんわり揺れる柔らかさ', s: { feminine: 2 } },
+    { t: '凛としたシャープさ', s: { cool: 2 } },
+    { t: 'しっとりした上品さ', s: { elegant: 2 } } ] },
+];
+const RESULTS = {
+  natural: { name: 'ナチュラルタイプ', desc: '爽やかで自然体な雰囲気が似合います。作り込みすぎないカットと、透明感のあるベージュ系カラーで、素顔の良さを引き出せます。', menu: [['似合わせカット', '¥5,500'], ['透明感ベージュカラー', '¥8,800'], ['ナチュラル仕上げトリートメント', '¥3,300']] },
+  feminine: { name: 'フェミニンタイプ', desc: '柔らかくて可愛らしい雰囲気が似合います。ゆるく巻けるロングと、ピンクブラウン系のカラーで、血色感のある仕上がりに。', menu: [['ロングレイヤーカット', '¥6,600'], ['ピンクブラウンカラー', '¥9,900'], ['ツヤ髪トリートメント', '¥4,400']] },
+  cool: { name: 'クールタイプ', desc: 'シャープで垢抜けた雰囲気が似合います。ショートやボブの潔いラインと、アッシュ系カラーで凛とした印象に決まります。', menu: [['ショート／ボブカット', '¥5,500'], ['アッシュグレーカラー', '¥9,900'], ['頭皮ケアスパ', '¥3,850']] },
+  elegant: { name: 'エレガントタイプ', desc: '上品で大人っぽい雰囲気が似合います。セミロングのきちんと感と、深みのあるダーク系カラーで落ち着いた美しさを引き出せます。', menu: [['セミロングカット', '¥6,050'], ['ダークブラウンカラー', '¥8,800'], ['贅沢うる艶トリートメント', '¥5,500']] },
+};
+const KEYS = ['natural', 'feminine', 'cool', 'elegant'];
+const root = document.getElementById('root');
+let step = 0, scores = {};
+function reset() { scores = {}; KEYS.forEach(k => scores[k] = 0); }
+function intro() {
+  root.innerHTML = '<div class="hero"><h1>似合うヘアスタイル診断</h1><p>10の質問に答えるだけで、あなたに似合う髪型と<br>おすすめメニューが分かります。</p></div>' +
+    '<button class="btn btn-primary" id="start">診断をはじめる</button>';
+  document.getElementById('start').onclick = () => { step = 0; reset(); question(); };
+}
+function question() {
+  const item = QUESTIONS[step];
+  let h = '<div class="card"><p class="progress-text">質問 ' + (step + 1) + ' / 10</p><div class="bar"><span style="width:' + (step * 10) + '%"></span></div><p class="q">' + item.q + '</p>';
+  item.c.forEach((c, i) => { h += '<button class="choice" data-i="' + i + '">' + c.t + '</button>'; });
+  h += '</div>';
+  root.innerHTML = h;
+  root.querySelectorAll('.choice').forEach(b => b.onclick = () => {
+    const c = item.c[Number(b.dataset.i)];
+    Object.keys(c.s).forEach(k => scores[k] += c.s[k]);
+    step++;
+    step < QUESTIONS.length ? question() : result();
+  });
+}
+function result() {
+  let best = KEYS[0];
+  KEYS.forEach(k => { if (scores[k] > scores[best]) best = k; });
+  const r = RESULTS[best];
+  let h = '<div class="card"><p class="progress-text">質問 10 / 10</p><div class="bar"><span style="width:100%"></span></div>' +
+    '<p class="result-head">あなたに似合うのは</p><p class="result-name">『' + r.name + '』</p>' +
+    '<p class="result-desc">' + r.desc + '</p><div class="menu"><h3>おすすめメニュー（見本）</h3><ul>';
+  r.menu.forEach(m => { h += '<li><span>' + m[0] + '</span><span>' + m[1] + '</span></li>'; });
+  h += '</ul></div>' +
+    '<button class="btn btn-teal" id="book">このメニューで予約する（見本）</button>' +
+    '<button class="btn btn-ghost" id="share">結果をXでシェアする</button>' +
+    '<button class="again" id="again">もう一度診断する</button></div>';
+  root.innerHTML = h;
+  document.getElementById('again').onclick = intro;
+  document.getElementById('book').onclick = () => alert('見本ページのため、実際の予約ボタンはお店の予約ページへつなぎます。');
+  document.getElementById('share').onclick = () => {
+    const text = '似合うヘアスタイル診断、私の結果は「' + r.name + '」でした！ #ヘアスタイル診断';
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  };
+}
+intro();
+</script>
+</body>
+</html>
