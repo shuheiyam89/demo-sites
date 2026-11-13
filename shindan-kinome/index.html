@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたに合う器診断 | キノメノウツワ</title>
+<meta name="description" content="10の質問に答えるだけで、キノメノウツワの器の中からあなたに合う器をご提案する診断デモです。">
+<style>
+:root{
+--bg:#faf6ef; --card:#ffffff; --ink:#3b332a; --sub:#8a7c6c;
+--accent:#8a5a33; --accent-dark:#6f4525; --line:#e7dccb;
+--chip:#f3ead9; --radius:18px;
+--shadow:0 10px 28px rgba(90,64,32,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 48px}
+.demo-bar{background:#3b332a;color:#f5ecdd;font-size:12px;text-align:center;padding:8px 12px;letter-spacing:.02em}
+header{padding:38px 4px 8px;text-align:center}
+.shop-name{font-size:13px;letter-spacing:.28em;color:var(--accent);font-weight:700}
+h1{font-size:30px;line-height:1.35;margin:10px 0 12px;font-weight:600}
+.lead{font-size:14.5px;color:var(--sub);max-width:440px;margin:0 auto}
+.meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 22px}
+.meta span{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:12.5px;color:var(--accent-dark);font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:15px 36px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(138,90,51,.35);transition:transform.15s, box-shadow.15s;text-decoration:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(138,90,51,.4)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#fff;color:var(--accent-dark);border:1.5px solid var(--accent);box-shadow:none}
+.btn.small{padding:10px 22px;font-size:14px}
+.screen{display:none;animation:fade.35s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.center{text-align:center}
+.progress{height:8px;background:#eee2cf;border-radius:99px;overflow:hidden;margin:26px 0 8px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#b98a54,var(--accent));border-radius:99px;transition:width.35s ease}
+.step-label{font-size:12.5px;color:var(--sub);text-align:center;letter-spacing:.1em}
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 20px 22px;margin-top:16px}
+.q-num{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.2em;text-align:center}
+.q-text{font-size:19px;font-weight:700;text-align:center;margin:8px 0 20px;line-height:1.5}
+.choices{display:grid;gap:10px}
+.choice{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fdfaf4;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-size:15px;font-weight:600;color:var(--ink);cursor:pointer;transition:border-color.15s, background.15s, transform.1s;font-family:inherit}
+.choice:hover{border-color:var(--accent);background:#f8efe0}
+.choice:active{transform:scale(.99)}
+.choice.dot{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--accent);position:relative}
+.back-link{display:inline-block;margin-top:16px;font-size:13px;color:var(--sub);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:inherit}
+.result-badge{display:inline-block;background:var(--accent);color:#fff;font-size:12px;font-weight:700;letter-spacing:.14em;border-radius:999px;padding:5px 16px}
+.result-type{font-size:27px;margin:14px 0 8px;line-height:1.4}
+.result-desc{font-size:14.5px;color:var(--sub);max-width:440px;margin:0 auto}
+.products{display:grid;gap:14px;margin-top:26px;text-align:left}
+.product{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:0 4px 14px rgba(90,64,32,.07)}
+.product img{width:104px;height:104px;object-fit:cover;border-radius:12px;flex:none;background:#f1e8d8}
+.product.p-body{flex:1;min-width:0;display:flex;flex-direction:column}
+.product.p-cat{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.08em}
+.product.p-name{font-size:15px;font-weight:700;line-height:1.5;margin:2px 0 4px}
+.product.p-note{font-size:12.5px;color:var(--sub);line-height:1.6}
+.product.p-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px;gap:8px}
+.product.p-price{font-size:16px;font-weight:800;color:var(--accent-dark)}
+.product.p-link{flex:none;background:var(--accent);color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:8px 16px;text-decoration:none;box-shadow:0 4px 10px rgba(138,90,51,.3)}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:12.5px;color:var(--sub)}
+footer a{color:var(--accent-dark);font-weight:700}
+@media (max-width:420px){ h1{font-size:26px}.product img{width:88px;height:88px}}
+</style>
+</head>
+<body>
+<div class="demo-bar">このページは「キノメノウツワ」様向けに作成した診断デモ（サンプル）です</div>
+<div class="wrap">
+
+<!-- スタート画面 -->
+<section class="screen on" id="scr-start">
+<header>
+<div class="shop-name serif">キノメノウツワ</div>
+<h1 class="serif">あなたに合う<br>器診断</h1>
+<p class="lead">毎日の食卓の好みや暮らし方から、キノメノウツワの器の中から「あなたに合う器」をご提案します。迷ったときの器選びに、どうぞ。</p>
+<div class="meta"><span>全10問</span><span>約2分</span><span>登録不要・無料</span></div>
+<button class="btn" onclick="startQuiz()">診断をはじめる →</button>
+</header>
+</section>
+
+<!-- 質問画面 -->
+<section class="screen" id="scr-quiz">
+<div class="progress"><i id="bar"></i></div>
+<div class="step-label" id="stepLabel"></div>
+<div class="q-card">
+<div class="q-num" id="qNum"></div>
+<div class="q-text" id="qText"></div>
+<div class="choices" id="choices"></div>
+</div>
+<div class="center"><button class="back-link" id="backBtn" onclick="goBack()">← 前の質問にもどる</button></div>
+</section>
+
+<!-- 結果画面 -->
+<section class="screen" id="scr-result">
+<header>
+<span class="result-badge">診断結果</span>
+<div class="result-type serif" id="rType"></div>
+<p class="result-desc" id="rDesc"></p>
+</header>
+<div class="products" id="rProducts"></div>
+<div class="actions">
+<button class="btn ghost small" onclick="restart()">もう一度診断する</button>
+<button class="btn small" onclick="shareResult()">結果をシェアする</button>
+</div>
+</section>
+
+<footer>
+商品のご購入は公式ショップへ：<a href="https://kinome4.base.shop/" target="_blank" rel="noopener">キノメノウツワ（BASE）</a><br>
+※このページは診断コンテンツ制作サービスのデモです。商品情報は公式ショップの掲載内容に基づきます。
+</footer>
+</div>
+
+<script>
+var IMG = "?imformat=generic&q=90&im=Resize,width=800,type=normal";
+var TYPES = {
+jitsuyo: {
+name: "実用・定番タイプ",
+desc: "毎日の食卓を大切にするあなたには、使い勝手がよくて飽きのこない定番の器が似合います。盛る料理を選ばず、長く愛用できる一枚をどうぞ。",
+products: [
+{cat:"益子焼", name:"益子焼 7寸パン皿 青磁釉", price:"¥2,530", note:"朝のパン食にも取り皿にも。毎日の食卓で出番の多い、頼れるサイズのパン皿です。", url:"https://kinome4.base.shop/items/162740611", img:"https://baseec-img-mng.akamaized.net/images/item/origin/b63b0cea5798bb7cbd1bedf0e6c04b65.jpg" + IMG},
+{cat:"益子焼", name:"益子焼 7寸皿パン皿 糠白釉", price:"¥2,530", note:"やさしい糠白釉は和食にも洋食にもすっとなじみます。揃えて使いたくなる一枚。", url:"https://kinome4.base.shop/items/162740151", img:"https://baseec-img-mng.akamaized.net/images/item/origin/74a4fb4e1f46b866b005022af9277407.jpg" + IMG},
+{cat:"美濃焼", name:"美濃焼 伸光窯 icing 18cmプレート 志野土×灰グレー", price:"¥1,980", note:"ワンプレートごはんに便利な18cm。志野土と灰グレーの組み合わせが食卓をすっきり見せます。", url:"https://kinome4.base.shop/items/85461726", img:"https://baseec-img-mng.akamaized.net/images/item/origin/fb28eec257abb5f6b6b026d6ee6e2855.jpg" + IMG}
+]
+},
+tsuchi: {
+name: "土の風合い・渋めタイプ",
+desc: "土の質感や手仕事の表情に惹かれるあなたには、古信楽や作家ものの器を。使うほどに味わいが深まり、食卓に落ち着きを添えてくれます。",
+products: [
+{cat:"明山・古信楽", name:"明山 古信楽 角プレートL白釉", price:"¥3,850", note:"古信楽の土の風合いと白釉のコントラスト。おかずを格上げしてくれる角プレートです。", url:"https://kinome4.base.shop/items/162738197", img:"https://baseec-img-mng.akamaized.net/images/item/origin/b81f8ec5d0490445e87b250d548695f1.jpg" + IMG},
+{cat:"明山・古信楽", name:"明山 古信楽 丸プレートL白釉", price:"¥3,850", note:"丸のやわらかさと土味の力強さが同居する一枚。メイン料理の盛り付けに。", url:"https://kinome4.base.shop/items/162737716", img:"https://baseec-img-mng.akamaized.net/images/item/origin/93f3a14ca2baa818db6164126a908ad2.jpg" + IMG},
+{cat:"こま製陶所", name:"こま製陶所 文山香菜江 焦茶7寸浅鉢", price:"¥5,500", note:"深みのある焦茶色が煮物やサラダを引き立てます。食卓の真ん中に置きたい浅鉢。", url:"https://kinome4.base.shop/items/112913011", img:"https://baseec-img-mng.akamaized.net/images/item/origin/794decf71ec51edefb8bae3234be6fab.jpg" + IMG}
+]
+},
+egara: {
+name: "絵付け・かわいいタイプ",
+desc: "季節の花や優しい色合いに心が動くあなたには、野花の絵付けが可憐な器を。食卓に小さな季節を運んでくれる、眺めて楽しい器たちです。",
+products: [
+{cat:"こま製陶所", name:"こま製陶所 文山香菜江 豆皿・オオイヌノフグリ", price:"¥1,760", note:"小さな野花・オオイヌノフグリの絵付けが可憐な豆皿。薬味やお菓子をのせて。", url:"https://kinome4.base.shop/items/112912366", img:"https://baseec-img-mng.akamaized.net/images/item/origin/a5ab3ac4a76a5a8e142d852b0453b25e.jpg" + IMG},
+{cat:"こま製陶所", name:"こま製陶所 文山香菜江 ははこぐさのデミタスカップ", price:"¥4,180", note:"ははこぐさの絵付けで、お茶の時間が少し特別に。手に取るたび優しい気持ちになれます。", url:"https://kinome4.base.shop/items/112911256", img:"https://baseec-img-mng.akamaized.net/images/item/origin/124aab15f9a8e0714a1d3764234e1c10.jpg" + IMG},
+{cat:"こま製陶所", name:"こま製陶所 文山香菜江 月桃のマグカップ", price:"¥4,950", note:"月桃の絵付けが目を引くマグカップ。朝の一杯が楽しみになる存在感です。", url:"https://kinome4.base.shop/items/112909577", img:"https://baseec-img-mng.akamaized.net/images/item/origin/f1af37ccba86a74c83c5f8aa015e852e.jpg" + IMG}
+]
+}
+};
+var QUESTIONS = [
+{q:"朝の食卓、どんな雰囲気が好きですか？", c:[["さっと用意できる、シンプルな食卓","jitsuyo"],["落ち着いた和の食卓","tsuchi"],["季節の花や色を添えた食卓","egara"],["家族でワイワイ囲む食卓","jitsuyo"]]},
+{q:"器を選ぶとき、いちばん重視するのは？", c:[["土の質感や手触り","tsuchi"],["柄や色のかわいらしさ","egara"],["毎日使える丈夫さ","jitsuyo"],["手仕事の味わい","tsuchi"]]},
+{q:"よく作る料理は？", c:[["見た目も楽しい盛り付け料理","egara"],["煮物や焼き魚の和食","tsuchi"],["パンとサラダの洋食","jitsuyo"],["丼ものや麺類","jitsuyo"]]},
+{q:"お部屋のインテリアの雰囲気は？", c:[["北欧風ですっきり","jitsuyo"],["木と土のナチュラルな和風","tsuchi"],["小物で季節感を出す","egara"],["ミニマルで物少なめ","jitsuyo"]]},
+{q:"器の色の好みは？", c:[["茶色やグレーの渋い色","tsuchi"],["花柄や優しい色合い","egara"],["白や生成りのベーシックな色","jitsuyo"],["青系のさわやかな色","jitsuyo"]]},
+{q:"休日の過ごし方に近いのは？", c:[["お菓子作りやお茶の時間","egara"],["庭や植物の手入れ","tsuchi"],["家事をテキパキ片付ける","jitsuyo"],["家族とお出かけ","jitsuyo"]]},
+{q:"プレゼントに器を選ぶなら？", c:[["誰にでも使いやすい定番品","jitsuyo"],["作家ものの一点もの","tsuchi"],["見た瞬間「かわいい」と思えるもの","egara"],["実用的なもの","jitsuyo"]]},
+{q:"食器棚の中はどんな感じ？", c:[["旅先で買った器が混ざっている","tsuchi"],["季節ごとに入れ替える","egara"],["同じシリーズで揃っている","jitsuyo"],["必要最小限だけ","jitsuyo"]]},
+{q:"料理の写真を撮るときは？", c:[["テーブルコーディネート込みで撮る","egara"],["器の質感が伝わるように撮る","tsuchi"],["さっと撮ってすぐ食べる","jitsuyo"],["あまり撮らない","jitsuyo"]]},
+{q:"あなたにとって理想の器は？", c:[["欠けにくく扱いやすい器","jitsuyo"],["使うほど味が出る器","tsuchi"],["食卓が明るくなる器","egara"],["電子レンジ・食洗機が使える器","jitsuyo"]]}
+];
+var idx = 0, answers = [];
+function show(id){
+["scr-start","scr-quiz","scr-result"].forEach(function(s){ document.getElementById(s).classList.toggle("on", s===id);});
+window.scrollTo({top:0, behavior:"smooth"});
+}
+function startQuiz(){ idx = 0; answers = []; renderQ(); show("scr-quiz");}
+function renderQ(){
+var item = QUESTIONS[idx];
+document.getElementById("bar").style.width = (idx / QUESTIONS.length * 100) + "%";
+document.getElementById("stepLabel").textContent = "質問 " + (idx+1) + " / " + QUESTIONS.length;
+document.getElementById("qNum").textContent = "Q" + (idx+1);
+document.getElementById("qText").textContent = item.q;
+document.getElementById("backBtn").style.visibility = idx === 0? "hidden": "visible";
+var box = document.getElementById("choices"); box.innerHTML = "";
+item.c.forEach(function(choice){
+var b = document.createElement("button");
+b.className = "choice";
+b.innerHTML = '<span class="dot"></span><span></span>';
+b.querySelector("span:last-child").textContent = choice[0];
+b.onclick = function(){ answers[idx] = choice[1]; idx++; if(idx < QUESTIONS.length){ renderQ();} else { showResult();}};
+box.appendChild(b);
+});
+}
+function goBack(){ if(idx > 0){ idx--; renderQ();}}
+function showResult(){
+document.getElementById("bar").style.width = "100%";
+var score = {jitsuyo:0, tsuchi:0, egara:0};
+answers.forEach(function(a){ score[a]++;});
+var best = "jitsuyo";
+["jitsuyo","tsuchi","egara"].forEach(function(k){ if(score[k] > score[best]) best = k;});
+var t = TYPES[best];
+document.getElementById("rType").textContent = "あなたは「" + t.name + "」";
+document.getElementById("rDesc").textContent = t.desc;
+var box = document.getElementById("rProducts"); box.innerHTML = "";
+t.products.forEach(function(p){
+var d = document.createElement("div"); d.className = "product";
+d.innerHTML = '<img alt=""><div class="p-body"><div class="p-cat"></div><div class="p-name"></div><div class="p-note"></div><div class="p-row"><span class="p-price"></span><a class="p-link" target="_blank" rel="noopener">商品を見る →</a></div></div>';
+d.querySelector("img").src = p.img; d.querySelector("img").alt = p.name;
+d.querySelector(".p-cat").textContent = p.cat;
+d.querySelector(".p-name").textContent = p.name;
+d.querySelector(".p-note").textContent = p.note;
+d.querySelector(".p-price").textContent = p.price;
+d.querySelector(".p-link").href = p.url;
+box.appendChild(d);
+});
+show("scr-result");
+}
+function restart(){ startQuiz();}
+function shareResult(){
+var type = document.getElementById("rType").textContent;
+var text = "" + type + "でした！ #器診断 #キノメノウツワ";
+if(navigator.share){ navigator.share({title:"あなたに合う器診断", text:text, url:location.href}).catch(function(){});}
+else{ window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(location.href), "_blank");}
+}
+</script>
+</body>
+</html>

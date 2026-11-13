@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたに似合うワンちゃんキャンドル診断 | Acandle</title>
+<meta name="description" content="10の質問に答えるだけで、Acandleのイッヌシリーズからあなたに似合うワンちゃんキャンドルをご提案する診断デモです。">
+<style>
+:root{
+--bg:#fdf6ee; --card:#ffffff; --ink:#43332a; --sub:#97826f;
+--accent:#c05a2e; --accent-dark:#9c4520; --line:#f0ddc9;
+--chip:#fbeedd; --radius:20px;
+--shadow:0 10px 28px rgba(160,90,40,.13);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 48px}
+.demo-bar{background:#43332a;color:#ffe9d2;font-size:12px;text-align:center;padding:8px 12px;letter-spacing:.02em}
+header{padding:38px 4px 8px;text-align:center}
+.shop-name{font-size:13px;letter-spacing:.3em;color:var(--accent);font-weight:800}
+h1{font-size:29px;line-height:1.4;margin:10px 0 12px;font-weight:800}
+.lead{font-size:14.5px;color:var(--sub);max-width:440px;margin:0 auto}
+.meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 22px}
+.meta span{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:12.5px;color:var(--accent-dark);font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:15px 36px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 20px rgba(192,90,46,.35);transition:transform.15s, box-shadow.15s;text-decoration:none;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(192,90,46,.4)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#fff;color:var(--accent-dark);border:1.5px solid var(--accent);box-shadow:none}
+.btn.small{padding:10px 22px;font-size:14px}
+.screen{display:none;animation:fade.35s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.center{text-align:center}
+.progress{height:8px;background:#f3e0c8;border-radius:99px;overflow:hidden;margin:26px 0 8px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e08b4d,var(--accent));border-radius:99px;transition:width.35s ease}
+.step-label{font-size:12.5px;color:var(--sub);text-align:center;letter-spacing:.1em}
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 20px 22px;margin-top:16px}
+.q-num{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:.2em;text-align:center}
+.q-text{font-size:19px;font-weight:800;text-align:center;margin:8px 0 20px;line-height:1.5}
+.choices{display:grid;gap:10px}
+.choice{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fffaf3;border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;transition:border-color.15s, background.15s, transform.1s;font-family:inherit}
+.choice:hover{border-color:var(--accent);background:#fdeeda}
+.choice:active{transform:scale(.99)}
+.choice.paw{flex:none;font-size:17px}
+.back-link{display:inline-block;margin-top:16px;font-size:13px;color:var(--sub);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:inherit}
+.result-badge{display:inline-block;background:var(--accent);color:#fff;font-size:12px;font-weight:800;letter-spacing:.14em;border-radius:999px;padding:5px 16px}
+.result-type{font-size:26px;margin:14px 0 8px;line-height:1.4;font-weight:800}
+.result-desc{font-size:14.5px;color:var(--sub);max-width:440px;margin:0 auto}
+.products{display:grid;gap:14px;margin-top:26px;text-align:left}
+.product{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:0 4px 14px rgba(160,90,40,.08)}
+.product img{width:104px;height:104px;object-fit:cover;border-radius:14px;flex:none;background:#f7e8d5}
+.product.p-body{flex:1;min-width:0;display:flex;flex-direction:column}
+.product.p-cat{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:.08em}
+.product.p-name{font-size:15.5px;font-weight:800;line-height:1.5;margin:2px 0 4px}
+.product.p-note{font-size:12.5px;color:var(--sub);line-height:1.6}
+.product.p-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px;gap:8px}
+.product.p-price{font-size:16px;font-weight:800;color:var(--accent-dark)}
+.product.p-link{flex:none;background:var(--accent);color:#fff;font-size:13px;font-weight:800;border-radius:999px;padding:8px 16px;text-decoration:none;box-shadow:0 4px 10px rgba(192,90,46,.3)}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:12.5px;color:var(--sub)}
+footer a{color:var(--accent-dark);font-weight:700}
+@media (max-width:420px){ h1{font-size:25px}.product img{width:88px;height:88px}}
+</style>
+</head>
+<body>
+<div class="demo-bar">このページは「Acandle」様向けに作成した診断デモ（サンプル）です</div>
+<div class="wrap">
+
+<!-- スタート画面 -->
+<section class="screen on" id="scr-start">
+<header>
+<div class="shop-name">A c a n d l e</div>
+<h1>あなたに似合う<br>ワンちゃんキャンドル診断</h1>
+<p class="lead">Acandleのイッヌシリーズは、型を使わずひとつひとつ手作りしたワンちゃんキャンドル。10の質問で、あなたの毎日に寄り添う一匹をご提案します。</p>
+<div class="meta"><span>全10問</span><span>約2分</span><span>登録不要・無料</span></div>
+<button class="btn" onclick="startQuiz()">診断をはじめる →</button>
+</header>
+</section>
+
+<!-- 質問画面 -->
+<section class="screen" id="scr-quiz">
+<div class="progress"><i id="bar"></i></div>
+<div class="step-label" id="stepLabel"></div>
+<div class="q-card">
+<div class="q-num" id="qNum"></div>
+<div class="q-text" id="qText"></div>
+<div class="choices" id="choices"></div>
+</div>
+<div class="center"><button class="back-link" id="backBtn" onclick="goBack()">← 前の質問にもどる</button></div>
+</section>
+
+<!-- 結果画面 -->
+<section class="screen" id="scr-result">
+<header>
+<span class="result-badge">診断結果</span>
+<div class="result-type" id="rType"></div>
+<p class="result-desc" id="rDesc"></p>
+</header>
+<div class="products" id="rProducts"></div>
+<div class="actions">
+<button class="btn ghost small" onclick="restart()">もう一度診断する</button>
+<button class="btn small" onclick="shareResult()">結果をシェアする</button>
+</div>
+</section>
+
+<footer>
+商品のご購入は公式ショップへ：<a href="https://acandle.base.shop/" target="_blank" rel="noopener">Acandle（BASE）</a><br>
+※このページは診断コンテンツ制作サービスのデモです。商品情報は公式ショップの掲載内容に基づきます。
+</footer>
+</div>
+
+<script>
+var IMG = "?imformat=generic&q=90&im=Resize,width=800,type=normal";
+var TYPES = {
+genki: {
+name: "元気・明るいタイプ",
+desc: "明るくてアクティブなあなたには、見ているだけで笑顔になれる元気なワンちゃんを。お部屋に置くだけで、その場がぱっと明るくなります。",
+products: [
+{cat:"イッヌシリーズ", name:"コーギー", price:"¥9,000", note:"短いあんよに、元気いっぱいの表情。ころんとした愛らしさに思わず笑顔になります。", url:"https://acandle.base.shop/items/152150954", img:"https://baseec-img-mng.akamaized.net/images/item/origin/63c30deb97d5b53c71316da2553f2b7d.jpg" + IMG},
+{cat:"イッヌシリーズ", name:"プードル", price:"¥9,000", note:"小さな体に愛らしさがぎゅっと詰まったプードル。デスクや玄関の彩りにも。", url:"https://acandle.base.shop/items/152141249", img:"https://baseec-img-mng.akamaized.net/images/item/origin/e69d921faae3e3d51c29779f59a9eb13.jpg" + IMG}
+]
+},
+iyashi: {
+name: "癒し・穏やかタイプ",
+desc: "穏やかな時間を大切にするあなたには、優しい表情のワンちゃんを。そっと置いて眺めるだけで、心がほどけるような癒しをお届けします。",
+products: [
+{cat:"イッヌシリーズ", name:"ダックスフント", price:"¥8,000", note:"長い胴と短いあんよが愛らしいダックス。穏やかな表情で毎日に寄り添います。", url:"https://acandle.base.shop/items/151900710", img:"https://baseec-img-mng.akamaized.net/images/item/origin/8073571cc9f3aa9d3e1dca0a96cad530.jpg" + IMG},
+{cat:"イッヌシリーズ", name:"ラブラドールレトリバー", price:"¥9,000", note:"優しい表情と穏やかな雰囲気が魅力。イエローとブラックの2カラーから選べます。", url:"https://acandle.base.shop/items/152147259", img:"https://baseec-img-mng.akamaized.net/images/item/origin/0a9bf3bb7599797e94adc09fc923fa0e.jpg" + IMG},
+{cat:"イッヌシリーズ", name:"ゴールデンレトリバー", price:"¥12,000", note:"ふわりとした毛並みと、みんなに愛される穏やかな表情。存在感もたっぷりです。", url:"https://acandle.base.shop/items/152148866", img:"https://baseec-img-mng.akamaized.net/images/item/origin/8a2204079361066efa48a2f92cd110e0.jpg" + IMG}
+]
+},
+kosei: {
+name: "個性派・存在感タイプ",
+desc: "「人と違うもの」が好きなあなたには、表情のインパクトが光るワンちゃんを。飾れば会話のきっかけになる、個性派ぞろいです。",
+products: [
+{cat:"イッヌシリーズ", name:"パグ", price:"¥8,500", note:"愛嬌たっぷりの表情がたまらないパグ。見るたびにクスッと笑える存在です。", url:"https://acandle.base.shop/items/152141731", img:"https://baseec-img-mng.akamaized.net/images/item/origin/947c5055e216fd119d888420e1443d8d.jpg" + IMG},
+{cat:"イッヌシリーズ", name:"フレンチブル", price:"¥10,000", note:"大きなお耳と凛々しい佇まい。お部屋に置けば一気に存在感がアップします。", url:"https://acandle.base.shop/items/152145864", img:"https://baseec-img-mng.akamaized.net/images/item/origin/b324e3375febbfa486499acee3611e57.jpg" + IMG},
+{cat:"イッヌシリーズ", name:"シュナウザー", price:"¥11,000", note:"立派なおひげに、きりっとした表情。2カラーそれぞれの毛色の魅力が楽しめます。", url:"https://acandle.base.shop/items/152150159", img:"https://baseec-img-mng.akamaized.net/images/item/origin/c99df5b48f3eb9a4d2821d11a0511c31.jpg" + IMG}
+]
+}
+};
+var QUESTIONS = [
+{q:"ワンちゃんと過ごすなら、どんな時間が理想？", c:[["公園で思いっきり遊ぶ","genki"],["おうちでまったり過ごす","iyashi"],["一緒におしゃれカフェへ","kosei"],["ドッグランでお友達と","genki"]]},
+{q:"お部屋に飾るなら、どんなものが好き？", c:[["見ていると癒されるもの","iyashi"],["思わず二度見するもの","kosei"],["見ると笑顔になるもの","genki"],["明るい色のもの","genki"]]},
+{q:"好きなワンちゃんのタイプは？", c:[["表情豊かで個性的な子","kosei"],["小さくて甘えん坊な子","iyashi"],["人懐っこくて元気な子","genki"],["しっぽを振って迎えてくれる子","genki"]]},
+{q:"休日の過ごし方に近いのは？", c:[["アウトドアやお出かけ","genki"],["家で映画や読書","iyashi"],["街歩きやカフェ巡り","kosei"],["友達と集まってワイワイ","genki"]]},
+{q:"プレゼントにキャンドルを選ぶなら？", c:[["相手が笑顔になるもの","genki"],["癒されるもの","iyashi"],["他の人と被らないもの","kosei"],["実用的で喜ばれるもの","iyashi"]]},
+{q:"キャンドルとの付き合い方は？", c:[["飾って眺めるのがメイン","kosei"],["リラックスタイムに灯す","iyashi"],["パーティーや集まりで使う","genki"],["記念日やイベントに","genki"]]},
+{q:"あなたの性格に近いのは？", c:[["明るくて社交的","genki"],["穏やかでマイペース","iyashi"],["こだわりが強い","kosei"],["場を和ませるムードメーカー","genki"]]},
+{q:"インテリアの好みは？", c:[["ナチュラルで優しい雰囲気","iyashi"],["アートや個性派の小物","kosei"],["ポップで明るい雰囲気","genki"],["カラフルな色づかい","genki"]]},
+{q:"ワンちゃんを迎えるなら重視するのは？", c:[["見た目の個性","kosei"],["一緒に遊べる元気さ","genki"],["抱っこしやすいサイズ感","iyashi"],["賢くて飼いやすいところ","iyashi"]]},
+{q:"診断に期待するのは、どんな出会い？", c:[["元気をくれる子","genki"],["癒してくれる子","iyashi"],["印象に残る子","kosei"],["みんなに愛される子","genki"]]}
+];
+var idx = 0, answers = [];
+function show(id){
+["scr-start","scr-quiz","scr-result"].forEach(function(s){ document.getElementById(s).classList.toggle("on", s===id);});
+window.scrollTo({top:0, behavior:"smooth"});
+}
+function startQuiz(){ idx = 0; answers = []; renderQ(); show("scr-quiz");}
+function renderQ(){
+var item = QUESTIONS[idx];
+document.getElementById("bar").style.width = (idx / QUESTIONS.length * 100) + "%";
+document.getElementById("stepLabel").textContent = "質問 " + (idx+1) + " / " + QUESTIONS.length;
+document.getElementById("qNum").textContent = "Q" + (idx+1);
+document.getElementById("qText").textContent = item.q;
+document.getElementById("backBtn").style.visibility = idx === 0? "hidden": "visible";
+var box = document.getElementById("choices"); box.innerHTML = "";
+item.c.forEach(function(choice){
+var b = document.createElement("button");
+b.className = "choice";
+b.innerHTML = '<span class="paw">🐾</span><span></span>';
+b.querySelector("span:last-child").textContent = choice[0];
+b.onclick = function(){ answers[idx] = choice[1]; idx++; if(idx < QUESTIONS.length){ renderQ();} else { showResult();}};
+box.appendChild(b);
+});
+}
+function goBack(){ if(idx > 0){ idx--; renderQ();}}
+function showResult(){
+document.getElementById("bar").style.width = "100%";
+var score = {genki:0, iyashi:0, kosei:0};
+answers.forEach(function(a){ score[a]++;});
+var best = "genki";
+["genki","iyashi","kosei"].forEach(function(k){ if(score[k] > score[best]) best = k;});
+var t = TYPES[best];
+document.getElementById("rType").textContent = "あなたは「" + t.name + "」";
+document.getElementById("rDesc").textContent = t.desc;
+var box = document.getElementById("rProducts"); box.innerHTML = "";
+t.products.forEach(function(p){
+var d = document.createElement("div"); d.className = "product";
+d.innerHTML = '<img alt=""><div class="p-body"><div class="p-cat"></div><div class="p-name"></div><div class="p-note"></div><div class="p-row"><span class="p-price"></span><a class="p-link" target="_blank" rel="noopener">商品を見る →</a></div></div>';
+d.querySelector("img").src = p.img; d.querySelector("img").alt = p.name;
+d.querySelector(".p-cat").textContent = p.cat;
+d.querySelector(".p-name").textContent = p.name;
+d.querySelector(".p-note").textContent = p.note;
+d.querySelector(".p-price").textContent = p.price;
+d.querySelector(".p-link").href = p.url;
+box.appendChild(d);
+});
+show("scr-result");
+}
+function restart(){ startQuiz();}
+function shareResult(){
+var type = document.getElementById("rType").textContent;
+var text = "" + type + "でした！ #キャンドル診断 #Acandle";
+if(navigator.share){ navigator.share({title:"ワンちゃんキャンドル診断", text:text, url:location.href}).catch(function(){});}
+else{ window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(location.href), "_blank");}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたに合う真鍮アクセサリー診断 | slow</title>
+<meta name="description" content="10の質問に答えるだけで、真鍮アクセサリーのslowの中からあなたに合う一点をご提案する診断デモです。">
+<style>
+:root{
+--bg:#f7f4ef; --card:#ffffff; --ink:#2e2a24; --sub:#8d8474;
+--accent:#a07d2c; --accent-dark:#7d611f; --line:#e3dcc9;
+--chip:#efe9da; --radius:14px;
+--shadow:0 10px 26px rgba(80,66,30,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 48px}
+.demo-bar{background:#2e2a24;color:#e8dfc8;font-size:12px;text-align:center;padding:8px 12px;letter-spacing:.04em}
+header{padding:40px 4px 8px;text-align:center}
+.shop-name{font-size:15px;letter-spacing:.5em;color:var(--ink);font-weight:600}
+.shop-tag{font-size:12px;color:var(--sub);letter-spacing:.12em;margin-top:4px}
+h1{font-size:27px;line-height:1.45;margin:16px 0 12px;font-weight:600}
+.lead{font-size:14px;color:var(--sub);max-width:440px;margin:0 auto}
+.meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 24px}
+.meta span{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:12.5px;color:var(--accent-dark);font-weight:600;letter-spacing:.05em}
+.btn{display:inline-flex;align-items:center;gap:8px;background:#2e2a24;color:#f3ecd9;border:none;border-radius:999px;padding:15px 38px;font-size:15.5px;font-weight:700;letter-spacing:.06em;cursor:pointer;box-shadow:0 8px 20px rgba(46,42,36,.3);transition:transform.15s, box-shadow.15s;text-decoration:none;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(46,42,36,.36)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#fff;color:var(--accent-dark);border:1.5px solid var(--accent);box-shadow:none}
+.btn.small{padding:10px 22px;font-size:13.5px}
+.screen{display:none;animation:fade.35s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.center{text-align:center}
+.progress{height:6px;background:#e9e2cf;border-radius:99px;overflow:hidden;margin:26px 0 8px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c9a959,var(--accent));border-radius:99px;transition:width.35s ease}
+.step-label{font-size:12.5px;color:var(--sub);text-align:center;letter-spacing:.14em}
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 20px 24px;margin-top:16px}
+.q-num{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.26em;text-align:center}
+.q-text{font-size:18.5px;font-weight:700;text-align:center;margin:8px 0 22px;line-height:1.55}
+.choices{display:grid;gap:10px}
+.choice{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fcfaf5;border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;transition:border-color.15s, background.15s, transform.1s;font-family:inherit}
+.choice:hover{border-color:var(--accent);background:#f6efdd}
+.choice:active{transform:scale(.99)}
+.choice.sq{flex:none;width:12px;height:12px;border:2px solid var(--accent);transform:rotate(45deg)}
+.back-link{display:inline-block;margin-top:16px;font-size:13px;color:var(--sub);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:inherit}
+.result-badge{display:inline-block;background:#2e2a24;color:#f3ecd9;font-size:12px;font-weight:700;letter-spacing:.18em;border-radius:999px;padding:5px 16px}
+.result-type{font-size:26px;margin:14px 0 8px;line-height:1.45}
+.result-desc{font-size:14px;color:var(--sub);max-width:440px;margin:0 auto}
+.products{display:grid;gap:14px;margin-top:26px;text-align:left}
+.product{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:0 4px 14px rgba(80,66,30,.07)}
+.product img{width:104px;height:104px;object-fit:cover;border-radius:8px;flex:none;background:#efe9da}
+.product.p-body{flex:1;min-width:0;display:flex;flex-direction:column}
+.product.p-cat{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.1em}
+.product.p-name{font-size:15px;font-weight:700;line-height:1.5;margin:2px 0 4px}
+.product.p-note{font-size:12.5px;color:var(--sub);line-height:1.65}
+.product.p-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px;gap:8px}
+.product.p-price{font-size:16px;font-weight:800;color:var(--accent-dark)}
+.product.p-link{flex:none;background:#2e2a24;color:#f3ecd9;font-size:13px;font-weight:700;border-radius:999px;padding:8px 16px;text-decoration:none;box-shadow:0 4px 10px rgba(46,42,36,.28)}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:12.5px;color:var(--sub)}
+footer a{color:var(--accent-dark);font-weight:700}
+@media (max-width:420px){ h1{font-size:24px}.product img{width:88px;height:88px}}
+</style>
+</head>
+<body>
+<div class="demo-bar">このページは「slow」様向けに作成した診断デモ（サンプル）です</div>
+<div class="wrap">
+
+<!-- スタート画面 -->
+<section class="screen on" id="scr-start">
+<header>
+<div class="shop-name serif">s l o w</div>
+<div class="shop-tag">素朴な輝きと経年変化が魅力の真鍮アクセサリー</div>
+<h1 class="serif">あなたに合う<br>真鍮アクセサリー診断</h1>
+<p class="lead">slowの真鍮アクセサリーは、受注制作の手仕事の品々。ふだんの装いや好みから、あなたに似合う一点をご提案します。</p>
+<div class="meta"><span>全10問</span><span>約2分</span><span>登録不要・無料</span></div>
+<button class="btn" onclick="startQuiz()">診断をはじめる →</button>
+</header>
+</section>
+
+<!-- 質問画面 -->
+<section class="screen" id="scr-quiz">
+<div class="progress"><i id="bar"></i></div>
+<div class="step-label" id="stepLabel"></div>
+<div class="q-card">
+<div class="q-num" id="qNum"></div>
+<div class="q-text" id="qText"></div>
+<div class="choices" id="choices"></div>
+</div>
+<div class="center"><button class="back-link" id="backBtn" onclick="goBack()">← 前の質問にもどる</button></div>
+</section>
+
+<!-- 結果画面 -->
+<section class="screen" id="scr-result">
+<header>
+<span class="result-badge">診断結果</span>
+<div class="result-type serif" id="rType"></div>
+<p class="result-desc" id="rDesc"></p>
+</header>
+<div class="products" id="rProducts"></div>
+<div class="actions">
+<button class="btn ghost small" onclick="restart()">もう一度診断する</button>
+<button class="btn small" onclick="shareResult()">結果をシェアする</button>
+</div>
+</section>
+
+<footer>
+商品のご購入は公式ショップへ：<a href="https://slow1020.base.shop/" target="_blank" rel="noopener">slow（BASE）</a><br>
+※このページは診断コンテンツ制作サービスのデモです。商品情報は公式ショップの掲載内容に基づきます。
+</footer>
+</div>
+
+<script>
+var IMG = "?imformat=generic&q=90&im=Resize,width=800,type=normal";
+var TYPES = {
+minimal: {
+name: "シンプル・毎日タイプ",
+desc: "装いはシンプルが好きなあなたには、付けっぱなしでも気にならない小さな真鍮を。さりげない輝きが、毎日の装いを静かに引き締めてくれます。",
+products: [
+{cat:"ピアス", name:"ピアス_p-18(tsubu)", price:"¥2,000", note:"小さな粒のようなシンプルなピアス。普段着けるピアスとしておすすめの一点です。", url:"https://slow1020.base.shop/items/97165543", img:"https://baseec-img-mng.akamaized.net/images/item/origin/2a3e6fbde34443c9a9de0239769eced2.jpg" + IMG},
+{cat:"ピアス", name:"ピアス_p-21(cube)", price:"¥3,000", note:"キューブ型のシンプルなピアス。約0.5cmの小さなモチーフが耳元で控えめに光ります。", url:"https://slow1020.base.shop/items/97179345", img:"https://baseec-img-mng.akamaized.net/images/item/origin/de7cf4602c77f1cf8873f5711f1d9d6b.jpg" + IMG},
+{cat:"バングル", name:"バングル_3mm", price:"¥3,200", note:"細身ながら存在感のある真鍮バングル。手首につけるだけで華奢な雰囲気に。", url:"https://slow1020.base.shop/items/145372433", img:"https://baseec-img-mng.akamaized.net/images/item/origin/f996d667f8fc0d70ba74c59178daf16c.jpg" + IMG}
+]
+},
+texture: {
+name: "手仕事の表情タイプ",
+desc: "手作りの温かみや素材の表情に惹かれるあなたには、槌目や偶然の形が生きる品を。世界にひとつだけの表情と、経年変化を育てる楽しみがあります。",
+products: [
+{cat:"バングル", name:"バングル_槌目_5mm", price:"¥3,500", note:"表面をハンマーで叩いて表情を付けたバングル。光の当たり方で表情が変わります。", url:"https://slow1020.base.shop/items/145446894", img:"https://baseec-img-mng.akamaized.net/images/item/origin/5af943bd53bfdc6a9f57fec0c4e71313.jpg" + IMG},
+{cat:"ピアス", name:"ピアス_p-24(kakera)", price:"¥3,500", note:"制作過程で余った真鍮板から生まれたピアス。すべて形の異なる四角形で、届く形はお楽しみ。", url:"https://slow1020.base.shop/items/101546560", img:"https://baseec-img-mng.akamaized.net/images/item/origin/f9c623db06a85eb4e0ecf4a6ca52c9da.jpg" + IMG},
+{cat:"バレッタ", name:"バレッタ_bar-6(楕円)", price:"¥3,200", note:"楕円形のバレッタ。大きめのピン留めとして、サイドや後ろ髪を抑えるのにも。", url:"https://slow1020.base.shop/items/97180528", img:"https://baseec-img-mng.akamaized.net/images/item/origin/c7892c4638225906aea281a17c13e08e.jpg" + IMG}
+]
+},
+statement: {
+name: "存在感・特別な日タイプ",
+desc: "アクセサリーを装いの主役にしたいあなたには、幅や大きさで印象を残す真鍮を。特別な日の気分を上げてくれる、頼れる一点です。",
+products: [
+{cat:"バングル", name:"バングル_20mm", price:"¥4,000", note:"存在感のある太さで、コーディネートのアクセントになるバングル。幅20mm。", url:"https://slow1020.base.shop/items/96330233", img:"https://baseec-img-mng.akamaized.net/images/item/origin/ed8435227ab2fbe34a88ec84e790f5d3.jpg" + IMG},
+{cat:"ピアス", name:"ピアス_p-35(hoop-ita)", price:"¥4,000", note:"板状のフープピアス。ヤスリ跡を残して光沢を抑えた、落ち着いた存在感があります。", url:"https://slow1020.base.shop/items/97180307", img:"https://baseec-img-mng.akamaized.net/images/item/origin/0f49404e0257424b24db6a19bbc880e5.jpg" + IMG},
+{cat:"ピアス", name:"ピアス_p-23(marutsubomi)", price:"¥4,000", note:"模様をつけた丸いモチーフに小さな丸粒を4つ添えたピアス。特別な日にもおすすめです。", url:"https://slow1020.base.shop/items/97179819", img:"https://baseec-img-mng.akamaized.net/images/item/origin/96b8bfc04f9c2981ae31a71fed2ba417.jpg" + IMG}
+]
+}
+};
+var QUESTIONS = [
+{q:"普段のファッションに近いのは？", c:[["Tシャツとデニムのシンプルな装い","minimal"],["ナチュラル素材の服が多い","texture"],["ワンピースやモードな装い","statement"],["きれいめカジュアル","minimal"]]},
+{q:"アクセサリーに求めるものは？", c:[["手作りの温かみ","texture"],["コーデの主役になる存在感","statement"],["付けっぱなしにできる手軽さ","minimal"],["上品なさりげなさ","minimal"]]},
+{q:"金属の質感の好みは？", c:[["槌目やヤスリ跡の表情があるもの","texture"],["マットで落ち着いたもの","statement"],["つるんと滑らかなもの","minimal"],["ほどよい光沢のもの","minimal"]]},
+{q:"よく出かける場所は？", c:[["美術館や特別な日の食事","statement"],["蚤の市やクラフト市","texture"],["オフィス・仕事","minimal"],["近所へのお散歩","minimal"]]},
+{q:"真鍮の「経年変化」についてどう思う？", c:[["使うほど味が出るのが楽しみ","texture"],["自分色に育つのが好き","texture"],["あまり変わらない方がいい","minimal"],["落ち着いた色合いは素敵","statement"]]},
+{q:"気になる真鍮アクセサリーのお値段は？", c:[["まず手頃なものから試したい","minimal"],["気に入ればしっかりしたものを","texture"],["特別な一点を選びたい","statement"],["長く使えるなら納得感重視","minimal"]]},
+{q:"髪のまとめ方で多いのは？", c:[["バレッタやヘアゴムでアレンジ","texture"],["ダウンスタイルが多い","statement"],["ひとつ結びが多い","minimal"],["ショートヘア","minimal"]]},
+{q:"手元のコーディネートは？", c:[["太めのバングルをひとつ","statement"],["バングルの重ね付け","texture"],["細いリングだけ","minimal"],["腕時計だけ","minimal"]]},
+{q:"アクセサリーを贈るなら？", c:[["毎日使えるシンプルなもの","minimal"],["一点ものの手作り品","texture"],["印象に残るデザイン","statement"],["無難で上質なもの","minimal"]]},
+{q:"あなたにとって理想のアクセサリーは？", c:[["使うほど愛着が増していくもの","texture"],["特別な日に気分が上がるもの","statement"],["気づいたら毎日付けているもの","minimal"],["どんな服にも合うもの","minimal"]]}
+];
+var idx = 0, answers = [];
+function show(id){
+["scr-start","scr-quiz","scr-result"].forEach(function(s){ document.getElementById(s).classList.toggle("on", s===id);});
+window.scrollTo({top:0, behavior:"smooth"});
+}
+function startQuiz(){ idx = 0; answers = []; renderQ(); show("scr-quiz");}
+function renderQ(){
+var item = QUESTIONS[idx];
+document.getElementById("bar").style.width = (idx / QUESTIONS.length * 100) + "%";
+document.getElementById("stepLabel").textContent = "質問 " + (idx+1) + " / " + QUESTIONS.length;
+document.getElementById("qNum").textContent = "Q" + (idx+1);
+document.getElementById("qText").textContent = item.q;
+document.getElementById("backBtn").style.visibility = idx === 0? "hidden": "visible";
+var box = document.getElementById("choices"); box.innerHTML = "";
+item.c.forEach(function(choice){
+var b = document.createElement("button");
+b.className = "choice";
+b.innerHTML = '<span class="sq"></span><span></span>';
+b.querySelector("span:last-child").textContent = choice[0];
+b.onclick = function(){ answers[idx] = choice[1]; idx++; if(idx < QUESTIONS.length){ renderQ();} else { showResult();}};
+box.appendChild(b);
+});
+}
+function goBack(){ if(idx > 0){ idx--; renderQ();}}
+function showResult(){
+document.getElementById("bar").style.width = "100%";
+var score = {minimal:0, texture:0, statement:0};
+answers.forEach(function(a){ score[a]++;});
+var best = "minimal";
+["minimal","texture","statement"].forEach(function(k){ if(score[k] > score[best]) best = k;});
+var t = TYPES[best];
+document.getElementById("rType").textContent = "あなたは「" + t.name + "」";
+document.getElementById("rDesc").textContent = t.desc;
+var box = document.getElementById("rProducts"); box.innerHTML = "";
+t.products.forEach(function(p){
+var d = document.createElement("div"); d.className = "product";
+d.innerHTML = '<img alt=""><div class="p-body"><div class="p-cat"></div><div class="p-name"></div><div class="p-note"></div><div class="p-row"><span class="p-price"></span><a class="p-link" target="_blank" rel="noopener">商品を見る →</a></div></div>';
+d.querySelector("img").src = p.img; d.querySelector("img").alt = p.name;
+d.querySelector(".p-cat").textContent = p.cat;
+d.querySelector(".p-name").textContent = p.name;
+d.querySelector(".p-note").textContent = p.note;
+d.querySelector(".p-price").textContent = p.price;
+d.querySelector(".p-link").href = p.url;
+box.appendChild(d);
+});
+show("scr-result");
+}
+function restart(){ startQuiz();}
+function shareResult(){
+var type = document.getElementById("rType").textContent;
+var text = "" + type + "でした！ #真鍮アクセサリー #slow";
+if(navigator.share){ navigator.share({title:"真鍮アクセサリー診断", text:text, url:location.href}).catch(function(){});}
+else{ window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(location.href), "_blank");}
+}
+</script>
+</body>
+</html>
