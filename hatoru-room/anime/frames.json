@@ -1,14 +1,14 @@
 {
- "frame_interval_ms": 417,
+ "frame_interval_ms": 200,
  "grid": {
   "cols": 4,
   "rows": 6,
   "frames": 24
  },
  "states": {
-  "working": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/working-grid24.jpg",
-  "sleeping": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/sleeping-grid24.jpg",
-  "thinking": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/thinking-grid24.jpg",
-  "researching": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/researching-grid24.jpg"
+  "working": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/working-chara24.jpg",
+  "sleeping": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/sleeping-chara24.jpg",
+  "thinking": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/thinking-chara24.jpg",
+  "researching": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/researching-chara24.jpg"
  }
 }

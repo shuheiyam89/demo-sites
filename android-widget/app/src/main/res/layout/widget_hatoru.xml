@@ -15,14 +15,14 @@
         android:contentDescription="@string/room_image_description"
         android:scaleType="centerCrop" />
 
-    <!-- コマ送りアニメーション。24コマを flipInterval ごとに切り替え、前後のコマをクロスフェードでつなぐ
+    <!-- コマ送りアニメーション。24コマを flipInterval（200ms）ごとに切り替え、前後のコマを短いクロスフェードでつなぐ
          （切り替えはランチャー側で行われる）。コマが無いときは GONE にして、下の静止画を見せる -->
     <ViewFlipper
         android:id="@+id/room_flipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:autoStart="true"
-        android:flipInterval="417"
+        android:flipInterval="200"
         android:inAnimation="@anim/frame_fade_in"
         android:outAnimation="@anim/frame_fade_out"
         android:visibility="gone">
