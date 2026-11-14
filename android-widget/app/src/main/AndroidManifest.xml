@@ -32,12 +32,5 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/hatoru_widget_info" />
         </receiver>
-
-        <!-- ウィジェットのコマ画像をランチャーに読ませる読み取り専用プロバイダー（frames/ の画像だけを公開） -->
-        <provider
-            android:name=".FrameProvider"
-            android:authorities="${applicationId}.frames"
-            android:exported="true"
-            android:grantUriPermissions="false" />
     </application>
 </manifest>

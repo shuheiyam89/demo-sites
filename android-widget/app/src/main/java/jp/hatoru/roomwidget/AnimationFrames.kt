@@ -3,7 +3,6 @@ package jp.hatoru.roomwidget
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.util.Log
 import org.json.JSONObject
 import java.io.File
@@ -15,7 +14,7 @@ import java.io.File
  * - グリッドを行優先（左→右、上→下）で切り分け、filesDir/frames/<state>/<version>/f<n>.jpg に保存する
  * - ネットワークを使うのは refresh() の中だけ（状態の再取得と同じタイミング）。コマの表示中は通信しない
  *
- * 表示側（ウィジェット）は frameUris() で得た content:// URI を ViewFlipper の各コマに渡す。
+ * 表示側（ウィジェット）は frameBitmaps() で読み込んだコマを ViewFlipper の各コマに渡す。
  * コマの切り替えはホーム画面アプリ（ランチャー）側の ViewFlipper が行うので、このアプリのサービスや
  * 常駐処理は不要で、OSに止められて表示が壊れることもない。
  */
@@ -55,23 +54,61 @@ object AnimationFrames {
         loadManifest(context)?.intervalMs ?: DEFAULT_INTERVAL_MS
 
     /**
-     * その状態のコマが揃っていれば、コマ画像の URI を順番どおりに返す（無ければ null）。
+     * その状態のコマが揃っていれば、コマ画像のファイルを順番どおりに返す（無ければ null）。
      * 端末内のファイルを見るだけで、通信はしない。
      */
-    fun frameUris(context: Context, state: String): List<Uri>? {
+    fun frameFiles(context: Context, state: String): List<File>? {
         if (state !in HatoruRepository.STATES) return null
         val p = prefs(context)
         val version = p.getLong(keyVersion(state), 0L)
         val count = p.getInt(keyCount(state), 0)
         if (version <= 0L || count <= 0) return null
         val dir = versionDir(context, state, version)
-        val uris = ArrayList<Uri>(count)
+        val files = ArrayList<File>(count)
         for (i in 0 until count) {
             val f = File(dir, "f$i.jpg")
             if (!f.exists() || f.length() == 0L) return null
-            uris.add(FrameProvider.uriFor(context, state, version, i))
+            files.add(f)
         }
-        return uris
+        return files
+    }
+
+    /** 用意済みのコマ数（無ければ 0）。アプリ画面の表示用 */
+    fun frameCount(context: Context, state: String): Int = frameFiles(context, state)?.size ?: 0
+
+    /**
+     * コマを Bitmap で読み込む（無ければ null）。
+     * @param maxWidth この幅(px)以下に縮小する
+     * @param lowMemory true なら RGB_565（ウィジェット用。8コマ分の転送量を抑える）
+     */
+    fun frameBitmaps(context: Context, state: String, maxWidth: Int, lowMemory: Boolean): List<Bitmap>? {
+        val files = frameFiles(context, state) ?: return null
+        val out = ArrayList<Bitmap>(files.size)
+        for (f in files) {
+            val b = decode(f, maxWidth, lowMemory)
+            if (b == null) {
+                out.forEach { it.recycle() }
+                return null
+            }
+            out.add(b)
+        }
+        return out
+    }
+
+    private fun decode(file: File, maxWidth: Int, lowMemory: Boolean): Bitmap? = try {
+        val opts = BitmapFactory.Options().apply { if (lowMemory) inPreferredConfig = Bitmap.Config.RGB_565 }
+        val b = BitmapFactory.decodeFile(file.path, opts)
+        when {
+            b == null -> null
+            b.width <= maxWidth -> b
+            else -> {
+                val h = (b.height.toLong() * maxWidth / b.width).toInt().coerceAtLeast(1)
+                Bitmap.createScaledBitmap(b, maxWidth, h, true).also { if (it !== b) b.recycle() }
+            }
+        }
+    } catch (e: Throwable) {
+        Log.w(TAG, "コマの読み込みに失敗: ${file.path}", e)
+        null
     }
 
     // ---------------- 取得（バックグラウンドスレッドから呼ぶ） ----------------
@@ -83,20 +120,20 @@ object AnimationFrames {
     @Synchronized
     fun refresh(context: Context, state: String): Boolean {
         if (state !in HatoruRepository.STATES) return false
-        val manifest = fetchManifestIfNeeded(context) ?: return frameUris(context, state) != null
-        val url = manifest.urls[state] ?: return frameUris(context, state) != null
+        val manifest = fetchManifestIfNeeded(context) ?: return frameFiles(context, state) != null
+        val url = manifest.urls[state] ?: return frameFiles(context, state) != null
 
         val p = prefs(context)
         val sameUrl = p.getString(keyUrl(state), null) == url
         val version = p.getLong(keyVersion(state), 0L)
         val fresh = version > 0L && System.currentTimeMillis() - version < GRID_MAX_AGE_MILLIS
-        if (sameUrl && fresh && frameUris(context, state) != null) return true
+        if (sameUrl && fresh && frameFiles(context, state) != null) return true
 
         val bytes = HatoruRepository.httpGet(url, connectTimeoutMs = 5_000, readTimeoutMs = 15_000)
-            ?: return frameUris(context, state) != null
+            ?: return frameFiles(context, state) != null
         val newVersion = System.currentTimeMillis()
         val count = splitAndSave(context, state, newVersion, bytes, manifest)
-        if (count <= 0) return frameUris(context, state) != null
+        if (count <= 0) return frameFiles(context, state) != null
 
         p.edit()
             .putString(keyUrl(state), url)

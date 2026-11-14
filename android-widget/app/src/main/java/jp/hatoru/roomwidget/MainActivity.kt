@@ -3,6 +3,8 @@ package jp.hatoru.roomwidget
 import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -20,6 +22,36 @@ class MainActivity : Activity() {
     private lateinit var refreshButton: Button
 
     private var loading = false
+
+    // プレビューのコマ送り（アプリ画面を開いている間だけ動かす）
+    private val handler = Handler(Looper.getMainLooper())
+    private var frames: List<Bitmap> = emptyList()
+    private var frameIndex = 0
+    private var frameIntervalMs = AnimationFrames.DEFAULT_INTERVAL_MS
+    private val tick = object : Runnable {
+        override fun run() {
+            if (frames.size > 1) {
+                frameIndex = (frameIndex + 1) % frames.size
+                previewImage.setImageBitmap(frames[frameIndex])
+                handler.postDelayed(this, frameIntervalMs.toLong())
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startPreviewAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(tick)
+    }
+
+    private fun startPreviewAnimation() {
+        handler.removeCallbacks(tick)
+        if (frames.size > 1) handler.postDelayed(tick, frameIntervalMs.toLong())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +111,8 @@ class MainActivity : Activity() {
             val bitmap: Bitmap? = state?.let {
                 HatoruRepository.loadBitmap(appContext, it, maxWidth = 1200, lowMemory = false)
             }
+            val newFrames = state?.let { AnimationFrames.frameBitmaps(appContext, it, maxWidth = 800, lowMemory = false) }.orEmpty()
+            val interval = AnimationFrames.intervalMs(appContext)
             runOnUiThread {
                 if (isFinishing || isDestroyed) return@runOnUiThread
                 if (status == null || state == null) {
@@ -87,7 +121,12 @@ class MainActivity : Activity() {
                     previewUpdated.text = if (lastResult == false) getString(R.string.status_fetch_failed) else ""
                     return@runOnUiThread
                 }
-                if (bitmap != null) previewImage.setImageBitmap(bitmap)
+                frames = newFrames
+                frameIndex = 0
+                frameIntervalMs = interval
+                if (frames.isNotEmpty()) previewImage.setImageBitmap(frames[0])
+                else if (bitmap != null) previewImage.setImageBitmap(bitmap)
+                startPreviewAnimation()
                 previewLabel.text = HatoruRepository.label(this, state)
                 val showTask = status.task.isNotEmpty() && !HatoruRepository.isStale(status, now)
                 previewTask.text = status.task
@@ -99,6 +138,9 @@ class MainActivity : Activity() {
                 if (HatoruRepository.lastFetchFailed(this)) {
                     updated += " ・ " + getString(R.string.status_fetch_failed)
                 }
+                // コマの準備状況（ウィジェットが動かないときの確認用）
+                updated += "\n" + if (frames.isNotEmpty()) getString(R.string.anime_ready, frames.size)
+                    else getString(R.string.anime_not_ready)
                 previewUpdated.text = updated
             }
         }

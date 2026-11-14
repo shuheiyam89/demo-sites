@@ -6,7 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.widget.RemoteViews
@@ -20,6 +20,7 @@ import kotlin.concurrent.thread
  * - 取得失敗時はキャッシュ（前回表示）のまま描画する
  * - コマが用意できていれば、ViewFlipper でコマ送りアニメーションを表示する
  *   （コマの切り替えはランチャー側の ViewFlipper が行う。コマが無いときは静止画）
+ *   コマは Bitmap で渡す（URI で渡すとランチャーが読み込めない端末があるため）
  */
 class HatoruWidgetProvider : AppWidgetProvider() {
 
@@ -72,6 +73,9 @@ class HatoruWidgetProvider : AppWidgetProvider() {
         /** ウィジェット用の画像幅上限(px)。RemoteViews の転送上限を超えないよう控えめにする */
         private const val WIDGET_IMAGE_MAX_WIDTH = 640
 
+        /** アニメーションの1コマの幅上限(px)。8コマ分を1回で送るので、静止画より小さくする */
+        private const val FRAME_MAX_WIDTH = 400
+
         private val refreshing = AtomicBoolean(false)
 
         /** 配置済みの全ウィジェットをキャッシュの内容で描き直す */
@@ -105,15 +109,15 @@ class HatoruWidgetProvider : AppWidgetProvider() {
 
         /**
          * コマ送りアニメーションを設定する。コマが無ければ ViewFlipper を隠して静止画だけにする。
-         * コマは URI で渡す（Bitmap を8枚渡すとプロセス間の転送上限を超えるため）。
-         * コマ数が8未満のときは、先頭から繰り返して8枠を埋める。
+         * コマは RGB_565・幅400px の Bitmap で渡す（8コマで約1.7MB。RemoteViews の画像上限より十分小さい）。
+         * コマ数が8未満のときは、先頭から繰り返して8枠を埋める（同じ Bitmap は1回しか送られない）。
          */
-        private fun applyAnimation(context: Context, views: RemoteViews, uris: List<Uri>?) {
-            if (uris.isNullOrEmpty()) {
+        private fun applyAnimation(context: Context, views: RemoteViews, frames: List<Bitmap>?) {
+            if (frames.isNullOrEmpty()) {
                 views.setViewVisibility(R.id.room_flipper, View.GONE)
                 return
             }
-            FRAME_VIEW_IDS.forEachIndexed { i, id -> views.setImageViewUri(id, uris[i % uris.size]) }
+            FRAME_VIEW_IDS.forEachIndexed { i, id -> views.setImageViewBitmap(id, frames[i % frames.size]) }
             views.setInt(R.id.room_flipper, "setFlipInterval", AnimationFrames.intervalMs(context))
             views.setViewVisibility(R.id.room_flipper, View.VISIBLE)
         }
@@ -138,7 +142,11 @@ class HatoruWidgetProvider : AppWidgetProvider() {
                 // 静止画は常に下に敷いておく（コマが読めなかったときもここが見える）
                 HatoruRepository.loadBitmap(context, state, WIDGET_IMAGE_MAX_WIDTH, lowMemory = true)
                     ?.let { views.setImageViewBitmap(R.id.room_image, it) }
-                applyAnimation(context, views, AnimationFrames.frameUris(context, state))
+                applyAnimation(
+                    context,
+                    views,
+                    AnimationFrames.frameBitmaps(context, state, FRAME_MAX_WIDTH, lowMemory = true),
+                )
 
                 views.setTextViewText(R.id.state_label, HatoruRepository.label(context, state))
 
