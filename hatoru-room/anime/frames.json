@@ -1,0 +1,14 @@
+{
+ "frame_interval_ms": 900,
+ "grid": {
+  "cols": 4,
+  "rows": 2,
+  "frames": 8
+ },
+ "states": {
+  "working": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/working-grid.jpg",
+  "sleeping": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/sleeping-grid.jpg",
+  "thinking": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/thinking-grid.jpg",
+  "researching": "https://shuheiyam89.github.io/demo-sites/hatoru-room/anime/researching-grid.jpg"
+ }
+}
