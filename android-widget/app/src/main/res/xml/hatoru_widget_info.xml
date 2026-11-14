@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  2x2（110dp）〜 4x3 程度までリサイズ可能。
+  updatePeriodMillis = 30分（Androidの下限も30分）。
+  targetCell* / maxResize* / previewLayout / description は Android 12 以降で有効（それ以前は無視される）。
+-->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_description"
+    android:initialLayout="@layout/widget_hatoru"
+    android:maxResizeHeight="320dp"
+    android:maxResizeWidth="420dp"
+    android:minHeight="110dp"
+    android:minResizeHeight="110dp"
+    android:minResizeWidth="110dp"
+    android:minWidth="110dp"
+    android:previewImage="@drawable/widget_preview"
+    android:previewLayout="@layout/widget_hatoru"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellHeight="2"
+    android:targetCellWidth="3"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen" />

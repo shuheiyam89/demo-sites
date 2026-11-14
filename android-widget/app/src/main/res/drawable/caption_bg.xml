@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 下が濃く、上に向かって透明になるグラデーション（文字を読みやすくする） -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="90"
+        android:endColor="#00000000"
+        android:startColor="#C0000000" />
+</shape>

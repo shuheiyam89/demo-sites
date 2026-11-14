@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 以前のウィジェット一覧で使うプレビュー（3:2） -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/widget_bg" />
+    <item
+        android:bottom="8dp"
+        android:drawable="@drawable/ic_launcher_foreground"
+        android:gravity="center"
+        android:height="108dp"
+        android:width="108dp" />
+</layer-list>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Hatoru" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/hatoru_accent</item>
+        <item name="android:colorPrimaryDark">@color/hatoru_brown</item>
+        <item name="android:colorAccent">@color/hatoru_accent</item>
+        <item name="android:windowBackground">@color/hatoru_cream</item>
+        <item name="android:statusBarColor">@color/hatoru_brown</item>
+    </style>
+</resources>

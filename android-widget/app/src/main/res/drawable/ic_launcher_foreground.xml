@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- チワワ（ハトル）の顔のシンプルなアイコン。アダプティブアイコンの安全領域（中央66dp）に収まるよう配置 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 耳 -->
+    <path android:fillColor="#D9A066" android:pathData="M37,52 L31,27 L52,41 Z" />
+    <path android:fillColor="#D9A066" android:pathData="M71,52 L77,27 L56,41 Z" />
+    <path android:fillColor="#F5C9A3" android:pathData="M38.5,47 L35,32 L47,40.5 Z" />
+    <path android:fillColor="#F5C9A3" android:pathData="M69.5,47 L73,32 L61,40.5 Z" />
+    <!-- 頭 -->
+    <path android:fillColor="#E3AF78" android:pathData="M34,59 a20,19 0 1,0 40,0 a20,19 0 1,0 -40,0 Z" />
+    <!-- マズル -->
+    <path android:fillColor="#FBE3C8" android:pathData="M44.5,67 a9.5,7.5 0 1,0 19,0 a9.5,7.5 0 1,0 -19,0 Z" />
+    <!-- 目 -->
+    <path android:fillColor="#3B2A20" android:pathData="M43.2,57 a2.8,2.8 0 1,0 5.6,0 a2.8,2.8 0 1,0 -5.6,0 Z" />
+    <path android:fillColor="#3B2A20" android:pathData="M59.2,57 a2.8,2.8 0 1,0 5.6,0 a2.8,2.8 0 1,0 -5.6,0 Z" />
+    <!-- 鼻 -->
+    <path android:fillColor="#3B2A20" android:pathData="M51.6,64 a2.4,2 0 1,0 4.8,0 a2.4,2 0 1,0 -4.8,0 Z" />
+</vector>
