@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- RemoteViews で使えるビューだけで構成（FrameLayout / LinearLayout / ImageView / TextView） -->
+<!-- RemoteViews で使えるビューだけで構成（FrameLayout / LinearLayout / ImageView / TextView / ViewFlipper） -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
@@ -14,6 +14,26 @@
         android:background="@color/hatoru_room"
         android:contentDescription="@string/room_image_description"
         android:scaleType="centerCrop" />
+
+    <!-- コマ送りアニメーション。8コマを flipInterval ごとに切り替える（切り替えはランチャー側で行われる）。
+         コマが無いときは GONE にして、下の静止画を見せる -->
+    <ViewFlipper
+        android:id="@+id/room_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:autoStart="true"
+        android:flipInterval="900"
+        android:visibility="gone">
+
+        <ImageView android:id="@+id/frame_0" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_1" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_2" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_3" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_4" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_5" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_6" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_7" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+    </ViewFlipper>
 
     <LinearLayout
         android:layout_width="match_parent"

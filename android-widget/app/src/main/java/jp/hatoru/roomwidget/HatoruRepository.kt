@@ -91,6 +91,13 @@ object HatoruRepository {
         ensureImage(context, shown)
         // 45分ルールでオフライン中に sleeping へ切り替わっても表示できるよう、sleeping 画像も確保しておく
         if (shown != STATE_SLEEPING) ensureImage(context, STATE_SLEEPING)
+        // コマ送りアニメーションのコマも同じタイミングで用意する（失敗しても静止画で表示できる）
+        try {
+            AnimationFrames.refresh(context, shown)
+            if (shown != STATE_SLEEPING) AnimationFrames.refresh(context, STATE_SLEEPING)
+        } catch (e: Throwable) {
+            Log.w(TAG, "アニメーションのコマの用意に失敗", e)
+        }
         return true
     }
 
@@ -230,7 +237,7 @@ object HatoruRepository {
 
     // ---------------- 通信 ----------------
 
-    private fun httpGet(url: String, connectTimeoutMs: Int, readTimeoutMs: Int): ByteArray? {
+    internal fun httpGet(url: String, connectTimeoutMs: Int, readTimeoutMs: Int): ByteArray? {
         var conn: HttpURLConnection? = null
         return try {
             conn = (URL(url).openConnection() as HttpURLConnection).apply {

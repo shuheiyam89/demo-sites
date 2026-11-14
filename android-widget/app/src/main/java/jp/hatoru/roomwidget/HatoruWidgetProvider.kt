@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.RemoteViews
@@ -17,6 +18,8 @@ import kotlin.concurrent.thread
  * - 30分ごと（updatePeriodMillis）に onUpdate → 再取得
  * - タップで ACTION_REFRESH → 即時再取得
  * - 取得失敗時はキャッシュ（前回表示）のまま描画する
+ * - コマが用意できていれば、ViewFlipper でコマ送りアニメーションを表示する
+ *   （コマの切り替えはランチャー側の ViewFlipper が行う。コマが無いときは静止画）
  */
 class HatoruWidgetProvider : AppWidgetProvider() {
 
@@ -95,6 +98,26 @@ class HatoruWidgetProvider : AppWidgetProvider() {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             )
 
+        private val FRAME_VIEW_IDS = intArrayOf(
+            R.id.frame_0, R.id.frame_1, R.id.frame_2, R.id.frame_3,
+            R.id.frame_4, R.id.frame_5, R.id.frame_6, R.id.frame_7,
+        )
+
+        /**
+         * コマ送りアニメーションを設定する。コマが無ければ ViewFlipper を隠して静止画だけにする。
+         * コマは URI で渡す（Bitmap を8枚渡すとプロセス間の転送上限を超えるため）。
+         * コマ数が8未満のときは、先頭から繰り返して8枠を埋める。
+         */
+        private fun applyAnimation(context: Context, views: RemoteViews, uris: List<Uri>?) {
+            if (uris.isNullOrEmpty()) {
+                views.setViewVisibility(R.id.room_flipper, View.GONE)
+                return
+            }
+            FRAME_VIEW_IDS.forEachIndexed { i, id -> views.setImageViewUri(id, uris[i % uris.size]) }
+            views.setInt(R.id.room_flipper, "setFlipInterval", AnimationFrames.intervalMs(context))
+            views.setViewVisibility(R.id.room_flipper, View.VISIBLE)
+        }
+
         private fun buildViews(context: Context, refreshing: Boolean): RemoteViews {
             val views = RemoteViews(context.packageName, R.layout.widget_hatoru)
             val status = HatoruRepository.loadCached(context)
@@ -102,6 +125,7 @@ class HatoruWidgetProvider : AppWidgetProvider() {
 
             if (status == null) {
                 // まだ一度も取得できていない
+                views.setViewVisibility(R.id.room_flipper, View.GONE)
                 views.setTextViewText(R.id.state_label, context.getString(R.string.app_name))
                 views.setTextViewText(R.id.task_text, context.getString(R.string.widget_tap_to_load))
                 views.setViewVisibility(R.id.task_text, View.VISIBLE)
@@ -111,8 +135,10 @@ class HatoruWidgetProvider : AppWidgetProvider() {
                 )
             } else {
                 val state = HatoruRepository.displayState(status, now)
+                // 静止画は常に下に敷いておく（コマが読めなかったときもここが見える）
                 HatoruRepository.loadBitmap(context, state, WIDGET_IMAGE_MAX_WIDTH, lowMemory = true)
                     ?.let { views.setImageViewBitmap(R.id.room_image, it) }
+                applyAnimation(context, views, AnimationFrames.frameUris(context, state))
 
                 views.setTextViewText(R.id.state_label, HatoruRepository.label(context, state))
 
