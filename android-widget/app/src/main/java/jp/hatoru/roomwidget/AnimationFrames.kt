@@ -10,7 +10,7 @@ import java.io.File
 /**
  * コマ送りアニメーション用のコマ（フレーム）を用意する。
  *
- * - anime/frames.json（マニフェスト）を取得し、状態ごとのグリッド画像（例: 4列×2行＝8コマ）をダウンロードする
+ * - anime/frames.json（マニフェスト）を取得し、状態ごとのグリッド画像（例: 4列×6行＝24コマ）をダウンロードする
  * - グリッドを行優先（左→右、上→下）で切り分け、filesDir/frames/<state>/<version>/f<n>.jpg に保存する
  * - ネットワークを使うのは refresh() の中だけ（状態の再取得と同じタイミング）。コマの表示中は通信しない
  *
@@ -24,7 +24,7 @@ object AnimationFrames {
     const val MANIFEST_URL = HatoruRepository.BASE_URL + "anime/frames.json"
 
     /** ウィジェットのレイアウトに用意しているコマの数（ViewFlipper の子） */
-    const val MAX_FRAMES = 8
+    const val MAX_FRAMES = 24
 
     const val DEFAULT_INTERVAL_MS = 900
 

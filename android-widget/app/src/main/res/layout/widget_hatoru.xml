@@ -15,14 +15,16 @@
         android:contentDescription="@string/room_image_description"
         android:scaleType="centerCrop" />
 
-    <!-- コマ送りアニメーション。8コマを flipInterval ごとに切り替える（切り替えはランチャー側で行われる）。
-         コマが無いときは GONE にして、下の静止画を見せる -->
+    <!-- コマ送りアニメーション。24コマを flipInterval ごとに切り替え、前後のコマをクロスフェードでつなぐ
+         （切り替えはランチャー側で行われる）。コマが無いときは GONE にして、下の静止画を見せる -->
     <ViewFlipper
         android:id="@+id/room_flipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:autoStart="true"
-        android:flipInterval="900"
+        android:flipInterval="417"
+        android:inAnimation="@anim/frame_fade_in"
+        android:outAnimation="@anim/frame_fade_out"
         android:visibility="gone">
 
         <ImageView android:id="@+id/frame_0" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
@@ -33,6 +35,22 @@
         <ImageView android:id="@+id/frame_5" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
         <ImageView android:id="@+id/frame_6" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
         <ImageView android:id="@+id/frame_7" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_8" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_9" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_10" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_11" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_12" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_13" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_14" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_15" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_16" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_17" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_18" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_19" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_20" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_21" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_22" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/frame_23" android:layout_width="match_parent" android:layout_height="match_parent" android:contentDescription="@string/room_image_description" android:scaleType="centerCrop" />
     </ViewFlipper>
 
     <LinearLayout

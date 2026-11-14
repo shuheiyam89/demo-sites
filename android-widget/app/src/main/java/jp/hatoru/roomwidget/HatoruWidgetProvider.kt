@@ -73,8 +73,8 @@ class HatoruWidgetProvider : AppWidgetProvider() {
         /** ウィジェット用の画像幅上限(px)。RemoteViews の転送上限を超えないよう控えめにする */
         private const val WIDGET_IMAGE_MAX_WIDTH = 640
 
-        /** アニメーションの1コマの幅上限(px)。8コマ分を1回で送るので、静止画より小さくする */
-        private const val FRAME_MAX_WIDTH = 400
+        /** アニメーションの1コマの幅上限(px)。24コマ分を1回で送るので、静止画より小さくする（RGB_565で1コマ約136KB） */
+        private const val FRAME_MAX_WIDTH = 320
 
         private val refreshing = AtomicBoolean(false)
 
@@ -103,14 +103,16 @@ class HatoruWidgetProvider : AppWidgetProvider() {
             )
 
         private val FRAME_VIEW_IDS = intArrayOf(
-            R.id.frame_0, R.id.frame_1, R.id.frame_2, R.id.frame_3,
-            R.id.frame_4, R.id.frame_5, R.id.frame_6, R.id.frame_7,
+            R.id.frame_0, R.id.frame_1, R.id.frame_2, R.id.frame_3, R.id.frame_4, R.id.frame_5,
+            R.id.frame_6, R.id.frame_7, R.id.frame_8, R.id.frame_9, R.id.frame_10, R.id.frame_11,
+            R.id.frame_12, R.id.frame_13, R.id.frame_14, R.id.frame_15, R.id.frame_16, R.id.frame_17,
+            R.id.frame_18, R.id.frame_19, R.id.frame_20, R.id.frame_21, R.id.frame_22, R.id.frame_23,
         )
 
         /**
          * コマ送りアニメーションを設定する。コマが無ければ ViewFlipper を隠して静止画だけにする。
-         * コマは RGB_565・幅400px の Bitmap で渡す（8コマで約1.7MB。RemoteViews の画像上限より十分小さい）。
-         * コマ数が8未満のときは、先頭から繰り返して8枠を埋める（同じ Bitmap は1回しか送られない）。
+         * コマは RGB_565・幅320px の Bitmap で渡す（24コマで約3.3MB。RemoteViews の画像上限＝画面サイズ×4×1.5 より十分小さい）。
+         * コマ数が24未満のときは、先頭から繰り返して24枠を埋める（同じ Bitmap は1回しか送られない）。
          */
         private fun applyAnimation(context: Context, views: RemoteViews, frames: List<Bitmap>?) {
             if (frames.isNullOrEmpty()) {

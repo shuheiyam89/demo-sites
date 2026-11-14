@@ -111,7 +111,7 @@ class MainActivity : Activity() {
             val bitmap: Bitmap? = state?.let {
                 HatoruRepository.loadBitmap(appContext, it, maxWidth = 1200, lowMemory = false)
             }
-            val newFrames = state?.let { AnimationFrames.frameBitmaps(appContext, it, maxWidth = 800, lowMemory = false) }.orEmpty()
+            val newFrames = state?.let { AnimationFrames.frameBitmaps(appContext, it, maxWidth = 640, lowMemory = false) }.orEmpty()
             val interval = AnimationFrames.intervalMs(appContext)
             runOnUiThread {
                 if (isFinishing || isDestroyed) return@runOnUiThread

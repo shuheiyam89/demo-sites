@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 前のコマは新しいコマが重なり終わるまで残しておく（一瞬背景が透けて見えないように） -->
+<alpha xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="380"
+    android:fromAlpha="1.0"
+    android:interpolator="@android:interpolator/accelerate_quad"
+    android:toAlpha="0.0" />
