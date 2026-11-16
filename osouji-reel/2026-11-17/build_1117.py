@@ -306,7 +306,7 @@ def main():
         shutter
         + f"[1:a]atrim=0:{dur:.3f},asetpts=PTS-STARTPTS,aformat=channel_layouts=stereo,volume=0.85,"
         f"afade=t=in:st=0:d=0.6,afade=t=out:st={dur - 1.5:.3f}:d=1.5[bgm];"
-        f"[bgm][sh]amix=inputs=2:duration=first:normalize=0[a]"
+        f"[bgm][sh]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.89:level=disabled[a]"
     )
     cmd = [FF, "-y", "-v", "error", "-i", silent, "-i", os.path.join(D, "Carefree.mp3"),
            "-filter_complex", graph, "-map", "0:v", "-map", "[a]", "-c:v", "copy",
