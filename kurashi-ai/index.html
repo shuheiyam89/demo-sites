@@ -55,22 +55,43 @@
   .brand small { font-size: 10.5px; letter-spacing: .22em; color: var(--ink-2); text-transform: uppercase; }
   .head-link { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; text-decoration: none; padding: 6px 0; border-bottom: 1px solid var(--ink); }
 
-  /* ---------- ヒーロー ---------- */
-  .hero { position: relative; padding: 8px 0 72px; }
-  .hero-grid { display: grid; gap: 34px; }
-  .hero-visual { position: relative; padding-right: 40px; }
-  .hero-frame { border-radius: 200px 200px 18px 18px; overflow: hidden; transform: translateZ(0); }
-  .hero-visual img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 58% 50%; }
-  .tate { position: absolute; top: 6px; right: 0; writing-mode: vertical-rl; font-family: var(--mincho); font-weight: 600; font-size: 13.5px; letter-spacing: .5em; color: var(--ink); white-space: nowrap; }
+  /* ---------- ファーストビュー：4アプリの縦割り（画面いっぱい） ---------- */
+  .fv { display: flex; flex-direction: column; height: 100vh; height: 100svh; min-height: 560px; }
+  .fv > .wrap { width: 100%; }
+  .stripes { position: relative; flex: 1; display: flex; gap: 4px; padding: 0 8px 8px; min-height: 0; }
+  .stripe { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; display: block; border-radius: 12px; background: var(--bg-2); color: #fff; text-decoration: none; transform: translateZ(0); transition: flex-grow .6s cubic-bezier(.2, .7, .2, 1); }
+  .st-media { position: absolute; inset: 0; transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .5s ease; }
+  .st-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); }
+  .st-media .before { opacity: 0; object-position: var(--pos-b, var(--pos, 50% 50%)); }
+  .stripe::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(30 26 22 / 52%), rgb(30 26 22 / 0%) 42%); pointer-events: none; }
+  .st-label { position: absolute; left: 50%; bottom: 18px; z-index: 1; transform: translateX(-50%); writing-mode: vertical-rl; font-family: var(--mincho); font-weight: 600; font-size: clamp(16px, 4.6vw, 22px); letter-spacing: .32em; white-space: nowrap; text-shadow: 0 1px 2px rgb(0 0 0 / 35%), 0 2px 12px rgb(0 0 0 / 40%); }
+  .st-no { display: inline-block; margin-inline-end: .7em; font-size: .62em; letter-spacing: 0; text-combine-upright: all; opacity: .9; }
+  .stripe:active .st-media { filter: brightness(1.12); }
+  .stripe:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }
+  @media (hover: hover) {
+    .stripe:hover { flex-grow: 1.35; }
+    .stripe:hover .st-media { transform: scale(1.05); filter: brightness(1.08); }
+  }
+  /* 中央の見出し（写真の上でも読めるよう、クリーム色のパネルを敷く。リンクの邪魔をしない） */
+  .fv-panel { position: absolute; left: 50%; top: 45%; z-index: 2; transform: translate(-50%, -50%); width: min(calc(100% - 44px), 620px); padding: 22px 20px 20px; text-align: center; background: rgb(250 247 241 / 90%); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-radius: 18px; box-shadow: 0 12px 40px rgb(46 42 38 / 16%); pointer-events: none; }
+  .fv-panel .script { font-size: clamp(30px, 8.4vw, 46px); margin: 0 0 6px; }
+  .fv-panel h1 { margin: 0; font-family: var(--mincho); font-weight: 600; font-size: clamp(20px, 6.4vw, 42px); line-height: 1.55; letter-spacing: .06em; }
+  .fv-panel h1 .em { color: var(--sage-deep); }
+  .fv-free { display: inline-flex; align-items: center; gap: 10px; margin: 12px 0 0; font-size: 12px; font-weight: 500; letter-spacing: .26em; color: var(--ink-2); }
+  .fv-free::before, .fv-free::after { content: ""; width: 18px; height: 1px; background: currentColor; }
+
+  /* ---------- 導入エリア（横長の静かな写真の帯＋導入文） ---------- */
+  .intro { padding: 64px 0 80px; }
+  .hero-frame { border-radius: 18px; overflow: hidden; transform: translateZ(0); }
+  .hero-frame img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 62%; }
+  .intro-body { position: relative; margin-top: 34px; padding-right: 40px; }
+  .tate { position: absolute; top: 4px; right: 0; margin: 0; writing-mode: vertical-rl; font-family: var(--mincho); font-weight: 600; font-size: 13.5px; letter-spacing: .5em; color: var(--ink); white-space: nowrap; }
   .tate::after { content: ""; display: inline-block; width: 1px; height: 54px; margin-top: 14px; background: var(--ink); vertical-align: top; }
   .script { margin: 0; font-family: var(--script); font-weight: 600; color: var(--sage-deep); line-height: 1; letter-spacing: 0; }
-  .tate { margin: 0; }
-  .hero .script { position: absolute; left: -6px; bottom: -22px; font-size: clamp(40px, 11vw, 64px); transform: rotate(-6deg); text-shadow: 0 0 18px var(--bg), 0 0 6px var(--bg); }
-  .eyebrow { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 18px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--sage-deep); }
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 16px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--sage-deep); }
   .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
-  .hero h1 { margin: 0; font-family: var(--mincho); font-weight: 600; font-size: clamp(25px, 7.9vw, 58px); line-height: 1.5; letter-spacing: .06em; }
-  .hero h1 .em { color: var(--sage-deep); }
-  .hero .lead { margin: 22px 0 0; color: var(--ink-2); max-width: 30em; }
+  .intro-title { margin: 0; font-family: var(--mincho); font-weight: 600; font-size: clamp(22px, 6vw, 34px); line-height: 1.6; letter-spacing: .08em; }
+  .intro .lead { margin: 16px 0 0; color: var(--ink-2); max-width: 32em; }
   .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
   .badges li { padding: 4px 14px; border: 1px solid var(--ink); border-radius: 99px; font-size: 12px; font-weight: 500; letter-spacing: .12em; }
   .hero-cta { margin-top: 30px; }
@@ -141,17 +162,23 @@
   .js-anim .ba-label .a { opacity: 0; }
   .js-anim .ba.is-done .ba-label .b { opacity: 0; transition-delay: 1.4s; }
   .js-anim .ba.is-done .ba-label .a { opacity: 1; transition-delay: 1.6s; }
+  .js-anim .stripe .before { opacity: 1; transition: opacity 2s ease; }
+  .js-anim .stripe .after { transform: scale(1.03); transition: transform 2.6s ease; }
+  .js-anim .stripe.is-done .before { opacity: 0; }
+  .js-anim .stripe.is-done .after { transform: scale(1); }
   .js-anim .rv { opacity: 0; transform: translateY(18px); transition: opacity .9s ease, transform 1s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0s); }
   .js-anim .rv.is-in { opacity: 1; transform: none; }
   .js-anim .hero-frame img { animation: kenburns 26s ease-out forwards; }
   @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.06); } }
   @media (prefers-reduced-motion: reduce) {
     .rv { opacity: 1 !important; transform: none !important; }
-    .ba .before { opacity: 0 !important; }
+    .ba .before, .stripe .before { opacity: 0 !important; }
+    .stripe, .st-media { transition: none !important; }
     .hero-frame img { animation: none !important; }
   }
 
   /* ---------- スマホ：狭い画面での微調整 ---------- */
+  @media (max-width: 440px) { .brand small { display: none; } }
   @media (max-width: 380px) {
     .step-list b { font-size: 13px; }
     .btn { padding: 0 22px; letter-spacing: .14em; }
@@ -161,14 +188,15 @@
   @media (min-width: 860px) {
     body { font-size: 15.5px; }
     .site-head { padding: 30px 0; }
-    .hero { padding: 24px 0 120px; }
-    .hero-grid { grid-template-columns: 6fr 5fr; align-items: center; gap: 64px; }
-    .hero h1 { font-size: min(3.9vw, 48px); }
-    .hero-text { order: 0; }
-    .hero-visual { order: 1; padding-right: 56px; }
-    .hero-visual img { aspect-ratio: 5 / 6; }
+    .stripes { gap: 8px; padding: 0 var(--gutter) 24px; }
+    .stripe { border-radius: 16px; }
+    .st-label { bottom: 28px; font-size: 22px; }
+    .fv-panel { padding: 34px 40px 30px; border-radius: 22px; }
+    .intro { padding: 110px 0 120px; }
+    .hero-frame img { aspect-ratio: 21 / 8; }
+    .intro-body { display: grid; grid-template-columns: 5fr 6fr; gap: 64px; align-items: start; margin-top: 56px; padding-right: 56px; }
+    .intro .lead { margin-top: 0; }
     .tate { font-size: 15px; }
-    .hero .script { left: -40px; bottom: -26px; }
     .apps { padding: 120px 0 40px; }
     .sec-head { margin-bottom: 96px; }
     .app { grid-template-columns: 7fr 5fr; align-items: center; gap: 72px; margin-bottom: 130px; }
@@ -185,32 +213,59 @@
 </head>
 <body>
 
-<div class="wrap">
-  <header class="site-head">
-    <a class="brand" href="./"><b>暮らしのAI</b><small>Kurashi AI series</small></a>
-    <a class="head-link" href="#apps">Apps</a>
-  </header>
+<!-- ファーストビュー：4アプリの縦割り。ストライプ全体が各アプリへのリンク -->
+<div class="fv">
+  <div class="wrap">
+    <header class="site-head">
+      <a class="brand" href="./"><b>暮らしのAI</b><small>Kurashi AI series</small></a>
+      <a class="head-link" href="#apps">Apps</a>
+    </header>
+  </div>
+  <section class="stripes" aria-labelledby="heroTitle">
+    <a class="stripe" href="https://okatazuke.onrender.com/?from=series" style="--pos: 74% 50%; --pos-b: 66% 50%;" aria-label="01 おかたづけ を使ってみる">
+      <span class="st-media"><img class="after" src="assets/app-okatazuke.webp" width="1200" height="800" alt="" fetchpriority="high"><img class="before" src="assets/before-okatazuke.webp" width="1200" height="800" alt=""></span>
+      <span class="st-label" aria-hidden="true"><span class="st-no">01</span>おかたづけ</span>
+    </a>
+    <a class="stripe" href="https://okigae.onrender.com/?from=series" style="--pos: 46% 30%; --pos-b: 50% 30%;" aria-label="02 おきがえ を使ってみる">
+      <span class="st-media"><img class="after" src="assets/app-okigae.webp" width="900" height="1200" alt=""><img class="before" src="assets/before-okigae.webp" width="900" height="1200" alt=""></span>
+      <span class="st-label" aria-hidden="true"><span class="st-no">02</span>おきがえ</span>
+    </a>
+    <a class="stripe" href="https://osouji.onrender.com/?from=series" style="--pos: 58% 50%; --pos-b: 72% 50%;" aria-label="03 おそうじ を使ってみる">
+      <span class="st-media"><img class="after" src="assets/app-osouji.webp" width="1200" height="800" alt=""><img class="before" src="assets/before-osouji.webp" width="1200" height="800" alt=""></span>
+      <span class="st-label" aria-hidden="true"><span class="st-no">03</span>おそうじ</span>
+    </a>
+    <a class="stripe" href="https://osentaku.onrender.com/?from=series" style="--pos: 40% 50%; --pos-b: 50% 50%;" aria-label="04 おせんたく を使ってみる">
+      <span class="st-media"><img class="after" src="assets/app-osentaku.webp" width="1200" height="800" alt=""><img class="before" src="assets/before-osentaku.webp" width="1200" height="800" alt=""></span>
+      <span class="st-label" aria-hidden="true"><span class="st-no">04</span>おせんたく</span>
+    </a>
+    <div class="fv-panel">
+      <p class="script" aria-hidden="true">Live in comfort.</p>
+      <h1 id="heroTitle">撮るだけ。<br>暮らしの困りごとを、<br><span class="em">AIが見立てます。</span></h1>
+      <p class="fv-free">登録不要・無料</p>
+    </div>
+  </section>
 </div>
 
 <main>
-  <!-- ヒーロー -->
-  <section class="hero" aria-labelledby="heroTitle">
-    <div class="wrap hero-grid">
-      <div class="hero-visual">
-        <div class="hero-frame"><img src="assets/hero.webp" width="1536" height="864" alt="植物と木の家具がある、明るく片付いたリビング" fetchpriority="high"></div>
+  <!-- 導入：横長の静かな写真の帯＋導入文 -->
+  <section class="intro" aria-labelledby="introTitle">
+    <div class="wrap">
+      <div class="hero-frame"><img src="assets/hero.webp" width="1536" height="864" loading="lazy" decoding="async" alt="植物と木の家具がある、明るく片付いたリビング"></div>
+      <div class="intro-body">
+        <div class="intro-text">
+          <p class="eyebrow">AI apps for everyday living</p>
+          <h2 class="intro-title" id="introTitle">部屋・服・掃除・洗濯。</h2>
+        </div>
+        <div class="intro-text">
+          <p class="lead">写真を撮るだけで、見立てと手順、使う道具まで分かります。4つのアプリはどれも、スマホのブラウザですぐ使えます。</p>
+          <ul class="badges" aria-label="特長">
+            <li>登録不要</li>
+            <li>無料</li>
+            <li>アプリのインストール不要</li>
+          </ul>
+          <div class="hero-cta"><a class="btn" href="#apps">4つのアプリを見る<span class="arw" aria-hidden="true"></span></a></div>
+        </div>
         <p class="tate" aria-hidden="true">暮らしのAIアプリシリーズ</p>
-        <p class="script" aria-hidden="true">Live in comfort.</p>
-      </div>
-      <div class="hero-text">
-        <p class="eyebrow">AI apps for everyday living</p>
-        <h1 id="heroTitle">撮るだけ。<br>暮らしの困りごとを、<br><span class="em">AIが見立てます。</span></h1>
-        <p class="lead">部屋・服・掃除・洗濯。写真を撮るだけで、見立てと手順、使う道具まで分かります。4つのアプリはどれも、スマホのブラウザですぐ使えます。</p>
-        <ul class="badges" aria-label="特長">
-          <li>登録不要</li>
-          <li>無料</li>
-          <li>アプリのインストール不要</li>
-        </ul>
-        <div class="hero-cta"><a class="btn" href="#apps">4つのアプリを見る<span class="arw" aria-hidden="true"></span></a></div>
       </div>
     </div>
   </section>
@@ -355,7 +410,7 @@
 (() => {
   if (!document.documentElement.classList.contains('js-anim')) return;
   // ふわっと出す要素。同じ親の中で順番に少しずつ遅らせる
-  const groups = ['.hero-text > *', '.sec-head > *', '.app-body > *', '.step-list > li', '.site-foot .wrap > *'];
+  const groups = ['.fv-panel > *', '.intro-text > *', '.sec-head > *', '.app-body > *', '.step-list > li', '.site-foot .wrap > *'];
   const items = [];
   for (const sel of groups) {
     const seen = new Map();
@@ -381,6 +436,10 @@
     }
   }, { threshold: 0.45 });
   document.querySelectorAll('.ba').forEach((el) => ba.observe(el));
+
+  // ファーストビューの縦割り：読み込みが済んだら、左から0.35秒ずつずらしてビフォー→アフター（1回だけ）
+  const stripes = () => document.querySelectorAll('.stripe').forEach((el, i) => setTimeout(() => el.classList.add('is-done'), 600 + i * 350));
+  if (document.readyState === 'complete') stripes(); else addEventListener('load', stripes, { once: true });
 })();
 </script>
 </body>
