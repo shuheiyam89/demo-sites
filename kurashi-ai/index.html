@@ -18,6 +18,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high">
+<script>
+  /* 動きを使える環境だけ、アニメーション用の印を付ける（JS無効・動きを減らす設定では何も隠さない） */
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-anim');
+</script>
 <style>
   :root {
     color-scheme: light;
@@ -55,7 +59,8 @@
   .hero { position: relative; padding: 8px 0 72px; }
   .hero-grid { display: grid; gap: 34px; }
   .hero-visual { position: relative; padding-right: 40px; }
-  .hero-visual img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 58% 50%; border-radius: 200px 200px 18px 18px; }
+  .hero-frame { border-radius: 200px 200px 18px 18px; overflow: hidden; transform: translateZ(0); }
+  .hero-visual img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 58% 50%; }
   .tate { position: absolute; top: 6px; right: 0; writing-mode: vertical-rl; font-family: var(--mincho); font-weight: 600; font-size: 13.5px; letter-spacing: .5em; color: var(--ink); white-space: nowrap; }
   .tate::after { content: ""; display: inline-block; width: 1px; height: 54px; margin-top: 14px; background: var(--ink); vertical-align: top; }
   .script { margin: 0; font-family: var(--script); font-weight: 600; color: var(--sage-deep); line-height: 1; letter-spacing: 0; }
@@ -86,7 +91,12 @@
   .apps { padding: 88px 0 40px; border-top: 1px solid var(--line); }
   .app { display: grid; gap: 26px; margin: 0 0 88px; }
   .app-photo { position: relative; margin: 0; }
-  .app-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; background: var(--bg-2); }
+  .ba { position: relative; border-radius: 18px; overflow: hidden; background: var(--bg-2); transform: translateZ(0); }
+  .app-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .ba .before { position: absolute; inset: 0; height: 100%; opacity: 0; }
+  .ba-label { position: absolute; left: 12px; top: 12px; display: grid; padding: 3px 11px; border-radius: 99px; background: rgb(250 247 241 / 86%); font-size: 10.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--ink); }
+  .ba-label span { grid-area: 1 / 1; transition: opacity .6s ease; }
+  .ba-label .b { opacity: 0; }
   .app-photo.tall img { aspect-ratio: 4 / 5; object-position: 50% 22%; }
   .app-photo .script { position: absolute; right: 14px; bottom: -18px; font-size: 34px; transform: rotate(-5deg); text-shadow: 0 0 14px var(--bg), 0 0 5px var(--bg); }
   .app-body { position: relative; }
@@ -121,6 +131,25 @@
   .contact { margin: 36px 0 0; font-size: 12.5px; color: var(--ink-2); }
   .contact a { color: var(--ink); text-underline-offset: 3px; }
   .copy { margin: 26px 0 0; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11px; letter-spacing: .18em; color: var(--ink-2); }
+
+  /* ---------- 動き（js-anim のときだけ。無いときは最初から全部見える） ---------- */
+  .js-anim .ba .before { opacity: 1; transition: opacity 2s ease; }
+  .js-anim .ba .after { transform: scale(1.03); transition: transform 2.6s ease; }
+  .js-anim .ba.is-done .before { opacity: 0; }
+  .js-anim .ba.is-done .after { transform: scale(1); }
+  .js-anim .ba-label .b { opacity: 1; }
+  .js-anim .ba-label .a { opacity: 0; }
+  .js-anim .ba.is-done .ba-label .b { opacity: 0; transition-delay: 1.4s; }
+  .js-anim .ba.is-done .ba-label .a { opacity: 1; transition-delay: 1.6s; }
+  .js-anim .rv { opacity: 0; transform: translateY(18px); transition: opacity .9s ease, transform 1s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0s); }
+  .js-anim .rv.is-in { opacity: 1; transform: none; }
+  .js-anim .hero-frame img { animation: kenburns 26s ease-out forwards; }
+  @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.06); } }
+  @media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1 !important; transform: none !important; }
+    .ba .before { opacity: 0 !important; }
+    .hero-frame img { animation: none !important; }
+  }
 
   /* ---------- スマホ：狭い画面での微調整 ---------- */
   @media (max-width: 380px) {
@@ -168,7 +197,7 @@
   <section class="hero" aria-labelledby="heroTitle">
     <div class="wrap hero-grid">
       <div class="hero-visual">
-        <img src="assets/hero.webp" width="1536" height="864" alt="植物と木の家具がある、明るく片付いたリビング" fetchpriority="high">
+        <div class="hero-frame"><img src="assets/hero.webp" width="1536" height="864" alt="植物と木の家具がある、明るく片付いたリビング" fetchpriority="high"></div>
         <p class="tate" aria-hidden="true">暮らしのAIアプリシリーズ</p>
         <p class="script" aria-hidden="true">Live in comfort.</p>
       </div>
@@ -197,7 +226,11 @@
 
       <article class="app" aria-labelledby="app1">
         <figure class="app-photo">
-          <img src="assets/app-okatazuke.webp" width="1200" height="800" loading="lazy" decoding="async" alt="グリーンのソファと木の棚がある、片付いた部屋">
+          <div class="ba">
+            <img class="after" src="assets/app-okatazuke.webp" width="1200" height="800" loading="lazy" decoding="async" alt="グリーンのソファと木の棚がある、片付いた部屋">
+            <img class="before" src="assets/before-okatazuke.webp" width="1200" height="800" loading="lazy" decoding="async" alt="本や服が出しっぱなしの、散らかった部屋（片付け前）">
+            <span class="ba-label" aria-hidden="true"><span class="b">Before</span><span class="a">After</span></span>
+          </div>
           <span class="script" aria-hidden="true">tidy &amp; cozy</span>
         </figure>
         <div class="app-body">
@@ -214,7 +247,11 @@
 
       <article class="app" aria-labelledby="app2">
         <figure class="app-photo tall">
-          <img src="assets/app-okigae.webp" width="900" height="1200" loading="lazy" decoding="async" alt="白いニットとスカートを着て、明るい窓辺に立つ女性">
+          <div class="ba">
+            <img class="after" src="assets/app-okigae.webp" width="900" height="1200" loading="lazy" decoding="async" alt="白いニットとスカートを着て、明るい窓辺に立つ女性">
+            <img class="before" src="assets/before-okigae.webp" width="900" height="1200" loading="lazy" decoding="async" alt="グレーのニットとパンツの普段着で立つ女性（着せ替え前）">
+            <span class="ba-label" aria-hidden="true"><span class="b">Before</span><span class="a">After</span></span>
+          </div>
           <span class="script" aria-hidden="true">try it on</span>
         </figure>
         <div class="app-body">
@@ -231,7 +268,11 @@
 
       <article class="app" aria-labelledby="app3">
         <figure class="app-photo">
-          <img src="assets/app-osouji.webp" width="1200" height="800" loading="lazy" decoding="async" alt="白い洗面台と鏡がある、きれいな洗面所">
+          <div class="ba">
+            <img class="after" src="assets/app-osouji.webp" width="1200" height="800" loading="lazy" decoding="async" alt="白い洗面台と鏡がある、きれいな洗面所">
+            <img class="before" src="assets/before-osouji.webp" width="1200" height="800" loading="lazy" decoding="async" alt="鏡や洗面台がくすんだ洗面所（掃除前）">
+            <span class="ba-label" aria-hidden="true"><span class="b">Before</span><span class="a">After</span></span>
+          </div>
           <span class="script" aria-hidden="true">fresh &amp; clean</span>
         </figure>
         <div class="app-body">
@@ -248,7 +289,11 @@
 
       <article class="app" aria-labelledby="app4">
         <figure class="app-photo">
-          <img src="assets/app-osentaku.webp" width="1200" height="800" loading="lazy" decoding="async" alt="窓辺に積まれた、白とパステルカラーのたたんだタオルや服">
+          <div class="ba">
+            <img class="after" src="assets/app-osentaku.webp" width="1200" height="800" loading="lazy" decoding="async" alt="窓辺に積まれた、白とパステルカラーのたたんだタオルや服">
+            <img class="before" src="assets/before-osentaku.webp" width="1200" height="800" loading="lazy" decoding="async" alt="シミの付いた服やタオルが積まれた山（洗濯前）">
+            <span class="ba-label" aria-hidden="true"><span class="b">Before</span><span class="a">After</span></span>
+          </div>
           <span class="script" aria-hidden="true">soft laundry</span>
         </figure>
         <div class="app-body">
@@ -306,5 +351,37 @@
   </div>
 </footer>
 
+<script>
+(() => {
+  if (!document.documentElement.classList.contains('js-anim')) return;
+  // ふわっと出す要素。同じ親の中で順番に少しずつ遅らせる
+  const groups = ['.hero-text > *', '.sec-head > *', '.app-body > *', '.step-list > li', '.site-foot .wrap > *'];
+  const items = [];
+  for (const sel of groups) {
+    const seen = new Map();
+    document.querySelectorAll(sel).forEach((el) => {
+      const i = seen.get(el.parentNode) || 0;
+      seen.set(el.parentNode, i + 1);
+      el.classList.add('rv');
+      el.style.setProperty('--d', Math.min(i * 0.09, 0.45) + 's');
+      items.push(el);
+    });
+  }
+  const io = new IntersectionObserver((list) => {
+    for (const e of list) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  items.forEach((el) => io.observe(el));
+
+  // ビフォー→アフター：枠が半分ほど見えたら1回だけ切り替えて、アフターで止める
+  const ba = new IntersectionObserver((list) => {
+    for (const e of list) if (e.isIntersecting) {
+      const el = e.target;
+      ba.unobserve(el);
+      setTimeout(() => el.classList.add('is-done'), 450);
+    }
+  }, { threshold: 0.45 });
+  document.querySelectorAll('.ba').forEach((el) => ba.observe(el));
+})();
+</script>
 </body>
 </html>
