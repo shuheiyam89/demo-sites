@@ -111,7 +111,7 @@
 
   /* ---------- アプリ紹介 01〜04（写真とテキストを左右交互） ---------- */
   .apps { padding: 88px 0 40px; border-top: 1px solid var(--line); }
-  .app { display: grid; gap: 26px; margin: 0 0 88px; }
+  .app { display: grid; gap: 26px; margin: 0 0 88px; scroll-margin-top: 24px; }
   .app-photo { position: relative; margin: 0; }
   .ba { position: relative; border-radius: 18px; overflow: hidden; background: var(--bg-2); transform: translateZ(0); }
   .app-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -154,6 +154,14 @@
   .contact a { color: var(--ink); text-underline-offset: 3px; }
   .copy { margin: 26px 0 0; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11px; letter-spacing: .18em; color: var(--ink-2); }
 
+  /* ---------- 上へ戻るボタン（600pxほどスクロールしたら、右下にふわっと出す） ---------- */
+  .to-top { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 20; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%; background: rgb(46 42 38 / 88%); color: #fff; cursor: pointer; box-shadow: 0 6px 18px rgb(46 42 38 / 22%); opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease, visibility .35s, background-color .2s; }
+  .to-top.is-shown { opacity: 1; visibility: visible; transform: none; }
+  .to-top:hover { background: var(--ink); }
+  .to-top svg { width: 20px; height: 20px; }
+  /* フッターの一番下の文字と、ボタンが重ならないように下に余白を足す */
+  .site-foot { padding-bottom: 96px; }
+
   /* ---------- 動き（js-anim のときだけ。無いときは最初から全部見える） ---------- */
   .js-anim .ba .before { opacity: 1; transition: opacity 2s ease; }
   .js-anim .ba .after { transform: scale(1.03); transition: transform 2.6s ease; }
@@ -174,7 +182,7 @@
   @media (prefers-reduced-motion: reduce) {
     .rv { opacity: 1 !important; transform: none !important; }
     .ba .before, .stripe .before { opacity: 0 !important; }
-    .stripe, .st-media { transition: none !important; }
+    .stripe, .st-media, .to-top { transition: none !important; }
     .hero-frame img { animation: none !important; }
   }
 
@@ -212,6 +220,7 @@
     .step-ico { width: 72px; height: 72px; }
     .step-list li + li::before { top: 36px; }
     .step-list b { font-size: 16px; }
+    .to-top { right: 28px; bottom: 28px; width: 52px; height: 52px; }
   }
 </style>
 </head>
@@ -226,19 +235,19 @@
     </header>
   </div>
   <section class="stripes" aria-labelledby="heroTitle">
-    <a class="stripe" href="https://okatazuke.onrender.com/?from=series" style="--pos: 74% 50%; --pos-b: 66% 50%;" aria-label="01 おかたづけ を使ってみる">
+    <a class="stripe" href="#okatazuke" style="--pos: 74% 50%; --pos-b: 66% 50%;" aria-label="01 おかたづけの紹介へ">
       <span class="st-media"><img class="after" src="assets/app-okatazuke.webp" width="1200" height="800" alt="" fetchpriority="high"><img class="before" src="assets/before-okatazuke.webp" width="1200" height="800" alt=""></span>
       <span class="st-label" aria-hidden="true"><span class="st-no">01</span>おかたづけ</span>
     </a>
-    <a class="stripe" href="https://okigae.onrender.com/?from=series" style="--pos: 46% 30%; --pos-b: 50% 30%;" aria-label="02 おきがえ を使ってみる">
+    <a class="stripe" href="#okigae" style="--pos: 46% 30%; --pos-b: 50% 30%;" aria-label="02 おきがえの紹介へ">
       <span class="st-media"><img class="after" src="assets/app-okigae.webp" width="900" height="1200" alt=""><img class="before" src="assets/before-okigae.webp" width="900" height="1200" alt=""></span>
       <span class="st-label" aria-hidden="true"><span class="st-no">02</span>おきがえ</span>
     </a>
-    <a class="stripe" href="https://osouji.onrender.com/?from=series" style="--pos: 58% 50%; --pos-b: 72% 50%;" aria-label="03 おそうじ を使ってみる">
+    <a class="stripe" href="#osouji" style="--pos: 58% 50%; --pos-b: 72% 50%;" aria-label="03 おそうじの紹介へ">
       <span class="st-media"><img class="after" src="assets/app-osouji.webp" width="1200" height="800" alt=""><img class="before" src="assets/before-osouji.webp" width="1200" height="800" alt=""></span>
       <span class="st-label" aria-hidden="true"><span class="st-no">03</span>おそうじ</span>
     </a>
-    <a class="stripe" href="https://osentaku.onrender.com/?from=series" style="--pos: 40% 50%; --pos-b: 50% 50%;" aria-label="04 おせんたく を使ってみる">
+    <a class="stripe" href="#osentaku" style="--pos: 40% 50%; --pos-b: 50% 50%;" aria-label="04 おせんたくの紹介へ">
       <span class="st-media"><img class="after" src="assets/app-osentaku.webp" width="1200" height="800" alt=""><img class="before" src="assets/before-osentaku.webp" width="1200" height="800" alt=""></span>
       <span class="st-label" aria-hidden="true"><span class="st-no">04</span>おせんたく</span>
     </a>
@@ -283,7 +292,7 @@
         <p>4つのアプリは、それぞれの画面の下から行き来できます。</p>
       </header>
 
-      <article class="app" aria-labelledby="app1">
+      <article class="app" id="okatazuke" aria-labelledby="app1">
         <figure class="app-photo">
           <div class="ba">
             <img class="after" src="assets/app-okatazuke.webp" width="1200" height="800" loading="lazy" decoding="async" alt="グリーンのソファと木の棚がある、片付いた部屋">
@@ -304,7 +313,7 @@
         </div>
       </article>
 
-      <article class="app" aria-labelledby="app2">
+      <article class="app" id="okigae" aria-labelledby="app2">
         <figure class="app-photo tall">
           <div class="ba">
             <img class="after" src="assets/app-okigae.webp" width="900" height="1200" loading="lazy" decoding="async" alt="白いニットとスカートを着て、明るい窓辺に立つ女性">
@@ -325,7 +334,7 @@
         </div>
       </article>
 
-      <article class="app" aria-labelledby="app3">
+      <article class="app" id="osouji" aria-labelledby="app3">
         <figure class="app-photo">
           <div class="ba">
             <img class="after" src="assets/app-osouji.webp" width="1200" height="800" loading="lazy" decoding="async" alt="白い洗面台と鏡がある、きれいな洗面所">
@@ -346,7 +355,7 @@
         </div>
       </article>
 
-      <article class="app" aria-labelledby="app4">
+      <article class="app" id="osentaku" aria-labelledby="app4">
         <figure class="app-photo">
           <div class="ba">
             <img class="after" src="assets/app-osentaku.webp" width="1200" height="800" loading="lazy" decoding="async" alt="窓辺に積まれた、白とパステルカラーのたたんだタオルや服">
@@ -410,6 +419,10 @@
   </div>
 </footer>
 
+<button type="button" class="to-top" id="toTop" aria-label="ページの上へ戻る">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
+</button>
+
 <script>
 (() => {
   if (!document.documentElement.classList.contains('js-anim')) return;
@@ -444,6 +457,20 @@
   // ファーストビューの縦割り：読み込みが済んだら、左から0.35秒ずつずらしてビフォー→アフター（1回だけ）
   const stripes = () => document.querySelectorAll('.stripe').forEach((el, i) => setTimeout(() => el.classList.add('is-done'), 600 + i * 350));
   if (document.readyState === 'complete') stripes(); else addEventListener('load', stripes, { once: true });
+})();
+</script>
+<script>
+/* 上へ戻る：600pxほどスクロールしたら表示。動きを減らす設定では、すぐ先頭へ移動する */
+(() => {
+  const btn = document.getElementById('toTop');
+  let ticking = false;
+  const update = () => { btn.classList.toggle('is-shown', scrollY > 600); ticking = false; };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+  btn.addEventListener('click', () => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
 })();
 </script>
 </body>
