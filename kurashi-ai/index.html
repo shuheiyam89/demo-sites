@@ -8,59 +8,303 @@
 <meta property="og:title" content="暮らしのAIアプリシリーズ">
 <meta property="og:description" content="撮るだけ。部屋・服・掃除・洗濯、暮らしの困りごとをAIが見立てます。登録不要・無料。">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://shuheiyam89.github.io/demo-sites/kurashi-ai/">
+<meta property="og:image" content="https://shuheiyam89.github.io/demo-sites/kurashi-ai/assets/hero.jpg">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="864">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAF7F1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif; background:#faf8fc; color:#333; line-height:1.7; }
-  .wrap { max-width:640px; margin:0 auto; padding:32px 16px 48px; }
-  header { text-align:center; margin-bottom:28px; }
-  header .kicker { font-size:13px; letter-spacing:.15em; color:#8b5cf6; font-weight:700; }
-  header h1 { font-size:26px; margin:8px 0 10px; color:#2d2a32; }
-  header p { font-size:15px; color:#666; }
-  .cards { display:flex; flex-direction:column; gap:14px; }
-  a.card { display:flex; gap:14px; align-items:center; background:#fff; border-radius:16px; padding:16px; text-decoration:none; color:#333; box-shadow:0 2px 10px rgba(80,50,140,.08); border:1px solid #eee7f7; }
-  a.card:active { background:#f5f0fd; }
-  a.card img { width:64px; height:64px; border-radius:14px; flex:none; }
-  a.card .t { font-size:18px; font-weight:700; color:#2d2a32; }
-  a.card .d { font-size:13.5px; color:#666; margin-top:2px; }
-  a.card .go { margin-left:auto; flex:none; color:#8b5cf6; font-weight:700; font-size:20px; }
-  .note { text-align:center; font-size:13px; color:#888; margin-top:26px; }
-  footer { text-align:center; font-size:12px; color:#aaa; margin-top:34px; }
-  footer a { color:#8b5cf6; text-decoration:none; }
+  :root {
+    color-scheme: light;
+    --bg: #FAF7F1;          /* 温かいクリーム */
+    --bg-2: #F1ECE2;        /* 少し濃いクリーム（帯・写真の下地） */
+    --ink: #2E2A26;         /* チャコール */
+    --ink-2: #67605A;       /* 本文の薄い字 */
+    --line: #E3DCCF;
+    --sage: #8A9C82;        /* くすんだセージ（飾り） */
+    --sage-deep: #5D7057;   /* 文字に使うセージ（コントラスト確保） */
+    --sage-soft: #E6EADF;
+    --mincho: "Shippori Mincho", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", serif;
+    --gothic: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+    --script: "Caveat", "Segoe Script", cursive;
+    --gutter: clamp(20px, 5vw, 56px);
+    --max: 1180px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--gothic); font-size: 15px; line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 3px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* ---------- ヘッダー ---------- */
+  .site-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .brand { text-decoration: none; display: flex; align-items: baseline; gap: 10px; }
+  .brand b { font-family: var(--mincho); font-weight: 700; font-size: 17px; letter-spacing: .08em; }
+  .brand small { font-size: 10.5px; letter-spacing: .22em; color: var(--ink-2); text-transform: uppercase; }
+  .head-link { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; text-decoration: none; padding: 6px 0; border-bottom: 1px solid var(--ink); }
+
+  /* ---------- ヒーロー ---------- */
+  .hero { position: relative; padding: 8px 0 72px; }
+  .hero-grid { display: grid; gap: 34px; }
+  .hero-visual { position: relative; padding-right: 40px; }
+  .hero-visual img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 58% 50%; border-radius: 200px 200px 18px 18px; }
+  .tate { position: absolute; top: 6px; right: 0; writing-mode: vertical-rl; font-family: var(--mincho); font-weight: 600; font-size: 13.5px; letter-spacing: .5em; color: var(--ink); white-space: nowrap; }
+  .tate::after { content: ""; display: inline-block; width: 1px; height: 54px; margin-top: 14px; background: var(--ink); vertical-align: top; }
+  .script { margin: 0; font-family: var(--script); font-weight: 600; color: var(--sage-deep); line-height: 1; letter-spacing: 0; }
+  .tate { margin: 0; }
+  .hero .script { position: absolute; left: -6px; bottom: -22px; font-size: clamp(40px, 11vw, 64px); transform: rotate(-6deg); text-shadow: 0 0 18px var(--bg), 0 0 6px var(--bg); }
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 18px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--sage-deep); }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+  .hero h1 { margin: 0; font-family: var(--mincho); font-weight: 600; font-size: clamp(25px, 7.9vw, 58px); line-height: 1.5; letter-spacing: .06em; }
+  .hero h1 .em { color: var(--sage-deep); }
+  .hero .lead { margin: 22px 0 0; color: var(--ink-2); max-width: 30em; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
+  .badges li { padding: 4px 14px; border: 1px solid var(--ink); border-radius: 99px; font-size: 12px; font-weight: 500; letter-spacing: .12em; }
+  .hero-cta { margin-top: 30px; }
+
+  /* 黒背景・白文字のシャープなボタン */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 14px; min-height: 52px; padding: 0 28px; background: var(--ink); color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 500; letter-spacing: .2em; border-radius: 0; transition: background-color .2s, gap .2s; }
+  .btn .arw { display: inline-block; width: 22px; height: 1px; background: currentColor; position: relative; }
+  .btn .arw::after { content: ""; position: absolute; right: 0; top: -3px; width: 7px; height: 7px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; transform: rotate(45deg); }
+  .btn:hover { background: #000; gap: 20px; }
+
+  /* ---------- セクション見出し ---------- */
+  .sec-head { text-align: center; margin: 0 auto 56px; }
+  .sec-head .script { display: block; font-size: clamp(34px, 8vw, 46px); margin-bottom: 4px; }
+  .sec-head h2 { margin: 0; font-family: var(--mincho); font-weight: 600; font-size: clamp(22px, 5.4vw, 30px); letter-spacing: .14em; }
+  .sec-head p { margin: 14px auto 0; color: var(--ink-2); font-size: 14px; max-width: 32em; }
+
+  /* ---------- アプリ紹介 01〜04（写真とテキストを左右交互） ---------- */
+  .apps { padding: 88px 0 40px; border-top: 1px solid var(--line); }
+  .app { display: grid; gap: 26px; margin: 0 0 88px; }
+  .app-photo { position: relative; margin: 0; }
+  .app-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; background: var(--bg-2); }
+  .app-photo.tall img { aspect-ratio: 4 / 5; object-position: 50% 22%; }
+  .app-photo .script { position: absolute; right: 14px; bottom: -18px; font-size: 34px; transform: rotate(-5deg); text-shadow: 0 0 14px var(--bg), 0 0 5px var(--bg); }
+  .app-body { position: relative; }
+  .num { display: flex; align-items: baseline; gap: 14px; margin: 0 0 14px; }
+  .num b { font-family: var(--mincho); font-weight: 500; font-size: 54px; line-height: 1; color: var(--sage); letter-spacing: .02em; }
+  .num span { font-size: 11px; font-weight: 500; letter-spacing: .32em; color: var(--sage-deep); }
+  .app h3 { margin: 0; font-family: var(--mincho); font-weight: 700; font-size: clamp(30px, 8vw, 44px); line-height: 1.35; letter-spacing: .1em; }
+  .app .catch { margin: 10px 0 0; font-family: var(--mincho); font-weight: 600; font-size: 16.5px; letter-spacing: .06em; }
+  .app .desc { margin: 14px 0 0; color: var(--ink-2); max-width: 30em; }
+  .app-foot { display: flex; align-items: center; gap: 16px; margin-top: 26px; }
+  .app-foot .icon { width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 0 0 1px var(--line); background: #fff; flex: none; }
+
+  /* ---------- 使い方 3ステップ（横並びの帯） ---------- */
+  .steps { background: var(--sage-soft); padding: 64px 0 70px; }
+  .steps .sec-head { margin-bottom: 34px; }
+  .step-list { list-style: none; margin: 0 auto; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); max-width: 860px; }
+  .step-list li { position: relative; text-align: center; padding: 0 6px; }
+  .step-list li + li::before { content: ""; position: absolute; left: -10%; top: 30px; width: 20%; height: 1px; background: var(--sage-deep); opacity: .5; }
+  .step-ico { display: grid; place-items: center; width: 60px; height: 60px; margin: 0 auto 12px; border-radius: 50%; background: var(--bg); color: var(--sage-deep); }
+  .step-ico svg { width: 26px; height: 26px; }
+  .step-list small { display: block; font-family: var(--mincho); font-size: 12px; letter-spacing: .2em; color: var(--sage-deep); }
+  .step-list b { display: block; margin-top: 2px; font-family: var(--mincho); font-weight: 600; font-size: 14.5px; line-height: 1.6; letter-spacing: .04em; }
+
+  /* ---------- フッター ---------- */
+  .site-foot { padding: 84px 0 40px; text-align: center; }
+  .site-foot .script { font-size: 40px; display: block; margin-bottom: 8px; }
+  .site-foot .msg { margin: 0; font-family: var(--mincho); font-weight: 600; font-size: clamp(20px, 5.2vw, 28px); letter-spacing: .1em; line-height: 1.7; }
+  .site-foot .sub { margin: 12px auto 0; color: var(--ink-2); font-size: 14px; max-width: 30em; }
+  .foot-apps { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; margin: 36px 0 0; padding: 0; list-style: none; font-size: 13px; letter-spacing: .12em; }
+  .foot-apps a { text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+  .foot-apps a:hover { border-color: var(--ink); }
+  .contact { margin: 36px 0 0; font-size: 12.5px; color: var(--ink-2); }
+  .contact a { color: var(--ink); text-underline-offset: 3px; }
+  .copy { margin: 26px 0 0; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11px; letter-spacing: .18em; color: var(--ink-2); }
+
+  /* ---------- スマホ：狭い画面での微調整 ---------- */
+  @media (max-width: 380px) {
+    .step-list b { font-size: 13px; }
+    .btn { padding: 0 22px; letter-spacing: .14em; }
+  }
+
+  /* ---------- PC：ヒーロー2列・アプリ紹介を左右交互に ---------- */
+  @media (min-width: 860px) {
+    body { font-size: 15.5px; }
+    .site-head { padding: 30px 0; }
+    .hero { padding: 24px 0 120px; }
+    .hero-grid { grid-template-columns: 6fr 5fr; align-items: center; gap: 64px; }
+    .hero h1 { font-size: min(3.9vw, 48px); }
+    .hero-text { order: 0; }
+    .hero-visual { order: 1; padding-right: 56px; }
+    .hero-visual img { aspect-ratio: 5 / 6; }
+    .tate { font-size: 15px; }
+    .hero .script { left: -40px; bottom: -26px; }
+    .apps { padding: 120px 0 40px; }
+    .sec-head { margin-bottom: 96px; }
+    .app { grid-template-columns: 7fr 5fr; align-items: center; gap: 72px; margin-bottom: 130px; }
+    .app:nth-of-type(even) .app-photo { order: 1; }
+    .app:nth-of-type(even) { grid-template-columns: 5fr 7fr; }
+    .app-photo.tall { max-width: 460px; justify-self: center; width: 100%; }
+    .num b { font-size: 72px; }
+    .steps { padding: 84px 0 92px; }
+    .step-ico { width: 72px; height: 72px; }
+    .step-list li + li::before { top: 36px; }
+    .step-list b { font-size: 16px; }
+  }
 </style>
 </head>
 <body>
+
 <div class="wrap">
-  <header>
-    <div class="kicker">暮らしのAIアプリシリーズ</div>
-    <h1>撮るだけ。暮らしの困りごとを、<br>AIが見立てます。</h1>
-    <p>部屋・服・掃除・洗濯。写真を撮るだけで、<br>見立てと手順、使う道具まで分かります。<br>全アプリ 登録不要・無料です。</p>
+  <header class="site-head">
+    <a class="brand" href="./"><b>暮らしのAI</b><small>Kurashi AI series</small></a>
+    <a class="head-link" href="#apps">Apps</a>
   </header>
-  <div class="cards">
-    <a class="card" href="https://okatazuke.onrender.com/?from=series">
-      <img src="https://okatazuke.onrender.com/icons/icon-192.png" alt="おかたづけ">
-      <span><span class="t">おかたづけ</span><div class="d">部屋を撮るだけで、片付けと飾り付けの見立てと、使うアイテムが分かります。</div></span>
-      <span class="go">›</span>
-    </a>
-    <a class="card" href="https://okigae.onrender.com/?from=series">
-      <img src="https://okigae.onrender.com/icons/icon-192.png" alt="おきがえ">
-      <span><span class="t">おきがえ</span><div class="d">自分の写真で服や小物を着せ替え。買う前に似合うか試せます。コーデの診断も。</div></span>
-      <span class="go">›</span>
-    </a>
-    <a class="card" href="https://osouji.onrender.com/?from=series">
-      <img src="https://osouji.onrender.com/icons/icon-192.png" alt="おそうじ">
-      <span><span class="t">おそうじ</span><div class="d">汚れを撮るだけで、汚れの見立てと落とし方の手順、使う洗剤・道具が分かります。</div></span>
-      <span class="go">›</span>
-    </a>
-    <a class="card" href="https://osentaku.onrender.com/?from=series">
-      <img src="https://osentaku.onrender.com/icons/icon-192.png" alt="おせんたく">
-      <span><span class="t">おせんたく</span><div class="d">シミや洗濯表示を撮るだけで、洗い方と使う洗剤・道具が分かります。洗濯表示の意味も。</div></span>
-      <span class="go">›</span>
-    </a>
-  </div>
-  <p class="note">年末の大掃除・衣替えにも。4つのアプリは行き来できるので、<br>暮らしの困りごとをまるごとどうぞ。</p>
-  <footer>
-    <p>お問い合わせ：<a href="mailto:tidyupdecorations@gmail.com">tidyupdecorations@gmail.com</a></p>
-  </footer>
 </div>
+
+<main>
+  <!-- ヒーロー -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap hero-grid">
+      <div class="hero-visual">
+        <img src="assets/hero.webp" width="1536" height="864" alt="植物と木の家具がある、明るく片付いたリビング" fetchpriority="high">
+        <p class="tate" aria-hidden="true">暮らしのAIアプリシリーズ</p>
+        <p class="script" aria-hidden="true">Live in comfort.</p>
+      </div>
+      <div class="hero-text">
+        <p class="eyebrow">AI apps for everyday living</p>
+        <h1 id="heroTitle">撮るだけ。<br>暮らしの困りごとを、<br><span class="em">AIが見立てます。</span></h1>
+        <p class="lead">部屋・服・掃除・洗濯。写真を撮るだけで、見立てと手順、使う道具まで分かります。4つのアプリはどれも、スマホのブラウザですぐ使えます。</p>
+        <ul class="badges" aria-label="特長">
+          <li>登録不要</li>
+          <li>無料</li>
+          <li>アプリのインストール不要</li>
+        </ul>
+        <div class="hero-cta"><a class="btn" href="#apps">4つのアプリを見る<span class="arw" aria-hidden="true"></span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- アプリ紹介 01〜04 -->
+  <section class="apps" id="apps" aria-labelledby="appsTitle">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="script" aria-hidden="true">Our apps</span>
+        <h2 id="appsTitle">4つのアプリ</h2>
+        <p>4つのアプリは、それぞれの画面の下から行き来できます。</p>
+      </header>
+
+      <article class="app" aria-labelledby="app1">
+        <figure class="app-photo">
+          <img src="assets/app-okatazuke.webp" width="1200" height="800" loading="lazy" decoding="async" alt="グリーンのソファと木の棚がある、片付いた部屋">
+          <span class="script" aria-hidden="true">tidy &amp; cozy</span>
+        </figure>
+        <div class="app-body">
+          <p class="num"><b>01</b><span>ROOM</span></p>
+          <h3 id="app1">おかたづけ</h3>
+          <p class="catch">片付けも、飾り付けも、撮るだけで。</p>
+          <p class="desc">部屋を撮るだけで、片付けと飾り付けの見立てと、使うアイテムが分かります。</p>
+          <div class="app-foot">
+            <img class="icon" src="https://okatazuke.onrender.com/icons/icon-192.png" width="52" height="52" loading="lazy" decoding="async" alt="おかたづけのアイコン">
+            <a class="btn" href="https://okatazuke.onrender.com/?from=series">使ってみる<span class="arw" aria-hidden="true"></span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="app" aria-labelledby="app2">
+        <figure class="app-photo tall">
+          <img src="assets/app-okigae.webp" width="900" height="1200" loading="lazy" decoding="async" alt="白いニットとスカートを着て、明るい窓辺に立つ女性">
+          <span class="script" aria-hidden="true">try it on</span>
+        </figure>
+        <div class="app-body">
+          <p class="num"><b>02</b><span>OUTFIT</span></p>
+          <h3 id="app2">おきがえ</h3>
+          <p class="catch">買う前に、似合うか試せる。</p>
+          <p class="desc">自分の写真で服や小物を着せ替え。買う前に似合うか試せます。コーデの診断も。</p>
+          <div class="app-foot">
+            <img class="icon" src="https://okigae.onrender.com/icons/icon-192.png" width="52" height="52" loading="lazy" decoding="async" alt="おきがえのアイコン">
+            <a class="btn" href="https://okigae.onrender.com/?from=series">使ってみる<span class="arw" aria-hidden="true"></span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="app" aria-labelledby="app3">
+        <figure class="app-photo">
+          <img src="assets/app-osouji.webp" width="1200" height="800" loading="lazy" decoding="async" alt="白い洗面台と鏡がある、きれいな洗面所">
+          <span class="script" aria-hidden="true">fresh &amp; clean</span>
+        </figure>
+        <div class="app-body">
+          <p class="num"><b>03</b><span>CLEANING</span></p>
+          <h3 id="app3">おそうじ</h3>
+          <p class="catch">汚れに合った落とし方を、手順で。</p>
+          <p class="desc">汚れを撮るだけで、汚れの見立てと落とし方の手順、使う洗剤・道具が分かります。</p>
+          <div class="app-foot">
+            <img class="icon" src="https://osouji.onrender.com/icons/icon-192.png" width="52" height="52" loading="lazy" decoding="async" alt="おそうじのアイコン">
+            <a class="btn" href="https://osouji.onrender.com/?from=series">使ってみる<span class="arw" aria-hidden="true"></span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="app" aria-labelledby="app4">
+        <figure class="app-photo">
+          <img src="assets/app-osentaku.webp" width="1200" height="800" loading="lazy" decoding="async" alt="窓辺に積まれた、白とパステルカラーのたたんだタオルや服">
+          <span class="script" aria-hidden="true">soft laundry</span>
+        </figure>
+        <div class="app-body">
+          <p class="num"><b>04</b><span>LAUNDRY</span></p>
+          <h3 id="app4">おせんたく</h3>
+          <p class="catch">シミも洗濯表示も、撮るだけ。</p>
+          <p class="desc">シミや洗濯表示を撮るだけで、洗い方と使う洗剤・道具が分かります。洗濯表示の意味も。</p>
+          <div class="app-foot">
+            <img class="icon" src="https://osentaku.onrender.com/icons/icon-192.png" width="52" height="52" loading="lazy" decoding="async" alt="おせんたくのアイコン">
+            <a class="btn" href="https://osentaku.onrender.com/?from=series">使ってみる<span class="arw" aria-hidden="true"></span></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 使い方の3ステップ -->
+  <section class="steps" aria-labelledby="stepsTitle">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="script" aria-hidden="true">How it works</span>
+        <h2 id="stepsTitle">使い方は、3ステップ</h2>
+      </header>
+      <ol class="step-list">
+        <li>
+          <span class="step-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3v10.5H4z"/><circle cx="12" cy="13.4" r="3.4"/></svg></span>
+          <small>01</small><b>撮る</b>
+        </li>
+        <li>
+          <span class="step-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9-1.9 5.1-1.9-5.1-5.1-1.9 5.1-1.9z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span>
+          <small>02</small><b>AIが見立てる</b>
+        </li>
+        <li>
+          <span class="step-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M3.8 6.6l1.2 1.2 2-2.4M3.8 12.1l1.2 1.2 2-2.4M3.8 17.6l1.2 1.2 2-2.4"/></svg></span>
+          <small>03</small><b>手順と道具が<br>分かる</b>
+        </li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span class="script" aria-hidden="true">for every season</span>
+    <p class="msg">年末の大掃除・衣替えにも。</p>
+    <p class="sub">4つのアプリは行き来できるので、暮らしの困りごとをまるごとどうぞ。</p>
+    <ul class="foot-apps" aria-label="4つのアプリ">
+      <li><a href="https://okatazuke.onrender.com/?from=series">おかたづけ</a></li>
+      <li><a href="https://okigae.onrender.com/?from=series">おきがえ</a></li>
+      <li><a href="https://osouji.onrender.com/?from=series">おそうじ</a></li>
+      <li><a href="https://osentaku.onrender.com/?from=series">おせんたく</a></li>
+    </ul>
+    <p class="contact">お問い合わせ：<a href="mailto:tidyupdecorations@gmail.com">tidyupdecorations@gmail.com</a></p>
+    <p class="copy">© 2026 暮らしのAIアプリシリーズ</p>
+  </div>
+</footer>
+
 </body>
 </html>
