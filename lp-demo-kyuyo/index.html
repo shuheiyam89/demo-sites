@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>給与計算代行サービス｜クラリ給与サポート（制作サンプル）</title>
+<meta name="description" content="給与計算・年末調整・法改正対応をまるごと代行。月末の残業と計算ミスの不安から、経理担当者を解放します。（制作サンプル・架空の会社です）">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1f5fbf">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1f5fbf;
+    --blue-dark: #174a96;
+    --navy: #0f2a4a;
+    --ink: #1d2a3a;
+    --ink-2: #566377;
+    --line: #dbe4f0;
+    --bg: #ffffff;
+    --bg-soft: #f3f7fc;
+    --bg-blue: #e8f0fb;
+    --accent: #f2a43a;
+    --radius: 14px;
+    --shadow: 0 8px 28px rgb(15 42 74 / 8%);
+    --max: 1120px;
+    --gutter: clamp(16px, 4vw, 40px);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif; font-size: 15.5px; line-height: 1.85; letter-spacing: .02em; overflow-x: hidden; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: var(--blue); }
+  :focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* 制作サンプルの表示 */
+  .sample-bar { background: var(--navy); color: #fff; font-size: 12px; text-align: center; padding: 5px 12px; letter-spacing: .08em; }
+
+  /* ヘッダー */
+  .site-head { position: sticky; top: 0; z-index: 20; background: rgb(255 255 255 / 94%); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .head-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; color: var(--navy); text-decoration: none; font-weight: 900; font-size: 17px; letter-spacing: .04em; }
+  .logo-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: var(--blue); color: #fff; font-size: 15px; }
+  .logo small { display: block; font-size: 10px; font-weight: 500; color: var(--ink-2); letter-spacing: .12em; }
+  .head-nav { display: none; gap: 24px; font-size: 14px; }
+  .head-nav a { color: var(--ink); text-decoration: none; }
+  .head-nav a:hover { color: var(--blue); }
+
+  /* ボタン */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: var(--blue); color: #fff; font: inherit; font-weight: 700; font-size: 15.5px; text-decoration: none; cursor: pointer; box-shadow: 0 8px 20px rgb(31 95 191 / 28%); transition: background-color .2s, transform .1s; }
+  .btn:hover { background: var(--blue-dark); }
+  .btn:active { transform: translateY(1px); }
+  .btn-sm { min-height: 40px; padding: 0 18px; font-size: 13.5px; box-shadow: none; }
+  .btn-ghost { background: #fff; color: var(--blue); border: 1.5px solid var(--blue); box-shadow: none; }
+  .btn-ghost:hover { background: var(--bg-blue); }
+
+  /* セクション共通 */
+  section { padding: 72px 0; }
+  .sec-label { display: block; margin: 0 0 8px; color: var(--blue); font-size: 12.5px; font-weight: 700; letter-spacing: .2em; text-align: center; }
+  .sec-title { margin: 0 0 14px; text-align: center; color: var(--navy); font-size: clamp(23px, 5.6vw, 32px); line-height: 1.5; font-weight: 900; }
+  .sec-lead { max-width: 40em; margin: 0 auto 40px; text-align: center; color: var(--ink-2); }
+
+  /* ヒーロー */
+  .hero { padding: 44px 0 64px; background: linear-gradient(180deg, var(--bg-blue), #fff 85%); }
+  .hero-grid { display: grid; gap: 30px; align-items: center; }
+  .hero-tag { display: inline-block; margin: 0 0 14px; padding: 4px 14px; border-radius: 999px; background: #fff; color: var(--blue); font-size: 13px; font-weight: 700; box-shadow: 0 2px 8px rgb(15 42 74 / 8%); }
+  .hero h1 { margin: 0; color: var(--navy); font-size: clamp(23px, 7vw, 46px); line-height: 1.45; font-weight: 900; letter-spacing: .03em; }
+  .hero h1 .mark { background: linear-gradient(transparent 64%, rgb(242 164 58 / 40%) 64%); }
+  .hero .lead { margin: 18px 0 0; color: var(--ink-2); font-size: 15.5px; }
+  .hero-points { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 20px 0 0; padding: 0; list-style: none; font-size: 14px; font-weight: 700; color: var(--navy); }
+  .hero-points li::before { content: "✓"; margin-right: 6px; color: var(--blue); }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .hero-note { margin: 10px 0 0; font-size: 12.5px; color: var(--ink-2); }
+  .photo { position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #d6e4f7, #eef4fc); box-shadow: var(--shadow); }
+  .photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .hero-badge { position: absolute; left: 14px; bottom: 14px; padding: 10px 14px; border-radius: 12px; background: #fff; box-shadow: var(--shadow); font-size: 12.5px; line-height: 1.5; color: var(--ink-2); }
+  .hero-badge b { display: block; color: var(--navy); font-size: 20px; }
+
+  /* 課題 */
+  .problem { background: var(--bg-soft); }
+  .problem-grid { display: grid; gap: 28px; align-items: center; }
+  .problem-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .problem-list li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; padding: 16px; border-radius: var(--radius); background: #fff; box-shadow: 0 2px 10px rgb(15 42 74 / 5%); }
+  .problem-list .ic { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #fdeee0; color: #c46a12; font-weight: 900; }
+  .problem-list b { display: block; color: var(--navy); font-size: 16px; }
+  .problem-list span { color: var(--ink-2); font-size: 14px; }
+  .problem-close { margin: 30px auto 0; max-width: 34em; text-align: center; color: var(--navy); font-size: clamp(17px, 4.4vw, 21px); font-weight: 700; line-height: 1.7; }
+  .problem-close strong { color: var(--blue); }
+
+  /* 強み */
+  .features { display: grid; gap: 16px; }
+  .feature { padding: 26px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+  .feature .no { display: inline-block; margin-bottom: 10px; color: var(--blue); font-size: 13px; font-weight: 900; letter-spacing: .14em; }
+  .feature-ic { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 14px; border-radius: 14px; background: var(--bg-blue); color: var(--blue); }
+  .feature-ic svg { width: 28px; height: 28px; }
+  .feature h3 { margin: 0 0 8px; color: var(--navy); font-size: 18.5px; line-height: 1.5; }
+  .feature p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+
+  /* 料金 */
+  .price-box { max-width: 820px; margin: 0 auto; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: #fff; }
+  .price-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .price-table th, .price-table td { padding: 16px 14px; border-bottom: 1px solid var(--line); text-align: left; }
+  .price-table thead th { background: var(--navy); color: #fff; font-size: 13.5px; font-weight: 700; letter-spacing: .06em; }
+  .price-table tbody th { color: var(--navy); font-weight: 700; white-space: nowrap; }
+  .price-table td.amount { text-align: right; white-space: nowrap; }
+  .price-table td.amount b { color: var(--blue); font-size: 22px; font-weight: 900; }
+  .price-table td.amount small { color: var(--ink-2); font-size: 12px; }
+  .price-table tr.popular { background: var(--bg-blue); }
+  .price-table .pop-tag { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 11px; vertical-align: 2px; }
+  .price-table tbody tr:last-child th, .price-table tbody tr:last-child td { border-bottom: 0; }
+  .price-inc { display: grid; gap: 6px 18px; margin: 0; padding: 18px 20px; background: var(--bg-soft); font-size: 13.5px; color: var(--ink-2); list-style: none; }
+  .price-inc li::before { content: "✓"; margin-right: 6px; color: var(--blue); font-weight: 700; }
+  .price-note { max-width: 820px; margin: 12px auto 0; font-size: 12.5px; color: var(--ink-2); }
+
+  /* 導入の流れ */
+  .flow { background: var(--bg-soft); }
+  .steps { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+  .steps li { position: relative; padding: 22px 20px 20px; border-radius: var(--radius); background: #fff; box-shadow: 0 2px 10px rgb(15 42 74 / 5%); }
+  .steps li::before { counter-increment: step; content: "STEP " counter(step); display: inline-block; margin-bottom: 8px; padding: 2px 12px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+  .steps h3 { margin: 0 0 4px; color: var(--navy); font-size: 17px; }
+  .steps p { margin: 0; color: var(--ink-2); font-size: 14px; }
+  .steps .term { display: inline-block; margin-top: 8px; font-size: 12.5px; font-weight: 700; color: var(--blue); }
+
+  /* FAQ */
+  .faq { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
+  .faq details { border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+  .faq summary { position: relative; display: block; padding: 18px 48px 18px 54px; color: var(--navy); font-weight: 700; cursor: pointer; list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::before { content: "Q"; position: absolute; left: 18px; top: 16px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 13px; }
+  .faq summary::after { content: ""; position: absolute; right: 20px; top: 50%; width: 9px; height: 9px; margin-top: -6px; border-right: 2px solid var(--blue); border-bottom: 2px solid var(--blue); transform: rotate(45deg); transition: transform .2s; }
+  .faq details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+  .faq .a { position: relative; margin: 0; padding: 0 20px 18px 54px; color: var(--ink-2); font-size: 14.5px; }
+  .faq .a::before { content: "A"; position: absolute; left: 18px; top: 0; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #fdeee0; color: #c46a12; font-size: 13px; font-weight: 700; }
+
+  /* お問い合わせ（見た目のみ） */
+  .contact { background: linear-gradient(180deg, var(--bg-blue), #fff); }
+  .form { max-width: 720px; margin: 0 auto; padding: 28px 22px; border-radius: 18px; background: #fff; box-shadow: var(--shadow); }
+  .form-row { display: grid; gap: 6px; margin-bottom: 16px; }
+  .form-row label, .form-row .lbl { font-size: 14px; font-weight: 700; color: var(--navy); }
+  .req { margin-left: 6px; padding: 1px 7px; border-radius: 4px; background: #d94a4a; color: #fff; font-size: 11px; vertical-align: 1px; }
+  .form input, .form select, .form textarea { width: 100%; padding: 12px 14px; border: 1px solid #c9d5e6; border-radius: 10px; background: #fbfdff; color: var(--ink); font: inherit; font-size: 15px; }
+  .form textarea { min-height: 120px; resize: vertical; }
+  .form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgb(31 95 191 / 15%); }
+  .form .two { display: grid; gap: 16px; }
+  .form-submit { text-align: center; margin-top: 8px; }
+  .form-submit .btn { width: 100%; max-width: 360px; }
+  .form-note { margin: 12px 0 0; font-size: 12.5px; color: var(--ink-2); text-align: center; }
+
+  /* フッター */
+  .site-foot { padding: 40px 0 28px; background: var(--navy); color: #c9d6e8; font-size: 13px; }
+  .foot-grid { display: grid; gap: 18px; }
+  .site-foot .logo { color: #fff; }
+  .site-foot .logo small { color: #9fb2cc; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0; padding: 0; list-style: none; }
+  .foot-links a { color: #c9d6e8; text-decoration: none; }
+  .foot-links a:hover { color: #fff; text-decoration: underline; }
+  .copy { margin: 26px 0 0; padding-top: 18px; border-top: 1px solid rgb(255 255 255 / 12%); font-size: 11.5px; color: #8fa3bf; }
+
+  /* スマホ下部の固定CTA */
+  .float-cta { position: fixed; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 30; }
+  .float-cta .btn { width: 100%; }
+  body { padding-bottom: 76px; }
+
+  @media (min-width: 720px) {
+    .features { grid-template-columns: repeat(3, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .price-inc { grid-template-columns: repeat(2, 1fr); }
+    .form { padding: 40px 44px; }
+    .form .two { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 960px) {
+    body { font-size: 16px; padding-bottom: 0; }
+    .float-cta { display: none; }
+    .head-nav { display: flex; }
+    section { padding: 96px 0; }
+    .hero { padding: 64px 0 88px; }
+    .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 56px; }
+    .hero h1 { font-size: min(3vw, 40px); }
+    .problem-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
+    .steps { grid-template-columns: repeat(4, 1fr); }
+    .steps li:not(:last-child)::after { content: ""; position: absolute; right: -11px; top: 50%; z-index: 1; width: 0; height: 0; margin-top: -8px; border: 8px solid transparent; border-left: 9px solid var(--blue); }
+    .foot-grid { grid-template-columns: 1fr auto; align-items: center; }
+  }
+  @media (max-width: 400px) {
+    .price-table th, .price-table td { padding: 14px 10px; }
+    .price-table td.amount b { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<p class="sample-bar">制作サンプル（架空の会社・サービスです）</p>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="logo" href="#top" aria-label="クラリ給与サポート トップへ">
+      <span class="logo-mark" aria-hidden="true">給</span>
+      <span>クラリ給与サポート<small>PAYROLL OUTSOURCING</small></span>
+    </a>
+    <nav class="head-nav" aria-label="ページ内メニュー">
+      <a href="#features">強み</a>
+      <a href="#price">料金</a>
+      <a href="#flow">導入の流れ</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <a class="btn btn-sm" href="#contact">無料相談</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ヒーロー -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hero-tag">従業員5名〜300名の企業さまへ</p>
+        <h1 id="heroTitle">毎月の給与計算、<br><span class="mark">まるごとお任せ</span>ください。</h1>
+        <p class="lead">勤怠データを送るだけで、給与・賞与の計算から明細の発行、年末調整、法改正への対応まで、専任チームが代行します。月末の残業と、計算ミスの不安から解放されます。</p>
+        <ul class="hero-points">
+          <li>初期費用0円</li>
+          <li>最短2週間で開始</li>
+          <li>社労士監修</li>
+        </ul>
+        <div class="hero-cta">
+          <a class="btn" href="#contact">無料で相談する</a>
+          <a class="btn btn-ghost" href="#price">料金を見る</a>
+        </div>
+        <p class="hero-note">ご相談・お見積もりは無料です。しつこい営業はいたしません。</p>
+      </div>
+      <figure class="photo" style="margin:0">
+        <img src="hero.png" width="1200" height="900" alt="明るいオフィスで笑顔で仕事をする経理担当者" fetchpriority="high">
+        <p class="hero-badge" aria-hidden="true">月末の作業時間<b>最大80%削減</b></p>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 課題 -->
+  <section class="problem" aria-labelledby="problemTitle">
+    <div class="wrap">
+      <span class="sec-label">PROBLEM</span>
+      <h2 class="sec-title" id="problemTitle">給与計算で、こんなお悩みはありませんか？</h2>
+      <div class="problem-grid">
+        <figure class="photo" style="margin:0">
+          <img src="problem.png" width="1200" height="900" loading="lazy" decoding="async" alt="書類の山に囲まれて作業に追われる経理担当者">
+        </figure>
+        <ul class="problem-list">
+          <li><span class="ic" aria-hidden="true">!</span><div><b>月末・月初は毎月残業</b><span>勤怠の締めから給与計算、振込データの作成まで、短い期間に作業が集中してしまう。</span></div></li>
+          <li><span class="ic" aria-hidden="true">!</span><div><b>法改正への対応が追いつかない</b><span>社会保険料率や税制の変更を、毎回自分で調べて反映するのが不安。</span></div></li>
+          <li><span class="ic" aria-hidden="true">!</span><div><b>計算ミスが怖い</b><span>ひとりで担当していて、ダブルチェックできる人がいない。間違えたら従業員の信頼に関わる。</span></div></li>
+          <li><span class="ic" aria-hidden="true">!</span><div><b>担当者が辞めたら回らない</b><span>手順が属人化していて、休みや退職のときに引き継げる人がいない。</span></div></li>
+        </ul>
+      </div>
+      <p class="problem-close">その業務、<strong>専門チームに任せて</strong><br>本来のお仕事に集中しませんか。</p>
+    </div>
+  </section>
+
+  <!-- 強み -->
+  <section id="features" aria-labelledby="featuresTitle">
+    <div class="wrap">
+      <span class="sec-label">FEATURES</span>
+      <h2 class="sec-title" id="featuresTitle">クラリ給与サポートが選ばれる3つの理由</h2>
+      <p class="sec-lead">「任せて安心」と感じていただけるよう、正確さ・スピード・分かりやすさにこだわっています。</p>
+      <div class="features">
+        <article class="feature">
+          <span class="no">POINT 01</span>
+          <div class="feature-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>二重チェックで、ミスを防ぐ</h3>
+          <p>すべての計算を担当者と確認者の2名でチェック。社労士監修のもと、正確な給与計算をお届けします。</p>
+        </article>
+        <article class="feature">
+          <span class="no">POINT 02</span>
+          <div class="feature-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 9h16M8 3v4M16 3v4M8 13h3M8 16h6"/></svg></div>
+          <h3>法改正も、自動でキャッチアップ</h3>
+          <p>保険料率や税制の変更は、こちらで確認して反映します。年末調整や算定基礎届にも対応しています。</p>
+        </article>
+        <article class="feature">
+          <span class="no">POINT 03</span>
+          <div class="feature-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h6M9 14h4"/></svg></div>
+          <h3>専任担当が、すぐに回答</h3>
+          <p>貴社専任の担当者がつき、チャット・メールでのご質問に原則1営業日以内に回答します。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 料金 -->
+  <section id="price" class="price" aria-labelledby="priceTitle" style="background:var(--bg-soft)">
+    <div class="wrap">
+      <span class="sec-label">PRICE</span>
+      <h2 class="sec-title" id="priceTitle">料金プラン</h2>
+      <p class="sec-lead">従業員数に合わせた、分かりやすい月額料金です。初期費用はかかりません。</p>
+      <div class="price-box">
+        <table class="price-table">
+          <caption class="sr">従業員数別の月額料金</caption>
+          <thead>
+            <tr><th scope="col">従業員数</th><th scope="col" style="text-align:right">月額（税別）</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">〜10名</th><td class="amount"><b>15,000</b>円<small> / 月</small></td></tr>
+            <tr class="popular"><th scope="row">11〜30名<span class="pop-tag">人気</span></th><td class="amount"><b>30,000</b>円<small> / 月</small></td></tr>
+            <tr><th scope="row">31〜50名</th><td class="amount"><b>45,000</b>円<small> / 月</small></td></tr>
+            <tr><th scope="row">51〜100名</th><td class="amount"><b>70,000</b>円<small> / 月</small></td></tr>
+            <tr><th scope="row">101名〜</th><td class="amount"><b>お見積もり</b></td></tr>
+          </tbody>
+        </table>
+        <ul class="price-inc" aria-label="すべてのプランに含まれるもの">
+          <li>月次の給与計算・明細発行</li>
+          <li>賞与計算（年2回まで）</li>
+          <li>住民税の更新・社会保険料の改定</li>
+          <li>専任担当によるサポート</li>
+        </ul>
+      </div>
+      <p class="price-note">※年末調整は、別途1名あたり1,500円（税別）で承ります。※表示の料金は制作サンプル用の例です。</p>
+    </div>
+  </section>
+
+  <!-- 導入の流れ -->
+  <section id="flow" class="flow" aria-labelledby="flowTitle" style="background:#fff">
+    <div class="wrap">
+      <span class="sec-label">FLOW</span>
+      <h2 class="sec-title" id="flowTitle">導入の流れ</h2>
+      <p class="sec-lead">お問い合わせから最短2週間で、給与計算の代行を開始できます。</p>
+      <ol class="steps">
+        <li><h3>無料相談</h3><p>フォームからお問い合わせください。現在の運用やお困りごとをお伺いします。</p><span class="term">オンライン30分</span></li>
+        <li><h3>お見積もり・ご契約</h3><p>従業員数と業務範囲をもとに、お見積もりをご提示します。</p><span class="term">約3営業日</span></li>
+        <li><h3>データの引き継ぎ</h3><p>前月までの給与データや勤怠の形式を確認し、計算ルールを設定します。</p><span class="term">約1週間</span></li>
+        <li><h3>代行スタート</h3><p>毎月、勤怠データを送るだけ。計算結果と明細を期日までにお届けします。</p><span class="term">翌月から</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" aria-labelledby="faqTitle" style="background:var(--bg-soft)">
+    <div class="wrap">
+      <span class="sec-label">FAQ</span>
+      <h2 class="sec-title" id="faqTitle">よくある質問</h2>
+      <div class="faq">
+        <details>
+          <summary>今使っている勤怠システムのままで依頼できますか？</summary>
+          <p class="a">はい、多くの勤怠システムに対応しています。CSVやExcelでの書き出しができれば、そのままご依頼いただけます。紙のタイムカードの場合もご相談ください。</p>
+        </details>
+        <details>
+          <summary>途中で従業員数が増えた場合はどうなりますか？</summary>
+          <p class="a">翌月から、人数に合ったプランに自動で切り替わります。追加の手続きや手数料はかかりません。</p>
+        </details>
+        <details>
+          <summary>給与データなどの情報の管理は安全ですか？</summary>
+          <p class="a">データのやり取りは暗号化した専用の環境で行い、閲覧できる担当者も限定しています。秘密保持契約の締結にも対応します。</p>
+        </details>
+        <details>
+          <summary>年末調整だけの依頼もできますか？</summary>
+          <p class="a">はい、年末調整のみのスポット依頼も承っています。お早めにご相談いただくと、スムーズにご案内できます。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせ（見た目のみ） -->
+  <section id="contact" class="contact" aria-labelledby="contactTitle">
+    <div class="wrap">
+      <span class="sec-label">CONTACT</span>
+      <h2 class="sec-title" id="contactTitle">無料相談・お見積もり</h2>
+      <p class="sec-lead">お気軽にお問い合わせください。担当者より1営業日以内にご連絡します。</p>
+      <form class="form" action="#" onsubmit="return false" aria-describedby="formNote">
+        <div class="two">
+          <div class="form-row"><label for="f-company">会社名<span class="req">必須</span></label><input id="f-company" type="text" autocomplete="organization" placeholder="例）株式会社サンプル"></div>
+          <div class="form-row"><label for="f-name">お名前<span class="req">必須</span></label><input id="f-name" type="text" autocomplete="name" placeholder="例）山田 太郎"></div>
+        </div>
+        <div class="two">
+          <div class="form-row"><label for="f-mail">メールアドレス<span class="req">必須</span></label><input id="f-mail" type="email" autocomplete="email" placeholder="例）info@example.com"></div>
+          <div class="form-row"><label for="f-size">従業員数</label><select id="f-size"><option>選択してください</option><option>〜10名</option><option>11〜30名</option><option>31〜50名</option><option>51〜100名</option><option>101名〜</option></select></div>
+        </div>
+        <div class="form-row"><label for="f-msg">ご相談内容</label><textarea id="f-msg" placeholder="現在の運用やお困りごとなど、ご自由にお書きください"></textarea></div>
+        <div class="form-submit"><button class="btn" type="button">この内容で相談する</button></div>
+        <p class="form-note" id="formNote">※制作サンプルのため、このフォームは送信されません。</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true">給</span><span>クラリ給与サポート<small>PAYROLL OUTSOURCING</small></span></a>
+      <ul class="foot-links">
+        <li><a href="#features">強み</a></li>
+        <li><a href="#price">料金</a></li>
+        <li><a href="#flow">導入の流れ</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <p class="copy">© 2026 クラリ給与サポート（架空の会社）｜このページは制作サンプルです。実在の企業・サービスとは関係ありません。</p>
+  </div>
+</footer>
+
+<div class="float-cta"><a class="btn" href="#contact">無料で相談する</a></div>
+
+</body>
+</html>
