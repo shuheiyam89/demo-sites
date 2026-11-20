@@ -8,13 +8,15 @@
 | `02-lp/` | スマホで見やすい1ページLP｜公開までおまかせ（30,000円・7日・修正2回） | `thumbnail.png` | `sample/index.html`（見本LP。公開URLあり）、`sample-lp-pc.png`、`sample-lp-mobile.png`、`sample-lp-mobile-full.png` | `出品文.md` |
 | `03-banner/` | 広告・SNS用バナー3サイズセット（15,000円・2日・修正2回） | `thumbnail.png` | `banner-1080x1080.png`、`banner-1200x628.png`、`banner-1080x1920.png` | `出品文.md` |
 
-## 入口商品（2026-11-20 追加・安くて頼みやすい3つ）
+## 入口商品（2026-11-20 追加・安くて頼みやすい5つ）
 
 | フォルダ | 商品 | 見本 |
 |---|---|---|
 | `04-banner-entry/` | 告知バナー3サイズ（5,000円・2日・修正1回） | `03-banner/` の3枚 |
 | `05-hp-report/` | ホームページの改善点レポート（3,000円・3日・PDF） | `report-1〜3.png`（架空のカフェ） |
 | `06-blog/` | お店のブログ記事1本（4,000円・3日・修正1回） | `article-1〜2.png`（架空の花屋） |
+| `07-photo-cutout/` | 商品写真の背景を白く・切り抜き5枚（2,000円・2日・修正1回） | `sample.png`（イラストのイメージ） |
+| `08-map-info/` | 地図アプリの店舗情報の文章（3,000円・3日・修正1回） | `sample-1〜2.png`（架空のカフェ） |
 
 作り直すとき：`PYTHONIOENCODING=utf-8 python tools/build_entry.py`
 

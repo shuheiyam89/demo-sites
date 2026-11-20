@@ -168,7 +168,120 @@ def blog():
            pv, "4,000", "6,000円", ("納期3日", "修正1回"))
 
 
+# =====================================================================
+# ⑦ 商品写真の背景を白く・切り抜き（イラストの見本。実写真は使わない）
+# =====================================================================
+PH_CSS = """
+:root{--ink:#1F2A44;--accent:#FF7A45;--soft:#F3F5FA}
+body{background:#fff;color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;position:relative}
+.note{position:absolute;left:56px;bottom:26px;font-size:18px;opacity:.5}
+"""
+
+
+def mug(s=1.0):
+    return (f'<svg width="{260 * s:.0f}" height="{240 * s:.0f}" viewBox="0 0 260 240">'
+            '<path d="M190 80 q55 0 55 50 t-55 50" stroke="#3C6E71" stroke-width="18" fill="none"/>'
+            '<rect x="30" y="40" width="170" height="190" rx="26" fill="#3C6E71"/>'
+            '<rect x="30" y="40" width="170" height="40" rx="20" fill="#2F5A5D"/>'
+            '<rect x="52" y="110" width="20" height="90" rx="10" fill="#fff" opacity=".18"/></svg>')
+
+
+def tote(s=1.0):
+    return (f'<svg width="{240 * s:.0f}" height="{280 * s:.0f}" viewBox="0 0 240 280">'
+            '<path d="M70 90 q0 -70 50 -70 t50 70" stroke="#B9A27F" stroke-width="12" fill="none"/>'
+            '<path d="M30 90 h180 l-12 180 h-156 z" fill="#E8DCC6"/>'
+            '<rect x="85" y="150" width="70" height="56" rx="8" fill="#C0533F"/></svg>')
+
+
+def candle(s=1.0):
+    return (f'<svg width="{200 * s:.0f}" height="{260 * s:.0f}" viewBox="0 0 200 260">'
+            '<path d="M100 20 q18 26 0 46 q-18 -20 0 -46" fill="#F2B544"/>'
+            '<rect x="97" y="62" width="6" height="22" fill="#333"/>'
+            '<rect x="40" y="80" width="120" height="170" rx="18" fill="#D9C7E8"/>'
+            '<rect x="40" y="140" width="120" height="44" fill="#fff" opacity=".8"/>'
+            '<text x="100" y="170" font-size="22" text-anchor="middle" fill="#5B4A6B" font-family="serif">LAVENDER</text></svg>')
+
+
+def messy(svg):
+    return (f'<div style="width:360px;height:360px;border-radius:18px;overflow:hidden;position:relative;'
+            f'background:linear-gradient(170deg,#8B6B4E 0%,#A98563 55%,#6E5440 100%)">'
+            f'<div style="position:absolute;left:-30px;top:30px;width:200px;height:140px;background:#F4F1EA;transform:rotate(-14deg);opacity:.9"></div>'
+            f'<div style="position:absolute;right:-20px;bottom:40px;width:150px;height:14px;background:#222;border-radius:8px;transform:rotate(28deg)"></div>'
+            f'<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform:rotate(-6deg) translate(20px,14px)">{svg}</div>'
+            f'<div style="position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,200,120,.35),rgba(0,0,0,.25))"></div></div>')
+
+
+def clean(svg):
+    return (f'<div style="width:360px;height:360px;border-radius:18px;background:#fff;border:2px solid #E6EAF2;position:relative;'
+            f'display:flex;align-items:center;justify-content:center">'
+            f'<div style="position:absolute;bottom:48px;width:200px;height:20px;border-radius:50%;background:rgba(0,0,0,.10);filter:blur(6px)"></div>'
+            f'<div style="position:relative">{svg}</div></div>')
+
+
+def photo():
+    rows = "".join(f"""<div style="display:flex;align-items:center;justify-content:center;gap:40px;margin-top:26px">
+{messy(f(0.85))}<div style="font-size:60px;color:var(--accent)">→</div>{clean(f(0.85))}</div>""" for f in (mug, tote, candle)).replace("360px", "320px").replace("bottom:48px", "bottom:36px")
+    body = f"""<div style="text-align:center;padding-top:44px"><p style="font-size:26px;font-weight:700;color:var(--accent);letter-spacing:.1em">BEFORE → AFTER</p>
+<h1 style="font-size:52px;margin-top:6px">背景を白くして、商品をまっすぐに</h1></div>
+<div style="display:flex;justify-content:center;gap:450px;margin-top:24px;font-size:28px;font-weight:900"><span style="color:#D9534F">お手持ちの写真</span><span style="color:#2E8B57">納品イメージ</span></div>
+{rows}<p class="note">※見本はイラストで作ったイメージです。実際は、お送りいただいた写真を加工します</p>"""
+    build("07-photo-cutout/src/sample.html", "07-photo-cutout/sample.png", body, PH_CSS, 1080, 1350)
+    pv = (messy(mug(1.0)) + '<div style="font-size:80px;color:#FF7A45;font-weight:900">→</div>' + clean(mug(1.0))).replace("360px", "430px")
+    thumb2("07-photo-cutout", "商品写真の背景を<br><em>白く・切り抜き</em>ます", "ネットショップ・フリマの出品用に5枚",
+           pv, "2,000", "3,000円", ("納期2日", "5枚"))
+
+
+# =====================================================================
+# ⑧ Googleマップの店舗情報の文章づくり（架空のカフェ「山と珈琲 となり」）
+#    Google のロゴ・画面のまねはしない。中身（文章）を見せる
+# =====================================================================
+MP_CSS = RP_CSS + """
+.post{background:#fff;border:2px solid var(--line);border-radius:20px;padding:20px 24px}
+.post b{display:inline-block;background:var(--soft);border-radius:99px;padding:2px 14px;font-size:20px;margin-bottom:8px}
+.post p{font-size:23px;line-height:1.7}
+"""
+PIN = ('<svg width="56" height="56" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" fill="#FF7A45"/>'
+       '<circle cx="12" cy="9" r="2.6" fill="#fff"/></svg>')
+
+
+def mapinfo():
+    head = f'<div class="hd" style="display:flex;align-items:center;gap:22px">{PIN}<div><p>地図アプリの店舗情報・文章の見本</p><h1>山と珈琲 となり 様</h1></div></div>'
+    p1 = head + """<div class="wrap"><h2><b>1</b>お店の説明文（750字以内）</h2>
+<div class="card" style="font-size:25px;line-height:1.85">〇〇駅から徒歩3分、自家焙煎のコーヒーとホットサンドのお店です。店主が山歩きの途中で出会った、浅煎りのやさしい味わいを目指して、毎朝少しずつ焙煎しています。<br>
+ひとりでも過ごしやすいカウンター席と、ベビーカーでも入れるテーブル席があります。豆は100gから量り売りしており、ご自宅用の挽き方もご相談いただけます。<br>
+営業時間は8時〜18時（火曜定休）。モーニングは11時まで。テイクアウトもできます。</div>
+<h2 style="margin-top:34px"><b>2</b>書き方のポイント</h2>
+<ul style="font-size:24px;line-height:1.9;padding-left:1.2em">
+<li>最初の1文に「場所・何の店か」を入れる（検索した人がすぐ分かる）</li>
+<li>「ひとりで」「ベビーカー」など、来る人が気にすることを書く</li>
+<li>営業時間・定休日など、変わりやすい情報は最後にまとめる</li></ul></div>
+<p class="note">""" + SAMPLE_NOTE + "</p><p class=\"pg\">1 / 2</p>"
+    build("08-map-info/src/sample-1.html", "08-map-info/sample-1.png", p1, MP_CSS, 1080, 1350)
+
+    posts = (("新メニュー", "11月から、さつまいもと黒ごまのホットサンドを始めました。ほくほくの焼きいもと、香ばしいごまの組み合わせです。浅煎りのコーヒーとどうぞ。"),
+             ("お知らせ", "12月30日〜1月3日はお休みをいただきます。年内は29日の18時まで営業します。年末のご挨拶用のコーヒー豆のご予約も受け付けています。"),
+             ("豆のご紹介", "今月の豆は「エチオピア」。紅茶のような軽い飲み口で、朝の一杯におすすめです。100gから量り売りしています。"),
+             ("お店の様子", "窓ぎわのカウンター席は、午前中に日が入ってあたたかい場所です。読書やひと休みに、ゆっくりお過ごしください。"),
+             ("イベント", "毎月第2土曜は、ハンドドリップの小さな教室を開いています（定員4名）。ご予約はお電話か店頭でどうぞ。"))
+    p2 = head + """<div class="wrap"><h2><b>3</b>投稿文 5本（月に1〜2本ずつ）</h2>
+<div style="display:grid;gap:16px">""" + "".join(f'<div class="post"><b>{t}</b><p>{x}</p></div>' for t, x in posts) + """</div></div>
+<p class="note">""" + SAMPLE_NOTE + "</p><p class=\"pg\">2 / 2</p>"
+    build("08-map-info/src/sample-2.html", "08-map-info/sample-2.png", p2, MP_CSS, 1080, 1350)
+
+    pv = "".join(f'<img src="../sample-{i}.png" style="width:{w}px;height:{w * 1.25:.0f}px">' for i, w in ((1, 380), (2, 380)))
+    thumb2("08-map-info", "地図アプリの<br><em>店舗情報の文章</em>を作ります", "お店の説明文＋投稿文5本・電話なし",
+           pv, "3,000", "5,000円", ("納期3日", "修正1回"))
+
+
 if __name__ == "__main__":
-    banner_entry()
-    report()
-    blog()
+    what = sys.argv[1] if len(sys.argv) > 1 else "all"
+    if what in ("all", "banner"):
+        banner_entry()
+    if what in ("all", "report"):
+        report()
+    if what in ("all", "blog"):
+        blog()
+    if what in ("all", "photo"):
+        photo()
+    if what in ("all", "map"):
+        mapinfo()
