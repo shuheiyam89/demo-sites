@@ -8,7 +8,7 @@
 | `02-lp/` | スマホで見やすい1ページLP｜公開までおまかせ（30,000円・7日・修正2回） | `thumbnail.png` | `sample/index.html`（見本LP。公開URLあり）、`sample-lp-pc.png`、`sample-lp-mobile.png`、`sample-lp-mobile-full.png` | `出品文.md` |
 | `03-banner/` | 広告・SNS用バナー3サイズセット（15,000円・2日・修正2回） | `thumbnail.png` | `banner-1080x1080.png`、`banner-1200x628.png`、`banner-1080x1920.png` | `出品文.md` |
 
-## 入口商品（2026-11-20 追加・安くて頼みやすい5つ）
+## 入口商品（2026-11-20 追加・安くて頼みやすい11個）
 
 | フォルダ | 商品 | 見本 |
 |---|---|---|
@@ -17,8 +17,14 @@
 | `06-blog/` | お店のブログ記事1本（4,000円・3日・修正1回） | `article-1〜2.png`（架空の花屋） |
 | `07-photo-cutout/` | 商品写真の背景を白く・切り抜き5枚（2,000円・2日・修正1回） | `sample.png`（イラストのイメージ） |
 | `08-map-info/` | 地図アプリの店舗情報の文章（3,000円・3日・修正1回） | `sample-1〜2.png`（架空のカフェ） |
+| `09-sheet/` | スプレッドシート・Excelの自動化1つ（3,000円・2日・修正1回） | `sample-1〜2.png` |
+| `10-flyer/` | チラシ・メニュー表1枚（5,000円・3日・修正1回） | `sample-1〜2.png`（架空のパン屋） |
+| `11-ig-calendar/` | Instagram投稿ネタ30日分（3,000円・3日・修正1回） | `sample-1〜2.png` |
+| `12-rewrite/` | ホームページの文章の書き直し1ページ（4,000円・3日・修正1回） | `sample-1〜2.png`（架空の清掃会社） |
+| `13-estate/` | 不動産の物件紹介文3件（3,000円・2日・修正1回） | `sample-1〜2.png`（架空の物件） |
+| `14-reel/` | ショート動画1本の編集（5,000円・3日・修正1回） | `sample-1.png`（構成の見本） |
 
-作り直すとき：`PYTHONIOENCODING=utf-8 python tools/build_entry.py`
+作り直すとき：`PYTHONIOENCODING=utf-8 python tools/build_entry.py`（04〜08）／`tools/build_more.py`（09〜14）
 
 - 見本LPの公開URL：https://shuheiyam89.github.io/demo-sites/coconala-packages/02-lp/sample/
 - サムネイルは 1220×1240px です。出品画面の推奨サイズと違えば作り直します。
