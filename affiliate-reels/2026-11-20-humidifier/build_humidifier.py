@@ -90,8 +90,11 @@ def make_card():
     x0, y0, x1, y1 = 90, 300, W - 90, 1560
     d.rounded_rectangle([x0 + 6, y0 + 12, x1 + 6, y1 + 12], radius=48, fill=(214, 220, 226, 255))
     d.rounded_rectangle([x0, y0, x1, y1], radius=48, fill=(255, 255, 255, 255))
-    prod = Image.open(os.path.join(D, "product.jpg")).convert("RGB").resize((680, 680), Image.LANCZOS)
-    fr.paste(prod, ((W - 680) // 2, y0 + 60))
+    # 商品写真は縦横比を保ったまま 680x680 の枠に収めて、中央に置く（切り抜き版 product2.jpg は縦長）
+    prod = Image.open(os.path.join(D, "product2.jpg")).convert("RGB")
+    s = min(680 / prod.width, 680 / prod.height)
+    prod = prod.resize((round(prod.width * s), round(prod.height * s)), Image.LANCZOS)
+    fr.paste(prod, ((W - prod.width) // 2, y0 + 60 + (680 - prod.height) // 2))
     d = ImageDraw.Draw(fr)
     y = y0 + 60 + 680 + 70
     d.text((W / 2, y), NAME, font=font(56), fill=INK, anchor="mm")
