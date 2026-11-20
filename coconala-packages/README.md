@@ -8,6 +8,16 @@
 | `02-lp/` | スマホで見やすい1ページLP｜公開までおまかせ（30,000円・7日・修正2回） | `thumbnail.png` | `sample/index.html`（見本LP。公開URLあり）、`sample-lp-pc.png`、`sample-lp-mobile.png`、`sample-lp-mobile-full.png` | `出品文.md` |
 | `03-banner/` | 広告・SNS用バナー3サイズセット（15,000円・2日・修正2回） | `thumbnail.png` | `banner-1080x1080.png`、`banner-1200x628.png`、`banner-1080x1920.png` | `出品文.md` |
 
+## 入口商品（2026-11-20 追加・安くて頼みやすい3つ）
+
+| フォルダ | 商品 | 見本 |
+|---|---|---|
+| `04-banner-entry/` | 告知バナー3サイズ（5,000円・2日・修正1回） | `03-banner/` の3枚 |
+| `05-hp-report/` | ホームページの改善点レポート（3,000円・3日・PDF） | `report-1〜3.png`（架空のカフェ） |
+| `06-blog/` | お店のブログ記事1本（4,000円・3日・修正1回） | `article-1〜2.png`（架空の花屋） |
+
+作り直すとき：`PYTHONIOENCODING=utf-8 python tools/build_entry.py`
+
 - 見本LPの公開URL：https://shuheiyam89.github.io/demo-sites/coconala-packages/02-lp/sample/
 - サムネイルは 1220×1240px です。出品画面の推奨サイズと違えば作り直します。
 - **「通常◯円」の書き方について**：まだその値段で売った実績がないため、取り消し線つきの「通常価格」を見せると、景品表示法の二重価格表示として問題になるおそれがあります。そのため、画像と出品文では「**4人目からは◯円の予定**」と書いています。
