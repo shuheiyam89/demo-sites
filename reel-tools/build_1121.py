@@ -22,6 +22,12 @@ RED = (214, 40, 40)
 FF = shutil.which("ffmpeg") or os.path.expandvars(r"%LOCALAPPDATA%\Microsoft\WinGet\Links\ffmpeg.exe")
 
 APPS = {
+    "okatazuke": dict(
+        kind="okatazuke", music="Jingle_Bells.mp3", color=(46, 139, 103), url="okatazuke.onrender.com", name="おかたづけ",
+        cover="飾る前に、まずは片付け", cover_before="messy.jpg", cover_after="decorated.jpg",
+        before_telop="飾り付けしたいのに、この散らかり…", tidy_telop="まずは片付け", after_start=4.5,
+        end_note="作品や商品、掲載しませんか？",
+    ),
     "okigae": dict(
         kind="okigae", music="Bossa_Antigua.mp3", color=(98, 72, 196), url="okigae.onrender.com",
         cover="普段着→デートの装い", before_start=0.0, after_start=1.5, after_sec=6.0,
@@ -48,7 +54,7 @@ APPS = {
 
 APP = sys.argv[1] if len(sys.argv) > 1 else ""
 if APP not in APPS:
-    raise SystemExit("使い方: python reel-tools/build_1121.py okigae|osentaku|osouji")
+    raise SystemExit("使い方: python reel-tools/build_1121.py okatazuke|okigae|osentaku|osouji")
 C = APPS[APP]
 D = os.path.join(ROOT, f"{APP}-reel", "2026-11-21")
 
@@ -83,9 +89,9 @@ def zoom(img, z, cy=0.5):
 
 # ---------- ロゴ（ロックアップ）と透かし ----------
 def lockup_for():
-    if APP == "okigae":
-        # okigae-lockup.png は白い背景つき（RGB）なので、白に近い所を透明にする
-        im = Image.open(os.path.join(D, "okigae-lockup.png")).convert("RGB")
+    if APP in ("okigae", "okatazuke"):
+        # <app>-lockup.png は白い背景つき（RGB）なので、白に近い所を透明にする
+        im = Image.open(os.path.join(D, f"{APP}-lockup.png")).convert("RGB")
         a = im.convert("L").point(lambda v: 0 if v > 246 else (255 if v < 200 else int((246 - v) * 255 / 46)))
         lk = im.convert("RGBA")
         lk.putalpha(a)
@@ -159,8 +165,8 @@ def clip_frames(name, seconds, start=0.0):
     p.wait()
 
 
-before_img = Image.open(os.path.join(D, "before.jpg")).convert("RGB")
-after_img = Image.open(os.path.join(D, "after.jpg")).convert("RGB")
+before_img = Image.open(os.path.join(D, C.get("cover_before", "before.jpg"))).convert("RGB")
+after_img = Image.open(os.path.join(D, C.get("cover_after", "after.jpg"))).convert("RGB")
 
 
 def make_cover():
@@ -191,7 +197,7 @@ def make_end(note=None):
 
 
 # ---------- おせんたく・おそうじ（build_v2.py の型） ----------
-def make_phone_scene(shot, icon):
+def make_phone_scene(shot, icon, logo=None):
     bg = ImageEnhance.Brightness(cover_fit(shot, W, H).filter(ImageFilter.GaussianBlur(18))).enhance(0.7).convert("RGBA")
     pw, ph = 420, 840
     px, py = (W - pw) // 2, 150
@@ -203,8 +209,17 @@ def make_phone_scene(shot, icon):
     band = 132
     screen.paste(cover_fit(shot, sw, sh - band), (0, band))
     sd = ImageDraw.Draw(screen)
-    screen.alpha_composite(icon.resize((84, 84), Image.LANCZOS), (26, (band - 84) // 2))
-    sd.text((128, band // 2), C["name"], font=font(SANS, 46), fill=INK, anchor="lm")
+    if logo is not None:
+        # 実物のロゴ（アイコン＋「おかたづけ」の文字）を白い帯の中央に、読める大きさで置く
+        lw = sw - 60
+        lg = logo.resize((lw, round(lw * logo.height / logo.width)), Image.LANCZOS)
+        if lg.height > band - 24:
+            lh = band - 24
+            lg = logo.resize((round(lh * logo.width / logo.height), lh), Image.LANCZOS)
+        screen.alpha_composite(lg, ((sw - lg.width) // 2, (band - lg.height) // 2))
+    else:
+        screen.alpha_composite(icon.resize((84, 84), Image.LANCZOS), (26, (band - 84) // 2))
+        sd.text((128, band // 2), C["name"], font=font(SANS, 46), fill=INK, anchor="lm")
     cx, cy = sw // 2, sh - 70
     sd.ellipse([cx - 38, cy - 38, cx + 38, cy + 38], outline=(255, 255, 255), width=7)
     sd.ellipse([cx - 27, cy - 27, cx + 27, cy + 27], fill=(255, 255, 255))
@@ -306,6 +321,65 @@ def build_v2(emit, chk):
     return 0.5 + 5.0 + 3.0  # カシャッの位置（秒）
 
 
+# ---------- おかたづけ（家族×クリスマスの飾り付けの前の片付け） ----------
+def build_okatazuke(emit, chk):
+    shot = Image.open(os.path.join(D, "photo.jpg")).convert("RGB")
+    cover = make_cover()
+    for _ in range(round(0.5 * FPS)):
+        emit(cover)
+    chk["cover"] = cover
+    for i, f in enumerate(clip_frames("messy_clip.mp4", 5.0)):
+        fr = telop(f.copy(), C["before_telop"], 200)
+        if i < 40:
+            fr = big_word(fr, "Before", (20, 20, 20), 1.0 if i < 26 else (40 - i) / 14)
+        fr = add_wm(fr)
+        emit(fr)
+        if i == 75:
+            chk["before"] = fr
+    phone = make_phone_scene(shot, None, logo=LOCKUP)
+    n, last = round(3.0 * FPS), None
+    for i in range(n):
+        last = add_wm(telop(zoom(phone, 1.0 + 0.07 * i / (n - 1), cy=0.45), "スマホで撮るだけ", 1120, 44))
+        emit(last)
+    chk["phone"] = last
+    white = Image.new("RGB", (W, H), (255, 255, 255))
+    for i in range(round(0.6 * FPS)):
+        emit(Image.blend(last, white, [0.35, 0.6, 0.85, 0.97][i]) if i < 4 else white)
+    tidy_last = None
+    for i, f in enumerate(clip_frames("tidy_clip.mp4", 3.0)):
+        fr = add_wm(telop(f.copy(), C["tidy_telop"], 1110))
+        emit(fr)
+        tidy_last = f
+        if i == 45:
+            chk["tidy"] = fr
+    decos = clip_frames("decorated_clip.mp4", 5.0, C["after_start"])
+    first = next(decos)
+    # 白い線が左から右へ動き、片付いた部屋 → 飾った部屋へ切り替える（1.8秒）
+    n = round(1.8 * FPS)
+    for k in range(n):
+        t = (k + 1) / n
+        t = t * t * (3 - 2 * t)
+        x = round(W * t)
+        fr = tidy_last.copy()
+        fr.paste(first.crop((0, 0, x, H)), (0, 0))
+        d = ImageDraw.Draw(fr)
+        d.rectangle([x - 4, 0, x + 4, H], fill=(255, 255, 255))
+        emit(add_wm(fr))
+    for i, f in enumerate([first] + list(decos)):
+        fr = f.copy()
+        if i < 40:
+            fr = big_word(fr, "After", RED, 1.0 if i < 26 else (40 - i) / 14)
+        fr = add_wm(fr)
+        emit(fr)
+        if i == 90:
+            chk["after"] = fr
+    end = make_end(C["end_note"])
+    for _ in range(round(1.5 * FPS)):
+        emit(end)
+    chk["end"] = end
+    return 0.5 + 5.0 + 3.0  # カシャッの位置（秒）
+
+
 # ---------- おきがえ ----------
 def make_product():
     fr = Image.new("RGB", (W, H), (255, 255, 255))
@@ -374,7 +448,7 @@ def main():
         count[0] += 1
 
     chk = {}
-    shutter_at = build_okigae(emit, chk) if C["kind"] == "okigae" else build_v2(emit, chk)
+    shutter_at = {"okigae": build_okigae, "okatazuke": build_okatazuke}.get(C["kind"], build_v2)(emit, chk)
     p.stdin.close()
     if p.wait():
         raise SystemExit("映像の書き出しに失敗しました")
